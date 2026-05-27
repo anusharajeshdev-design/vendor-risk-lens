@@ -1,0 +1,13 @@
+# Node Modules
+node_modules
+
+# Build folders
+bin
+obj
+dist
+
+# VS Code
+.vscode
+
+# Logs
+*.log
