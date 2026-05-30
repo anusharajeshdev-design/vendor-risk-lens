@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: #f8f5f2;
+}
+
+.page-container {
+  padding: 32px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  color: #4f3b78;
+}
+
+.add-button {
+  background: #a98bd8;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-button:hover {
+  background: #8d6fc4;
+}
+
+.table-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  color: #4f3b78;
+  padding: 14px;
+  border-bottom: 2px solid #eee;
+}
+
+td {
+  padding: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+tr:hover {
+  background: #faf8ff;
+}
+
+.action-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: #6f56a6;
+  transition: transform 0.2s ease;
+}
+
+.edit-icon:hover {
+  transform: scale(1.15);
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: #d9534f;
+  transition: transform 0.2s ease;
+}
+
+.delete-icon:hover {
+  transform: scale(1.15);
+}

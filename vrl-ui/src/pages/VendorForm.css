@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: #f8f5f2;
+}
+
+.form-page {
+  min-height: 100vh;
+  background: #f8f5f2;
+  padding: 32px;
+}
+
+.form-card {
+  background: white;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.back-link {
+  color: #6f56a6;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.form-card h1 {
+  margin-top: 0;
+  margin-bottom: 36px;
+  color: #4f3b78;
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 10px;
+  color: #4f3b78;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.required {
+  color: #d9534f;
+}
+
+.form-group input,
+.form-group select {
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #d8d8d8;
+  border-radius: 12px;
+  font-size: 14px;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #a98bd8;
+  box-shadow: 0 0 0 4px rgba(169, 139, 216, 0.15);
+}
+
+.checkbox-container {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-container label {
+  color: #4f3b78;
+  font-weight: 600;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.cancel-btn {
+  min-width: 120px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: #ece7f7;
+  color: #4f3b78;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: #e0d7f4;
+}
+
+.save-btn {
+  min-width: 140px;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  background: #a98bd8;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+  background: #8d6fc4;
+  transform: translateY(-1px);
+}
+
+.save-btn:active,
+.cancel-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    padding: 24px;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}
