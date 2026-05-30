@@ -10,9 +10,19 @@ public class Vendor
 
     public string? ContactEmail { get; set; }
 
+    public string? Website { get; set; }
+
     public string RiskRating { get; set; } = string.Empty;
+
+    public int? OwnerUserId { get; set; }
+
+    public DateTime? LastReviewDate { get; set; }
+
+    public DateTime? NextReviewDate { get; set; }
 
     public bool IsActive { get; set; }
 
     public DateTime CreatedDate { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
 }
