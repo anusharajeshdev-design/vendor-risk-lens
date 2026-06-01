@@ -15,11 +15,13 @@ public class VendorService
 
     public async Task<List<Vendor>> GetVendorsAsync()
     {
-        return await _context.Vendors.ToListAsync();
+        return await _context.Vendors.Where(v => !v.IsDeleted).ToListAsync();
     }
 
     public async Task<Vendor> CreateVendorAsync(Vendor vendor)
     {
+        vendor.CreatedDate = DateTime.UtcNow;
+
         _context.Vendors.Add(vendor);
 
         await _context.SaveChangesAsync();
@@ -54,11 +56,17 @@ public class VendorService
         if (vendor == null)
             return false;
 
-        vendor.IsActive = false;
+        vendor.IsDeleted = true;
         vendor.UpdatedDate = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
 
         return true;
+    }
+
+    public async Task<Vendor?> GetVendorByIdAsync(int id)
+    {
+        return await _context.Vendors
+            .FirstOrDefaultAsync(v => v.VendorId == id);
     }
 }

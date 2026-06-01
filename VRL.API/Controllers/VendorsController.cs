@@ -88,4 +88,26 @@ public class VendorsController : ControllerBase
         });   
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetVendorById(int id)
+    {
+        var vendor = await _vendorService.GetVendorByIdAsync(id);
+
+        if (vendor == null)
+        {
+            return NotFound(new ApiResponse<object>
+            {
+                Success = false,
+                Message = "Vendor not found"
+            });
+        }
+
+        return Ok(new ApiResponse<Vendor>
+        {
+            Success = true,
+            Message = "Vendor retrieved successfully",
+            Data = vendor
+        });
+    }
+
 }

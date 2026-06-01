@@ -10,6 +10,7 @@ function App() {
         <Route path="/" element={<Vendors />} />
         <Route path="/vendors" element={<Vendors />} />
         <Route path="/vendors/new" element={<VendorForm />} />
+        <Route path="/vendors/edit/:id" element={<VendorForm />} />
       </Routes>
     </BrowserRouter>
   );
