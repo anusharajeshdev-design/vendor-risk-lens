@@ -21,6 +21,7 @@ builder.Services.AddDbContext<VrlDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<VendorService>();
+builder.Services.AddScoped<IncidentsService>();
 
 builder.Services.AddEndpointsApiExplorer();
 

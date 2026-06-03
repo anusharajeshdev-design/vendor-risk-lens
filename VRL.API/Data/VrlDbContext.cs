@@ -11,4 +11,5 @@ public class VrlDbContext : DbContext
     }
 
     public DbSet<Vendor> Vendors { get; set; }
+    public DbSet<Incident> Incidents {get; set;}
 }
