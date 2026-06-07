@@ -1,88 +1,176 @@
 body {
-  margin: 0;
-  font-family: Inter, sans-serif;
-  background: #f8f5f2;
+margin: 0;
+
+
+font-family: Inter, sans-serif;
+
+background: #f7f3ef;
+
+
 }
 
 .page-container {
-  padding: 32px;
+padding: 32px;
+
+
+background: #f7f3ef;
+
+min-height: 100vh;
+
+
 }
 
 .page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
+display: flex;
+
+
+justify-content: space-between;
+
+align-items: center;
+
+margin-bottom: 28px;
+
+
 }
 
 .page-header h1 {
-  color: #4f3b78;
+color: #5a4a4a;
+
+
+font-size: 36px;
+
+font-weight: 700;
+
+
 }
 
 .add-button {
-  background: #a98bd8;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
+background: #c492a7;
+
+
+color: white;
+
+border: none;
+
+padding: 14px 22px;
+
+border-radius: 16px;
+
+cursor: pointer;
+
+font-weight: 600;
+
+transition: all 0.25s ease;
+
+box-shadow:
+    0 4px 12px rgba(196,146,167,0.25);
+
+
 }
 
 .add-button:hover {
-  background: #8d6fc4;
+background: #bb8ea0;
+
+
+transform: translateY(-2px);
+
+
 }
 
 .table-card {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+background: white;
+
+
+border-radius: 24px;
+
+padding: 24px;
+
+box-shadow:
+    0 8px 30px rgba(0,0,0,0.05);
+
+border: 1px solid #efe8e3;
+
+
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
+width: 100%;
+
+
+border-collapse: collapse;
+
+
 }
 
 th {
-  text-align: left;
-  color: #4f3b78;
-  padding: 14px;
-  border-bottom: 2px solid #eee;
+text-align: left;
+
+
+color: #7d6670;
+
+font-size: 15px;
+
+font-weight: 600;
+
+padding: 16px;
+
+border-bottom: 1px solid #ece5df;
+
+
 }
 
 td {
-  padding: 14px;
-  border-bottom: 1px solid #f0f0f0;
+padding: 16px;
+
+
+color: #5a4a4a;
+
+border-bottom: 1px solid #f2ece8;
+
+
 }
 
 tr:hover {
-  background: #faf8ff;
+background: #fcfaf8;
 }
 
 .action-icons {
-  display: flex;
-  gap: 12px;
-  align-items: center;
+display: flex;
+
+
+gap: 12px;
+
+align-items: center;
+
+
 }
 
 .edit-icon {
-  cursor: pointer;
-  color: #6f56a6;
-  transition: transform 0.2s ease;
+cursor: pointer;
+
+
+color: #c492a7;
+
+transition: all 0.2s ease;
+
+
 }
 
 .edit-icon:hover {
-  transform: scale(1.15);
+transform: scale(1.15);
 }
 
 .delete-icon {
-  cursor: pointer;
-  color: #d9534f;
-  transition: transform 0.2s ease;
+cursor: pointer;
+
+
+color: #d4b2a7;
+
+transition: all 0.2s ease;
+
+
 }
 
 .delete-icon:hover {
-  transform: scale(1.15);
+transform: scale(1.15);
 }
