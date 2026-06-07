@@ -3,11 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using VRL.API.Data;
 using VRL.API.Models;
 using VRL.API.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VRL.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
+
 public class IncidentController : ControllerBase
 {
    private readonly IncidentsService _incidentService;
