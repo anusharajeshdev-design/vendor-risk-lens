@@ -1,71 +1,124 @@
 .confirm-modal {
-  width: 420px;
+    width: 420px;
 
-  background: white;
+    background: #f6fff8;
 
-  border-radius: 24px;
+    border-radius: 28px;
 
-  padding: 30px;
+    padding: 32px;
 
-  text-align: center;
+    text-align: center;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.12);
+
+    border: 1px solid #cce3de;
 }
+
+/* ICON */
 
 .confirm-icon {
-  width: 80px;
-  height: 80px;
+    width: 82px;
+    height: 82px;
 
-  margin: auto;
+    margin: auto;
 
-  border-radius: 50%;
+    border-radius: 50%;
 
-  background: #f8f0ff;
+    background: rgba(107,144,128,0.12);
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  font-size: 36px;
+    font-size: 36px;
+
+    color: #6b9080;
 }
+
+/* TITLE */
 
 .confirm-modal h2 {
-  color: #4f3b78;
-  margin-top: 20px;
+    color: #2f3e46;
+
+    margin-top: 20px;
+
+    margin-bottom: 10px;
+
+    font-size: 28px;
 }
+
+/* MESSAGE */
+
+.confirm-modal p {
+    color: #48645c;
+
+    line-height: 1.6;
+
+    margin-top: 8px;
+}
+
+/* BUTTON AREA */
 
 .confirm-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
+    display: flex;
 
-  margin-top: 24px;
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 28px;
 }
+
+/* CANCEL */
 
 .cancel-button {
-  border: none;
+    border: none;
 
-  background: #ece7f7;
+    background: #dceae6;
 
-  color: #4f3b78;
+    color: #48645c;
 
-  padding: 12px 24px;
+    padding: 12px 26px;
 
-  border-radius: 12px;
+    border-radius: 14px;
 
-  cursor: pointer;
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
 }
 
+.cancel-button:hover {
+    background: #cce3de;
+}
+
+/* DELETE */
+
 .delete-button {
-  border: none;
+    border: none;
 
-  background: #d9534f;
+    background: #6b9080;
 
-  color: white;
+    color: white;
 
-  padding: 12px 24px;
+    padding: 12px 26px;
 
-  border-radius: 12px;
+    border-radius: 14px;
 
-  cursor: pointer;
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+
+    box-shadow:
+        0 6px 18px rgba(107,144,128,0.20);
+}
+
+.delete-button:hover {
+    background: #5f8273;
+
+    transform: translateY(-2px);
 }

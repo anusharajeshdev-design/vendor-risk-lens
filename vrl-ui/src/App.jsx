@@ -5,6 +5,8 @@ import Vendors from "./pages/Vendors";
 import VendorForm from "./pages/VendorForm";
 import Incidents from "./pages/Incidents";
 import IncidentForm from "./pages/IncidentForm";
+import Users from "./pages/Users";
+import UserForm from "./pages/UserForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MainLayout from "./layouts/MainLayout";
 
@@ -20,6 +22,9 @@ function App() {
         <Route path="/incidents" element={ <ProtectedRoute><MainLayout><Incidents /></MainLayout></ProtectedRoute>} />
         <Route path="/incidents/new" element={ <ProtectedRoute><MainLayout><IncidentForm /></MainLayout></ProtectedRoute>} />
         <Route path="/incidents/edit/:id" element={ <ProtectedRoute><MainLayout><IncidentForm /></MainLayout></ProtectedRoute>} />
+        <Route path="/users"element={<ProtectedRoute><MainLayout><Users /></MainLayout></ProtectedRoute>}/>
+        <Route path="/users/new" element={<ProtectedRoute><MainLayout><UserForm /></MainLayout></ProtectedRoute>}/>
+        <Route path="/users/edit/:id" element={<ProtectedRoute><MainLayout><UserForm /></MainLayout></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   );
