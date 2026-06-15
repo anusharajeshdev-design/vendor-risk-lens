@@ -74,15 +74,64 @@ return await response.json();
 };
 
 export const deleteIncident = async (id) => {
-const response = await fetch(`${API_URL}/${id}`, {
-method: "DELETE",
-headers: {
-...getAuthHeader()
-}
-});
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+        headers: {
+        ...getAuthHeader()
+        }
+    });
+    return await response.json();
+};
+
+export const getIncidentSeverities = async () => {
+
+    const response = await fetch(
+        `${API_URL}/severities`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
+
+    return await response.json();
+};
+
+export const getIncidentStatuses = async () => {
+
+    const response = await fetch(
+        `${API_URL}/statuses`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
+
+    return await response.json();
+};
 
 
-return await response.json();
+export const getIncidentTypes = async () => {
 
+    const response = await fetch(
+        `${API_URL}/types`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
 
+    return await response.json();
+};
+
+export const getIncidentPriorities = async () => {
+
+    const response = await fetch(
+        `${API_URL}/priorities`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
+
+    return await response.json();
 };

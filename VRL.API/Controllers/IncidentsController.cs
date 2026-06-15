@@ -90,4 +90,92 @@ public class IncidentController : ControllerBase
             Data = incidents
         });
     }
+
+    [HttpGet("types")]
+    public async Task<IActionResult> GetIncidentType()
+    {
+        var incidentType = await _incidentService.GetIncidentTypeAsync();
+
+        if(incidentType == null)
+        {
+            return NotFound(new ApiResponse<object>
+            {
+               Success = false,
+               Message = "Incident Type not found" 
+            });
+        }
+
+        return Ok(new ApiResponse<List<IncidentType>>
+        {
+            Success = true,
+            Message = "Incident types retrieved successfully",
+            Data = incidentType
+        });
+    }
+
+    [HttpGet("priorities")]
+    public async Task<IActionResult> GetIncidentPriorities()
+    {
+        var incidentpriorities = await _incidentService.GetIncidentPrioritiesAsync();
+
+        if(incidentpriorities == null)
+        {
+            return NotFound(new ApiResponse<object>
+            {
+               Success = false,
+               Message = "Incident priorities not found" 
+            });
+        }
+
+        return Ok(new ApiResponse<List<IncidentPriorities>>
+        {
+            Success = true,
+            Message = "Incident priorities retrieved successfully",
+            Data = incidentpriorities
+        });
+    }
+
+    [HttpGet("severities")]
+    public async Task<IActionResult> GetIncidentSeverities()
+    {
+        var incidentseverities = await _incidentService.GetIncidentSeveritiesAsync();
+
+        if(incidentseverities == null)
+        {
+            return NotFound(new ApiResponse<object>
+            {
+               Success = false,
+               Message = "Incident severities not found" 
+            });
+        }
+
+        return Ok(new ApiResponse<List<IncidentSeverities>>
+        {
+            Success = true,
+            Message = "Incident severities retrieved successfully",
+            Data = incidentseverities
+        });
+    }
+
+    [HttpGet("statuses")]
+    public async Task<IActionResult> GetIncidentStatuses()
+    {
+        var incidentstatuses = await _incidentService.GetIncidentStatusesAsync();
+
+        if(incidentstatuses == null)
+        {
+            return NotFound(new ApiResponse<object>
+            {
+               Success = false,
+               Message = "Incident statuses not found" 
+            });
+        }
+
+        return Ok(new ApiResponse<List<IncidentStatuses>>
+        {
+            Success = true,
+            Message = "Incident statuses retrieved successfully",
+            Data = incidentstatuses
+        });
+    }
 }

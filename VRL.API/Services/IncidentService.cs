@@ -80,4 +80,23 @@ public class IncidentsService
         return await _context.Incidents
             .FirstOrDefaultAsync(i => i.IncidentId == id);
     }
+
+    public async Task<List<IncidentType>> GetIncidentTypeAsync()
+    {
+        return await _context.IncidentTypes.ToListAsync();
+    }
+
+     public async Task<List<IncidentPriorities>> GetIncidentPrioritiesAsync()
+    {
+        return await _context.IncidentPriorities.ToListAsync();
+    }
+    public async Task<List<IncidentSeverities>> GetIncidentSeveritiesAsync()
+    {
+        return await _context.IncidentSeverities.ToListAsync();
+    }
+
+     public async Task<List<IncidentStatuses>> GetIncidentStatusesAsync()
+    {
+        return await _context.IncidentStatuses.ToListAsync();
+    }
 }

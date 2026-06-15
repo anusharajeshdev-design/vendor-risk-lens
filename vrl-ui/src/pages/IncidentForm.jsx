@@ -5,388 +5,439 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
 createIncident,
 updateIncident,
-getIncidentById
+getIncidentById,
+getIncidentSeverities,
+getIncidentStatuses,
+getIncidentTypes,
+getIncidentPriorities
 } from "../services/incidentService";
 
 import SuccessModal from "../components/SuccessModal";
 
 function IncidentForm() {
 
+
 const navigate = useNavigate();
 const { id } = useParams();
 
 const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+const [severities, setSeverities] = useState([]);
+const [statuses, setStatuses] = useState([]);
+const [types, setTypes] = useState([]);
+const [priorities, setPriorities] = useState([]);
+
 const [incident, setIncident] = useState({
-incidentNumber: "",
-vendorId: "",
-title: "",
-description: "",
-incidentType: "",
-severity: "",
-priority: "",
-status: "Open",
-assignedUserId: "",
-createdByUserId: "",
-reportedDate: "",
-dueDate: "",
-expectedCloseDate: "",
-actualCloseDate: "",
-resolutionSummary: ""
+    incidentNumber: "",
+    vendorId: "",
+    title: "",
+    description: "",
+    incidentType: "",
+    severity: "",
+    priority: "",
+    status: "",
+    assignedUserId: "",
+    createdByUserId: "",
+    reportedDate: "",
+    dueDate: "",
+    expectedCloseDate: "",
+    actualCloseDate: "",
+    resolutionSummary: ""
 });
 
 useEffect(() => {
 
+    loadDropdowns();
 
-if (id) {
-  loadIncident();
-}
-
+    if (id) {
+        loadIncident();
+    }
 
 }, [id]);
 
+const loadDropdowns = async () => {
+
+    try {
+
+        const [
+            severityResult,
+            statusResult,
+            typeResult,
+            priorityResult
+        ] = await Promise.all([
+            getIncidentSeverities(),
+            getIncidentStatuses(),
+            getIncidentTypes(),
+            getIncidentPriorities()
+        ]);
+
+        setSeverities(severityResult.data || []);
+        setStatuses(statusResult.data || []);
+        setTypes(typeResult.data || []);
+        setPriorities(priorityResult.data || []);
+
+    } catch (error) {
+
+        console.error(error);
+    }
+};
+
 const loadIncident = async () => {
 
+    try {
 
-try {
+        const result = await getIncidentById(id);
 
-  const result =
-    await getIncidentById(id);
+        setIncident({
+            ...result.data,
 
-  setIncident({
-    ...result.data,
+            reportedDate:
+                result.data.reportedDate?.split("T")[0] || "",
 
-    reportedDate:
-      result.data.reportedDate?.split("T")[0] || "",
+            dueDate:
+                result.data.dueDate?.split("T")[0] || "",
 
-    dueDate:
-      result.data.dueDate?.split("T")[0] || "",
+            expectedCloseDate:
+                result.data.expectedCloseDate?.split("T")[0] || "",
 
-    expectedCloseDate:
-      result.data.expectedCloseDate?.split("T")[0] || "",
+            actualCloseDate:
+                result.data.actualCloseDate?.split("T")[0] || ""
+        });
 
-    actualCloseDate:
-      result.data.actualCloseDate?.split("T")[0] || ""
-  });
+    } catch (error) {
 
-} catch (error) {
-
-  console.error(error);
-}
-
-
+        console.error(error);
+    }
 };
 
 const handleChange = (event) => {
 
+    const { name, value } = event.target;
 
-const { name, value } = event.target;
-
-setIncident((current) => ({
-  ...current,
-  [name]: value
-}));
-
-
+    setIncident((current) => ({
+        ...current,
+        [name]: value
+    }));
 };
 
 const handleSave = async () => {
 
+    try {
 
-try {
+        const incidentToSave = {
+            ...incident,
 
-  const incidentToSave = {
-    ...incident,
+            vendorId:
+                incident.vendorId
+                    ? Number(incident.vendorId)
+                    : null,
 
-    vendorId: incident.vendorId
-      ? Number(incident.vendorId)
-      : null,
+            createdByUserId: 1,
 
-    createdByUserId: 1,
+            assignedUserId:
+                incident.assignedUserId
+                    ? Number(incident.assignedUserId)
+                    : 1,
 
-    assignedUserId: incident.assignedUserId
-      ? Number(incident.assignedUserId)
-      : 1,
+            reportedDate:
+                incident.reportedDate || null,
 
-    reportedDate:
-      incident.reportedDate || null,
+            dueDate:
+                incident.dueDate || null,
 
-    dueDate:
-      incident.dueDate || null,
+            expectedCloseDate:
+                incident.expectedCloseDate || null,
 
-    expectedCloseDate:
-      incident.expectedCloseDate || null,
+            actualCloseDate:
+                incident.actualCloseDate || null
+        };
 
-    actualCloseDate:
-      incident.actualCloseDate || null
-  };
+        let result;
 
-  let result;
+        if (id) {
 
-  if (id) {
+            result = await updateIncident(
+                id,
+                incidentToSave
+            );
 
-    result = await updateIncident(
-      id,
-      incidentToSave
-    );
+        } else {
 
-  } else {
+            result = await createIncident(
+                incidentToSave
+            );
+        }
 
-    result = await createIncident(
-      incidentToSave
-    );
-  }
+        if (result.success) {
 
-  if (result.success) {
+            setShowSuccessModal(true);
 
-    setShowSuccessModal(true);
+        } else {
 
-  } else {
+            alert(result.message);
+        }
 
-    alert(result.message);
-  }
+    } catch (error) {
 
-} catch (error) {
+        console.error(error);
 
-  console.error(error);
-
-  alert("Error saving incident");
-}
-
-
+        alert("Error saving incident");
+    }
 };
 
-return ( <div className="form-page">
+return (
 
+    <div className="form-page">
 
-  <div
-    className="back-link"
-    onClick={() => navigate("/incidents")}
-  >
-    ← Back to Incidents
-  </div>
-
-  <div className="form-card">
-
-    <h1>
-      {id
-        ? "Edit Incident"
-        : "Create Incident"}
-    </h1>
-
-    <div className="form-grid">
-
-      <div className="form-group">
-        <label>Incident Number *</label>
-
-        <input
-          type="text"
-          name="incidentNumber"
-          value={incident.incidentNumber}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="form-group">
-        <label>Vendor *</label>
-
-        <select
-          name="vendorId"
-          value={incident.vendorId}
-          onChange={handleChange}
+        <div
+            className="back-link"
+            onClick={() => navigate("/incidents")}
         >
-          <option value="">
-            Select Vendor
-          </option>
+            ← Back to Incidents
+        </div>
 
-          <option value="3">
-            ABC Electric
-          </option>
+        <div className="form-card">
 
-          <option value="4">
-            XYZ Cloud
-          </option>
-        </select>
-      </div>
+            <h1>
+                {id
+                    ? "Edit Incident"
+                    : "Create Incident"}
+            </h1>
 
-      <div className="form-group">
-        <label>Title *</label>
+            <div className="form-grid">
 
-        <input
-          type="text"
-          name="title"
-          value={incident.title}
-          onChange={handleChange}
-        />
-      </div>
+                <div className="form-group">
+                    <label>Incident Number *</label>
 
-      <div className="form-group">
-        <label>Incident Type *</label>
+                    <input
+                        type="text"
+                        name="incidentNumber"
+                        value={incident.incidentNumber}
+                        onChange={handleChange}
+                    />
+                </div>
 
-        <select
-          name="incidentType"
-          value={incident.incidentType}
-          onChange={handleChange}
-        >
-          <option value="">
-            Select Type
-          </option>
+                <div className="form-group">
+                    <label>Vendor *</label>
 
-          <option value="Security">
-            Security
-          </option>
+                    <select
+                        name="vendorId"
+                        value={incident.vendorId}
+                        onChange={handleChange}
+                    >
+                        <option value="">
+                            Select Vendor
+                        </option>
 
-          <option value="Operational">
-            Operational
-          </option>
+                        <option value="3">
+                            ABC Electric
+                        </option>
 
-          <option value="Compliance">
-            Compliance
-          </option>
-        </select>
-      </div>
+                        <option value="4">
+                            XYZ Cloud
+                        </option>
+                    </select>
+                </div>
 
-      <div className="form-group">
-        <label>Severity *</label>
+                <div className="form-group">
+                    <label>Title *</label>
 
-        <select
-          name="severity"
-          value={incident.severity}
-          onChange={handleChange}
-        >
-          <option value="">
-            Select Severity
-          </option>
+                    <input
+                        type="text"
+                        name="title"
+                        value={incident.title}
+                        onChange={handleChange}
+                    />
+                </div>
 
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="Critical">Critical</option>
-        </select>
-      </div>
+                <div className="form-group">
+                    <label>Incident Type *</label>
 
-      <div className="form-group">
-        <label>Priority *</label>
+                    <select
+                        name="incidentType"
+                        value={incident.incidentType}
+                        onChange={handleChange}
+                    >
+                        <option value="">
+                            Select Type
+                        </option>
 
-        <select
-          name="priority"
-          value={incident.priority}
-          onChange={handleChange}
-        >
-          <option value="">
-            Select Priority
-          </option>
+                        {
+                            types.map(type => (
+                                <option
+                                    key={type.incidentTypeId}
+                                    value={type.incidentTypeName}
+                                >
+                                    {type.incidentTypeName}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
 
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="Urgent">Urgent</option>
-        </select>
-      </div>
+                <div className="form-group">
+                    <label>Severity *</label>
 
-      <div className="form-group">
-        <label>Status *</label>
+                    <select
+                        name="severity"
+                        value={incident.severity}
+                        onChange={handleChange}
+                    >
+                        <option value="">
+                            Select Severity
+                        </option>
 
-        <select
-          name="status"
-          value={incident.status}
-          onChange={handleChange}
-        >
-          <option value="Open">Open</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Resolved">Resolved</option>
-          <option value="Closed">Closed</option>
-        </select>
-      </div>
+                        {
+                            severities.map(severity => (
+                                <option
+                                    key={severity.incidentSeverityId}
+                                    value={severity.severityName}
+                                >
+                                    {severity.severityName}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
 
-      <div className="form-group">
-        <label>Reported Date</label>
+                <div className="form-group">
+                    <label>Priority *</label>
 
-        <input
-          type="date"
-          name="reportedDate"
-          value={incident.reportedDate}
-          onChange={handleChange}
-        />
-      </div>
+                    <select
+                        name="priority"
+                        value={incident.priority}
+                        onChange={handleChange}
+                    >
+                        <option value="">
+                            Select Priority
+                        </option>
 
-      <div className="form-group">
-        <label>Expected Close Date</label>
+                        {
+                            priorities.map(priority => (
+                                <option
+                                    key={priority.incidentPriorityId}
+                                    value={priority.priorityName}
+                                >
+                                    {priority.priorityName}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
 
-        <input
-          type="date"
-          name="expectedCloseDate"
-          value={incident.expectedCloseDate}
-          onChange={handleChange}
-        />
-      </div>
+                <div className="form-group">
+                    <label>Status *</label>
 
-    </div>
+                    <select
+                        name="status"
+                        value={incident.status}
+                        onChange={handleChange}
+                    >
+                        <option value="">
+                            Select Status
+                        </option>
 
-    <div className="form-group">
+                        {
+                            statuses.map(status => (
+                                <option
+                                    key={status.incidentStatusId}
+                                    value={status.statusName}
+                                >
+                                    {status.statusName}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
 
-      <label>Description</label>
+                <div className="form-group">
+                    <label>Reported Date</label>
 
-      <textarea
-        name="description"
-        value={incident.description}
-        onChange={handleChange}
-        rows="5"
-      />
+                    <input
+                        type="date"
+                        name="reportedDate"
+                        value={incident.reportedDate}
+                        onChange={handleChange}
+                    />
+                </div>
 
-    </div>
+                <div className="form-group">
+                    <label>Expected Close Date</label>
 
-    <div className="button-container">
+                    <input
+                        type="date"
+                        name="expectedCloseDate"
+                        value={incident.expectedCloseDate}
+                        onChange={handleChange}
+                    />
+                </div>
 
-      <button
-        type="button"
-        className="cancel-btn"
-        onClick={() => navigate("/incidents")}
-      >
-        Cancel
-      </button>
+            </div>
 
-      <button
-        type="button"
-        className="save-btn"
-        onClick={handleSave}
-      >
-        {id
-          ? "Update Incident"
-          : "Save Incident"}
-      </button>
+            <div className="form-group">
 
-    </div>
+                <label>Description</label>
 
-  </div>
+                <textarea
+                    name="description"
+                    value={incident.description}
+                    onChange={handleChange}
+                    rows="5"
+                />
 
-  {
-    showSuccessModal && (
-      <SuccessModal
-        title={
-          id
-            ? "Incident Updated"
-            : "Incident Created"
+            </div>
+
+            <div className="button-container">
+
+                <button
+                    type="button"
+                    className="cancel-btn"
+                    onClick={() => navigate("/incidents")}
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    className="save-btn"
+                    onClick={handleSave}
+                >
+                    {id
+                        ? "Update Incident"
+                        : "Save Incident"}
+                </button>
+
+            </div>
+
+        </div>
+
+        {
+            showSuccessModal && (
+                <SuccessModal
+                    title={
+                        id
+                            ? "Incident Updated"
+                            : "Incident Created"
+                    }
+                    message={
+                        id
+                            ? "The incident has been updated successfully."
+                            : "The incident has been created successfully."
+                    }
+                    onClose={() => {
+
+                        setShowSuccessModal(false);
+
+                        navigate("/incidents");
+                    }}
+                />
+            )
         }
-        message={
-          id
-            ? "The incident has been updated successfully."
-            : "The incident has been created successfully."
-        }
-        onClose={() => {
 
-          setShowSuccessModal(false);
-
-          navigate("/incidents");
-        }}
-      />
-    )
-  }
-
-</div>
-
-
+    </div>
 );
+
+
 }
 
 export default IncidentForm;
