@@ -28,7 +28,7 @@ builder.Services.AddScoped<VendorService>();
 builder.Services.AddScoped<IncidentsService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
-
+builder.Services.AddScoped<DashboardService>();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
