@@ -78,17 +78,40 @@ return result;
 };
 
 export const deleteVendor = async (id) => {
-const response = await fetch(`${API_URL}/${id}`, {
-method: "DELETE",
-headers: {
-...getAuthHeader()
-}
-});
+    const response = await fetch(
+        `${API_URL}/${id}`, 
+        {
+            method: "DELETE",
+            headers: {
+            ...getAuthHeader()
+            }
+        });
+    const result = await response.json();
+    return result;
+};
 
+export const getVendorTypes = async () => {
 
-const result = await response.json();
+    const response = await fetch(
+        `${API_URL}/types`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
 
-return result;
+    return await response.json();
+};
 
+export const getActiveUsers = async () => {
 
+    const response = await fetch(
+        `${API_URL}/active`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
+
+    return await response.json();
 };

@@ -82,3 +82,16 @@ return await response.json();
 
 
 };
+
+export const getRoles = async () => {
+
+    const response = await fetch(
+        `${API_URL}/roles`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
+
+    return await response.json();
+};

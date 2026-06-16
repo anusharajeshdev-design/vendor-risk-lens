@@ -99,4 +99,9 @@ public class IncidentsService
     {
         return await _context.IncidentStatuses.ToListAsync();
     }
+
+    public async Task<List<Vendor>> GetActiveVendorsAsync()
+    {
+        return await _context.Vendors.Where(v => v.IsActive).OrderBy(v => v.VendorName).ToListAsync();
+    }
 }

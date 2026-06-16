@@ -17,5 +17,6 @@ public class VrlDbContext : DbContext
     public DbSet<IncidentPriorities> IncidentPriorities {get; set;}
     public DbSet<IncidentSeverities> IncidentSeverities {get; set;}
     public DbSet<IncidentStatuses> IncidentStatuses {get; set;}
-
+    public DbSet<VendorTypes> VendorTypes {get; set;}
+    public DbSet<Roles> Roles {get; set;}
 }

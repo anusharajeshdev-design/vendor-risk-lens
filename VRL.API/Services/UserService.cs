@@ -78,4 +78,9 @@ public class UserService
             .FirstOrDefaultAsync(u =>
                 u.UserId == id);
     }
+
+     public async Task<List<Roles>> GetRoles()
+    {
+        return await _context.Roles.ToListAsync();
+    }
 }

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import {
 createUser,
 updateUser,
-getUserById
+getUserById,
+getRoles
 } from "../services/userService";
 
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,20 +13,12 @@ import SuccessModal from "../components/SuccessModal";
 import "./VendorForm.css";
 
 function UserForm() {
-
-
 const navigate = useNavigate();
-
 const { id } = useParams();
-
 const isEditMode = !!id;
-
-const [showSuccessModal, setShowSuccessModal] =
-    useState(false);
-
-const [successMessage, setSuccessMessage] =
-    useState("");
-
+const [showSuccessModal, setShowSuccessModal] = useState(false);
+const [roles, setRoles] = useState([]);
+const [successMessage, setSuccessMessage] = useState("");
 const [user, setUser] = useState({
     roleId: 1,
     firstName: "",
@@ -37,6 +30,8 @@ const [user, setUser] = useState({
 });
 
 useEffect(() => {
+
+    loadRoles();
 
     if (isEditMode) {
 
@@ -106,6 +101,20 @@ const handleSave = async () => {
     }
 };
 
+const loadRoles = async () => {
+
+    try {
+
+        const result =
+            await getRoles();
+
+        setRoles(result.data || []);
+
+    } catch (error) {
+
+        console.error(error);
+    }
+};
 return (
     <div className="form-page">
 
@@ -227,20 +236,34 @@ return (
                 <div className="form-group">
 
                     <label>
-                        Role Id
+                        Role
                     </label>
 
-                    <input
-                        type="number"
+                    <select
                         value={user.roleId}
                         onChange={(e) =>
                             setUser({
                                 ...user,
-                                roleId:
-                                    Number(
-                                        e.target.value)
+                                roleId: Number(e.target.value)
                             })}
-                    />
+                    >
+
+                        <option value="">
+                            Select Role
+                        </option>
+
+                        {
+                            roles.map(role => (
+                                <option
+                                    key={role.roleId}
+                                    value={role.roleId}
+                                >
+                                    {role.roleName}
+                                </option>
+                            ))
+                        }
+
+                    </select>
 
                 </div>
 

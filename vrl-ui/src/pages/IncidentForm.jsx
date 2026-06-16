@@ -9,7 +9,8 @@ getIncidentById,
 getIncidentSeverities,
 getIncidentStatuses,
 getIncidentTypes,
-getIncidentPriorities
+getIncidentPriorities,
+getActiveVendors
 } from "../services/incidentService";
 
 import SuccessModal from "../components/SuccessModal";
@@ -26,6 +27,7 @@ const [severities, setSeverities] = useState([]);
 const [statuses, setStatuses] = useState([]);
 const [types, setTypes] = useState([]);
 const [priorities, setPriorities] = useState([]);
+const [active, setActive] = useState([]);
 
 const [incident, setIncident] = useState({
     incidentNumber: "",
@@ -63,18 +65,21 @@ const loadDropdowns = async () => {
             severityResult,
             statusResult,
             typeResult,
-            priorityResult
+            priorityResult,
+            activeResult
         ] = await Promise.all([
             getIncidentSeverities(),
             getIncidentStatuses(),
             getIncidentTypes(),
-            getIncidentPriorities()
+            getIncidentPriorities(),
+            getActiveVendors()
         ]);
 
         setSeverities(severityResult.data || []);
         setStatuses(statusResult.data || []);
         setTypes(typeResult.data || []);
         setPriorities(priorityResult.data || []);
+        setActive(activeResult.data || []);
 
     } catch (error) {
 
@@ -229,13 +234,14 @@ return (
                             Select Vendor
                         </option>
 
-                        <option value="3">
-                            ABC Electric
-                        </option>
-
-                        <option value="4">
-                            XYZ Cloud
-                        </option>
+                        {active.map(vendor => (
+                            <option
+                                key={vendor.vendorId}
+                                value={vendor.vendorId}
+                            >
+                                {vendor.vendorName}
+                            </option>
+                        ))}
                     </select>
                 </div>
 

@@ -119,4 +119,17 @@ public class UserController : ControllerBase
             Message = "User deleted successfully"
         });
     }
+
+    [HttpGet("roles")]
+    public async Task<IActionResult> GetRoles()
+    {
+        var roles = await _userService.GetRoles();
+
+        return Ok(new ApiResponse<List<Roles>>
+        {
+            Success = true,
+            Message = "Roles retrieved successfully",
+            Data = roles
+        });
+    }
 } 

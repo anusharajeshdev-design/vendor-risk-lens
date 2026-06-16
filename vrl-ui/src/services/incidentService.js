@@ -135,3 +135,16 @@ export const getIncidentPriorities = async () => {
 
     return await response.json();
 };
+
+export const getActiveVendors = async () => {
+
+    const response = await fetch(
+        `${API_URL}/active`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
+
+    return await response.json();
+};

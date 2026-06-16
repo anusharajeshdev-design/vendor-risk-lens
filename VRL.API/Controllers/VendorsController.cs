@@ -112,4 +112,38 @@ public class VendorsController : ControllerBase
         });
     }
 
+    [HttpGet("types")]
+    public async Task<IActionResult> GetVendorTypes()
+    {
+        var vendorTypes = await _vendorService.GetVendorTypesAsync();
+
+        if(vendorTypes == null)
+        {
+            return NotFound(new ApiResponse<object>
+            {
+               Success = false,
+               Message = "Vendor types not found" 
+            });
+        }
+
+        return Ok(new ApiResponse<List<VendorTypes>>
+        {
+            Success = true,
+            Message = "Vendor types retrieved successfully",
+            Data = vendorTypes
+        });
+    }
+
+    [HttpGet("active")]
+    public async Task<IActionResult> GetActiveVendors()
+    {
+        var users = await _vendorService.GetActiveUser();
+
+        return Ok(new ApiResponse<List<Users>>
+        {
+            Success = true,
+            Message = "Active users retrieved successfully",
+            Data = users
+        });
+    }
 }

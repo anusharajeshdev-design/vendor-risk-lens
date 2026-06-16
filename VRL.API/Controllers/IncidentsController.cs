@@ -178,4 +178,17 @@ public class IncidentController : ControllerBase
             Data = incidentstatuses
         });
     }
+
+    [HttpGet("active")]
+    public async Task<IActionResult> GetActiveVendors()
+    {
+        var vendors = await _incidentService.GetActiveVendorsAsync();
+
+        return Ok(new ApiResponse<List<Vendor>>
+        {
+            Success = true,
+            Message = "Active vendors retrieved successfully",
+            Data = vendors
+        });
+    }
 }

@@ -69,4 +69,14 @@ public class VendorService
         return await _context.Vendors
             .FirstOrDefaultAsync(v => v.VendorId == id);
     }
+
+     public async Task<List<VendorTypes>> GetVendorTypesAsync()
+    {
+        return await _context.VendorTypes.ToListAsync();
+    }
+
+    public async Task<List<Users>> GetActiveUser()
+    {
+        return await _context.Users.Where(u => u.IsActive).OrderBy(u => u.FirstName).ToListAsync();
+    }
 }
