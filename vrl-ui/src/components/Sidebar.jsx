@@ -8,6 +8,7 @@ import {
     FaBuilding,
     FaExclamationTriangle,
     FaUsers,
+    FaChartLine,
     FaSignOutAlt
 } from "react-icons/fa";
 
@@ -90,6 +91,19 @@ function Sidebar() {
                     </span>
 
                 </Link>
+
+                <Link to="/dashboard">
+
+                    <FaChartLine
+                        className="menu-icon"
+                    />
+
+                    <span className="menu-text">
+                        Dashboard
+                    </span>
+
+                </Link>
+                
 
             </nav>
 

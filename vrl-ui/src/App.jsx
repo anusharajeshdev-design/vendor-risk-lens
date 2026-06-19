@@ -9,6 +9,7 @@ import Users from "./pages/Users";
 import UserForm from "./pages/UserForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MainLayout from "./layouts/MainLayout";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/users"element={<ProtectedRoute><MainLayout><Users /></MainLayout></ProtectedRoute>}/>
         <Route path="/users/new" element={<ProtectedRoute><MainLayout><UserForm /></MainLayout></ProtectedRoute>}/>
         <Route path="/users/edit/:id" element={<ProtectedRoute><MainLayout><UserForm /></MainLayout></ProtectedRoute>}/>
+        <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   );

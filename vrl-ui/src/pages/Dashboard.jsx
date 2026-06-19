@@ -1,54 +1,102 @@
+import { useEffect, useState } from "react";
+
+import { getDashboardSummary }
+from "../services/dashboardService";
+
+import "./Dashboard.css";
+
 function Dashboard() {
-  return (
-    <div style={{ padding: "20px" }}>
-      <h1>Vendor-Risk Lens Dashboard</h1>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          marginTop: "20px",
-        }}
-      >
-        <div
-          style={{
-            border: "1px solid #ccc",
-            padding: "20px",
-            width: "200px",
-            borderRadius: "10px",
-          }}
-        >
-          <h3>Total Vendors</h3>
-          <p>24</p>
-        </div>
+    const [summary, setSummary] = useState({
+        totalVendors: 0,
+        criticalVendors: 0,
+        openIncidents: 0,
+        activeUsers: 0
+    });
 
-        <div
-          style={{
-            border: "1px solid #ccc",
-            padding: "20px",
-            width: "200px",
-            borderRadius: "10px",
-          }}
-        >
-          <h3>Open Incidents</h3>
-          <p>8</p>
-        </div>
+    useEffect(() => {
+        loadDashboard();
+    }, []);
 
-        <div
-          style={{
-            border: "1px solid #ccc",
-            padding: "20px",
-            width: "200px",
-            borderRadius: "10px",
-          }}
-        >
-          <h3>Critical Risks</h3>
-          <p>3</p>
-          <p>4</p>
+    const loadDashboard = async () => {
+
+        try {
+
+            const result =
+                await getDashboardSummary();
+
+            setSummary(result.data);
+
+        } catch (error) {
+
+            console.error(error);
+        }
+    };
+
+    return (
+
+        <div className="page-container">
+
+            <div className="page-header">
+
+                <h1>Dashboard</h1>
+
+            </div>
+
+            <div className="dashboard-grid">
+
+                <div className="dashboard-card">
+
+                    <div className="card-label">
+                        Total Vendors
+                    </div>
+
+                    <div className="card-value">
+                        {summary.totalVendors}
+                    </div>
+
+                </div>
+
+                <div className="dashboard-card">
+
+                    <div className="card-label">
+                        Critical Vendors
+                    </div>
+
+                    <div className="card-value">
+                        {summary.criticalVendors}
+                    </div>
+
+                </div>
+
+                <div className="dashboard-card">
+
+                    <div className="card-label">
+                        Open Incidents
+                    </div>
+
+                    <div className="card-value">
+                        {summary.openIncidents}
+                    </div>
+
+                </div>
+
+                <div className="dashboard-card">
+
+                    <div className="card-label">
+                        Active Users
+                    </div>
+
+                    <div className="card-value">
+                        {summary.activeUsers}
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Dashboard;

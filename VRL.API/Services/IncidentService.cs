@@ -19,8 +19,10 @@ public class IncidentsService
         return await _context.Incidents.ToListAsync();
     }
 
-    public async Task<Incident> CreateIncidentAsync(Incident incident)
+   public async Task<Incident> CreateIncidentAsync(Incident incident)
     {
+        incident.IncidentNumber = await GenerateIncidentNumberAsync();
+
         incident.CreatedDate = DateTime.UtcNow;
 
         _context.Incidents.Add(incident);
@@ -30,9 +32,7 @@ public class IncidentsService
         return incident;
     }
 
-    public async Task<bool> UpdateIncidentAsync(
-    int id,
-    Incident updatedIncident)
+    public async Task<bool> UpdateIncidentAsync(int id, Incident updatedIncident)
     {
         var incident = await _context.Incidents
             .FirstOrDefaultAsync(i =>
@@ -103,5 +103,29 @@ public class IncidentsService
     public async Task<List<Vendor>> GetActiveVendorsAsync()
     {
         return await _context.Vendors.Where(v => v.IsActive).OrderBy(v => v.VendorName).ToListAsync();
+    }
+
+    private async Task<string> GenerateIncidentNumberAsync()
+    {
+        string today = DateTime.UtcNow.ToString("yyyyMMdd");
+
+        string prefix = $"INC{today}";
+
+        var lastIncident = await _context.Incidents
+            .Where(i => i.IncidentNumber.StartsWith(prefix))
+            .OrderByDescending(i => i.IncidentNumber)
+            .FirstOrDefaultAsync();
+
+        int nextSequence = 1;
+
+        if (lastIncident != null)
+        {
+            string lastSequence =
+                lastIncident.IncidentNumber.Substring(prefix.Length);
+
+            nextSequence = int.Parse(lastSequence) + 1;
+        }
+
+        return $"{prefix}{nextSequence:D3}";
     }
 }

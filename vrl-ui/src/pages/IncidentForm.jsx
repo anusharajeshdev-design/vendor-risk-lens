@@ -212,17 +212,6 @@ return (
             <div className="form-grid">
 
                 <div className="form-group">
-                    <label>Incident Number *</label>
-
-                    <input
-                        type="text"
-                        name="incidentNumber"
-                        value={incident.incidentNumber}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="form-group">
                     <label>Vendor *</label>
 
                     <select
