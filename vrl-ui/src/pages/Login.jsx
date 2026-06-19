@@ -27,11 +27,12 @@ function Login() {
                     })
                 });
 
-            const result =
-                await response.json();
+            const result = await response.json();
 
             if (response.ok) {
+
                 setError("");
+
                 localStorage.setItem(
                     "token",
                     result.token);
@@ -40,129 +41,211 @@ function Login() {
             }
             else {
 
-                setError("Invalid Username or Password");
+                setError(
+                    "Invalid username or password.");
             }
-
         }
         catch (error) {
 
             console.error(error);
+
+            setError(
+                "Unable to connect to server.");
         }
     };
 
-   return (
+    return (
 
-<div className="login-page">
+        <div className="login-page">
 
+            {/* LEFT SIDE */}
 
-<div className="login-left">
+            <div className="login-left">
 
-    <div className="brand-section">
+                <div className="brand-section">
+                    <h1 className="brand-logo">
+                        VRL
+                    </h1>
 
-        <h1 className="brand-logo">
-            VRL
-        </h1>
+                    <p className="brand-name">
+                        Vendor Risk Lens
+                    </p>
 
-        <p className="brand-name">
-            Vendor Risk Lens
-        </p>
+                    <h2 className="brand-heading">
+                        See Risk Clearly.
+                        <br />
+                        Manage Vendors Confidently.
+                    </h2>
 
-        <h2 className="brand-heading">
-            Smarter Vendor Risk.
-            <br />
-            Stronger Business.
-        </h2>
+                    <p className="brand-description">
 
-        <p className="brand-description">
-            Identify, assess and mitigate
-            vendor risks with AI-powered
-            insights.
-        </p>
+                        Centralize vendor assessments,
+                        incident tracking, compliance monitoring
+                        and risk intelligence in one unified
+                        platform designed for modern enterprises.
 
-    </div>
+                    </p>
 
-    <div className="dashboard-preview">
+                </div>
 
-        <div className="preview-card">
-            Risk Overview
-        </div>
+                <div className="feature-grid">
 
-        <div className="preview-card">
-            AI Insights
-        </div>
+                    <div className="feature-card">
+                        <h4>
+                            Unified Risk View
+                        </h4>
 
-        <div className="preview-card">
-            Incidents
-        </div>
+                        <p>
+                            Monitor all vendors from a
+                            single intelligent dashboard.
+                        </p>
+                    </div>
 
-    </div>
+                    <div className="feature-card">
+                        <h4>
+                            Proactive Alerts
+                        </h4>
 
-</div>
+                        <p>
+                            Identify potential issues
+                            before they become incidents.
+                        </p>
+                    </div>
 
-<div className="login-right">
+                    <div className="feature-card">
+                        <h4>
+                            Smarter Assessments
+                        </h4>
 
-    <div className="login-card">
+                        <p>
+                            Streamline reviews with
+                            AI-powered risk insights.
+                        </p>
+                    </div>
 
-        <h1 className="login-title">
-            Welcome Back
-        </h1>
+                    <div className="feature-card">
+                        <h4>
+                            Strong Compliance
+                        </h4>
 
-        <p className="login-subtitle">
-            Sign in to continue to VRL
-        </p>
+                        <p>
+                            Stay audit-ready with
+                            continuous monitoring.
+                        </p>
+                    </div>
 
-        {error && (
-            <div className="login-error">
-                {error}
+                </div>
+
             </div>
-        )}
 
-        <div className="login-group">
+            {/* RIGHT SIDE */}
 
-            <label>
-                Username
-            </label>
+            <div className="login-right">
 
-            <input
-                type="text"
-                value={username}
-                onChange={(e) =>
-                    setUsername(e.target.value)}
-            />
+                <div className="login-card">
+
+                    <h1 className="login-title">
+                        Welcome Back
+                    </h1>
+
+                    <p className="login-subtitle">
+
+                        Sign in to continue
+                        to Vendor Risk Lens
+
+                    </p>
+
+                    {error && (
+
+                        <div className="login-error">
+
+                            {error}
+
+                        </div>
+
+                    )}
+
+                    <div className="login-group">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            value={username}
+                            placeholder="Enter username"
+                            onChange={(e) =>
+                                setUsername(e.target.value)}
+                        />
+
+                    </div>
+
+                    <div className="login-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            value={password}
+                            placeholder="Enter password"
+                            onChange={(e) =>
+                                setPassword(e.target.value)}
+                        />
+
+                    </div>
+
+                    <div className="login-options">
+
+                        <label className="remember-me">
+
+                            <input
+                                type="checkbox"
+                            />
+
+                            Remember Me
+
+                        </label>
+
+                        <a
+                            href="/"
+                            className="forgot-password"
+                        >
+                            Forgot Password?
+                        </a>
+
+                    </div>
+
+                    <button
+                        className="login-button"
+                        onClick={handleLogin}
+                    >
+                        Sign In
+                    </button>
+
+                    <div className="login-divider">
+
+                        <span>
+                            Secure Enterprise Access
+                        </span>
+
+                    </div>
+
+                    <div className="login-footer">
+
+                        Vendor Risk Lens © 2026
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
-
-        <div className="login-group">
-
-            <label>
-                Password
-            </label>
-
-            <input
-                type="password"
-                value={password}
-                onChange={(e) =>
-                    setPassword(e.target.value)}
-            />
-
-        </div>
-
-        <button
-            className="login-button"
-            onClick={handleLogin}
-        >
-            Sign In
-        </button>
-
-    </div>
-
-</div>
-
-
-</div>
-
-);
-
+    );
 }
 
 export default Login;
+

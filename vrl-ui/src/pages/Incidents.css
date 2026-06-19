@@ -1,156 +1,272 @@
-.page-container {
-    padding: 32px;
-    background: #eaf4f4;
-    min-height: 100vh;
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: #eef2f6;
 }
 
+/* ======================================
+   PAGE
+====================================== */
+
+.page-container {
+
+    min-height: 100vh;
+
+    padding: 40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2f6 0%,
+            #f7fafc 100%
+        );
+}
+
+/* ======================================
+   HEADER
+====================================== */
+
 .page-header {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
-    margin-bottom: 28px;
+
+    margin-bottom: 32px;
 }
 
 .page-header h1 {
-    color: #2f3e46;
-    font-size: 36px;
-    font-weight: 700;
+
+    margin: 0;
+
+    color: #0f172a;
+
+    font-size: 46px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
 }
 
-/* ADD BUTTON */
 
 .add-button {
-    background: #6b9080;
-
-    color: white;
-
+    height: 56px;
+    padding: 0 24px;
     border: none;
-
-    border-radius: 16px;
-
-    padding: 14px 22px;
-
+    border-radius: 18px;
     cursor: pointer;
-
-    font-weight: 600;
-
-    transition: all 0.25s ease;
-
-    box-shadow:
-        0 8px 20px rgba(107,144,128,0.20);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    background:linear-gradient(135deg, #0f172a, #1e293b);
+    box-shadow:0 15px 30px rgba(53,57,65,.18);
+    transition: all .25s ease;
 }
 
 .add-button:hover {
-    transform: translateY(-2px);
-    background: #5f8273;
+    background: linear-gradient(135deg,#2d3138,#484f5b);
+    transform:translateY(-2px);
+    box-shadow:0 18px 40px rgba(53,57,65,.25);
 }
 
-/* TABLE CARD */
 
 .table-card {
-    background: #f6fff8;
 
-    border-radius: 24px;
+    background:
+        rgba(255,255,255,.45);
 
-    padding: 24px;
+    backdrop-filter:
+        blur(24px);
+
+    -webkit-backdrop-filter:
+        blur(24px);
+
+    border:
+        1px solid rgba(255,255,255,.55);
+
+    border-radius: 32px;
+
+    padding: 28px;
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,0.05);
-
-    border: 1px solid #cce3de;
+        0 20px 60px rgba(15,23,42,.05);
 }
 
+/* ======================================
+   TABLE
+====================================== */
+
 table {
+
     width: 100%;
+
     border-collapse: collapse;
 }
 
-th,
-td {
-    padding: 16px;
+thead tr {
 
-    text-align: left;
-
-    border-bottom: 1px solid #dceae6;
+    border-bottom:
+        1px solid rgba(148,163,184,.15);
 }
 
 th {
-    color: #48645c;
 
-    font-size: 15px;
+    text-align: left;
+
+    padding: 20px 16px;
+
+    color: #475569;
+
+    font-size: 14px;
 
     font-weight: 700;
 
-    letter-spacing: 0.3px;
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
 }
 
 td {
-    color: #2f3e46;
+
+    padding: 20px 16px;
+
+    color: #0f172a;
+
+    font-size: 15px;
+
+    border-bottom:
+        1px solid rgba(148,163,184,.10);
 }
 
-tr {
-    transition: all 0.2s ease;
+tbody tr {
+
+    transition: all .20s ease;
 }
 
-tr:hover {
-    background: rgba(204,227,222,0.25);
+tbody tr:hover {
+
+    background:
+        rgba(255,255,255,.35);
 }
 
-/* ACTION ICONS */
+/* ======================================
+   ACTIONS
+====================================== */
 
 .action-icons {
+
     display: flex;
+
+    align-items: center;
+
     gap: 14px;
 }
 
 .edit-icon {
+
     cursor: pointer;
 
-    color: #6b9080;
+    color: #64748b;
 
-    transition: all 0.2s ease;
+    transition: all .20s ease;
 }
 
 .edit-icon:hover {
-    transform: scale(1.15);
+
+    color: #0f172a;
+
+    transform:
+        scale(1.15);
 }
 
 .delete-icon {
+
     cursor: pointer;
 
-    color: #a4c3b2;
+    color: #94a3b8;
 
-    transition: all 0.2s ease;
+    transition: all .20s ease;
 }
 
 .delete-icon:hover {
-    transform: scale(1.15);
+
+    color: #dc2626;
+
+    transform:
+        scale(1.15);
 }
 
-/* OPTIONAL STATUS BADGES */
+/* ======================================
+   STATUS BADGES
+====================================== */
 
 .status-active {
-    background: rgba(107,144,128,0.12);
-    color: #4f7968;
+
+    display: inline-flex;
+
+    align-items: center;
 
     padding: 6px 12px;
 
     border-radius: 999px;
 
-    font-size: 13px;
+    background:
+        rgba(34,197,94,.10);
 
-    font-weight: 600;
+    color: #15803d;
+
+    font-size: 12px;
+
+    font-weight: 700;
 }
 
 .status-inactive {
-    background: rgba(164,195,178,0.18);
-    color: #64756e;
+
+    display: inline-flex;
+
+    align-items: center;
 
     padding: 6px 12px;
 
     border-radius: 999px;
 
-    font-size: 13px;
+    background:
+        rgba(148,163,184,.12);
 
-    font-weight: 600;
+    color: #64748b;
+
+    font-size: 12px;
+
+    font-weight: 700;
 }
+
+/* ======================================
+   SEVERITY BADGES
+====================================== */
+
+.severity-low {
+
+    color: #15803d;
+    font-weight: 700;
+}
+
+.severity-medium {
+
+    color: #b45309;
+    font-weight: 700;
+}
+
+.severity-high {
+
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.severity-critical {
+
+    color: #991b1b;
+    font-weight: 700;
+}
+

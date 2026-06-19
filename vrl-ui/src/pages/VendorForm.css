@@ -1,42 +1,68 @@
 body {
     margin: 0;
     font-family: Inter, sans-serif;
-    background: #eaf4f4;
+    background: #eef2f6;
 }
 
-/* PAGE */
+/* ======================================
+   PAGE
+====================================== */
 
 .form-page {
+
     min-height: 100vh;
 
-    background: #eaf4f4;
-
     padding: 40px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2f6 0%,
+            #f7fafc 100%
+        );
 }
 
-/* CARD */
+/* ======================================
+   FORM CARD
+====================================== */
 
 .form-card {
-    background: #f6fff8;
 
     max-width: 1400px;
 
     margin: 0 auto;
 
-    border-radius: 28px;
-
     padding: 42px;
 
-    box-shadow:
-        0 10px 35px rgba(0, 0, 0, 0.05);
+    border-radius: 32px;
 
-    border: 1px solid #cce3de;
+    background:
+        rgba(255,255,255,.45);
+
+    backdrop-filter:
+        blur(24px);
+
+    -webkit-backdrop-filter:
+        blur(24px);
+
+    border:
+        1px solid rgba(255,255,255,.55);
+
+    box-shadow:
+        0 20px 60px rgba(15,23,42,.05);
 }
 
-/* BACK */
+/* ======================================
+   BACK LINK
+====================================== */
 
 .back-link {
-    color: #6b9080;
+
+    display: inline-block;
+
+    margin-bottom: 24px;
+
+    color: #64748b;
 
     font-size: 14px;
 
@@ -44,34 +70,39 @@ body {
 
     cursor: pointer;
 
-    margin-bottom: 24px;
-
-    display: inline-block;
-
-    transition: all 0.2s ease;
+    transition: .25s ease;
 }
 
 .back-link:hover {
-    color: #4f7968;
+
+    color: #0f172a;
 }
 
-/* TITLE */
+/* ======================================
+   TITLE
+====================================== */
 
 .form-card h1 {
+
     margin-top: 0;
 
     margin-bottom: 36px;
 
-    color: #2f3e46;
+    color: #0f172a;
 
-    font-size: 42px;
+    font-size: 44px;
 
-    font-weight: 700;
+    font-weight: 800;
+
+    letter-spacing: -1px;
 }
 
-/* GRID */
+/* ======================================
+   GRID
+====================================== */
 
 .form-grid {
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -80,91 +111,118 @@ body {
 }
 
 .form-group {
+
     display: flex;
+
     flex-direction: column;
 }
 
-/* LABELS */
+/* ======================================
+   LABELS
+====================================== */
 
 .form-group label {
+
     margin-bottom: 10px;
 
-    color: #48645c;
+    color: #334155;
 
-    font-size: 15px;
+    font-size: 14px;
 
     font-weight: 600;
 }
 
 .required {
-    color: #6b9080;
+
+    color: #dc2626;
 }
 
-/* INPUTS */
+/* ======================================
+   INPUTS
+====================================== */
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-    min-height: 52px;
 
-    padding: 0 16px;
+    min-height: 56px;
 
-    border: 1px solid #cce3de;
+    padding: 0 18px;
 
     border-radius: 16px;
 
+    border:
+        1px solid rgba(148,163,184,.18);
+
+    background:
+        rgba(255,255,255,.85);
+
+    color: #0f172a;
+
     font-size: 14px;
 
-    background: white;
-
-    transition: all 0.25s ease;
+    transition: all .25s ease;
 }
 
 .form-group textarea {
+
+    min-height: 140px;
+
     padding-top: 14px;
-    min-height: 120px;
+
+    resize: vertical;
 }
 
-/* FOCUS */
+/* ======================================
+   FOCUS
+====================================== */
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
+
     outline: none;
 
-    border-color: #6b9080;
+    border-color: #94a3b8;
 
     box-shadow:
-        0 0 0 4px rgba(107,144,128,0.15);
-
-    background: white;
+        0 0 0 4px rgba(148,163,184,.15);
 }
 
-/* CHECKBOX */
+/* ======================================
+   CHECKBOX
+====================================== */
 
 .checkbox-container {
-    margin-top: 28px;
 
     display: flex;
 
     align-items: center;
 
     gap: 10px;
+
+    margin-top: 28px;
 }
 
 .checkbox-container label {
-    color: #48645c;
+
+    color: #475569;
+
     font-weight: 600;
 }
 
 .checkbox-container input[type="checkbox"] {
+
     width: 18px;
     height: 18px;
 }
 
-/* BUTTON AREA */
+/* ======================================
+   BUTTONS
+====================================== */
 
 .button-container {
+
     display: flex;
 
     justify-content: flex-end;
@@ -177,83 +235,109 @@ body {
 /* CANCEL */
 
 .cancel-btn {
+
     min-width: 130px;
 
-    height: 50px;
+    height: 54px;
 
-    border: none;
+    border-radius: 18px;
 
-    border-radius: 16px;
+    border:
+        1px solid rgba(148,163,184,.18);
 
-    background: #dceae6;
+    background:
+        rgba(255,255,255,.75);
 
-    color: #48645c;
+    color: #475569;
 
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
+    transition: all .25s ease;
 }
 
 .cancel-btn:hover {
-    background: #cce3de;
+
+    background:
+        rgba(255,255,255,.95);
+
+    transform:
+        translateY(-1px);
 }
 
 /* SAVE */
 
 .save-btn {
-    min-width: 150px;
 
-    height: 50px;
+    min-width: 160px;
+
+    height: 54px;
 
     border: none;
 
-    border-radius: 16px;
-
-    background: #6b9080;
+    border-radius: 18px;
 
     color: white;
 
-    font-weight: 600;
+    font-weight: 700;
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
+    background:
+        linear-gradient(
+            135deg,
+            #353941,
+            #545c68
+        );
 
     box-shadow:
-        0 8px 20px rgba(107,144,128,0.20);
+        0 15px 30px rgba(53,57,65,.18);
+
+    transition: all .25s ease;
 }
 
 .save-btn:hover {
-    background: #5f8273;
 
-    transform: translateY(-2px);
+    background:
+        linear-gradient(
+            135deg,
+            #2d3138,
+            #484f5b
+        );
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 18px 40px rgba(53,57,65,.25);
 }
 
-.save-btn:active,
-.cancel-btn:active {
-    transform: translateY(0);
-}
-
-/* RESPONSIVE */
+/* ======================================
+   RESPONSIVE
+====================================== */
 
 @media (max-width: 900px) {
 
     .form-grid {
+
         grid-template-columns: 1fr;
     }
 
     .form-card {
+
         padding: 24px;
     }
 
     .button-container {
+
         flex-direction: column;
     }
 
     .save-btn,
     .cancel-btn {
+
         width: 100%;
     }
 }
+

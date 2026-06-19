@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,8 +17,7 @@ function Sidebar() {
 
     const navigate = useNavigate();
 
-    const [collapsed, setCollapsed] =
-        useState(false);
+    const [collapsed, setCollapsed] = useState(false);
 
     const handleLogout = () => {
 
@@ -27,6 +27,7 @@ function Sidebar() {
     };
 
     return (
+
         <div
             className={
                 collapsed
@@ -52,7 +53,7 @@ function Sidebar() {
 
             </div>
 
-            <nav>
+            <nav className="sidebar-nav">
 
                 <Link to="/vendors">
 
@@ -91,25 +92,32 @@ function Sidebar() {
                 </Link>
 
             </nav>
-            <div className="profile-card">
-                <div className="profile-avatar">
-                    AR
-                </div>
 
-                {!collapsed && (
-                    <div>
-                        <div className="profile-name">
-                            Anusha R
-                        </div>
-
-                        <div className="profile-role">
-                            Admin
-                        </div>
-                    </div>
-                )}
-
-            </div>
             <div className="sidebar-footer">
+
+                <div className="profile-card">
+
+                    <div className="profile-avatar">
+                        AR
+                    </div>
+
+                    {!collapsed && (
+
+                        <div>
+
+                            <div className="profile-name">
+                                Anusha R
+                            </div>
+
+                            <div className="profile-role">
+                                Administrator
+                            </div>
+
+                        </div>
+
+                    )}
+
+                </div>
 
                 <button
                     className="logout-btn"
@@ -118,16 +126,22 @@ function Sidebar() {
 
                     <FaSignOutAlt />
 
-                    <span className="logout-text">
-                        Logout
-                    </span>
+                    {!collapsed && (
+
+                        <span className="logout-text">
+                            Logout
+                        </span>
+
+                    )}
 
                 </button>
 
             </div>
 
         </div>
+
     );
 }
 
 export default Sidebar;
+
