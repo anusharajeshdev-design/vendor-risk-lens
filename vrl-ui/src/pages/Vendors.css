@@ -13,6 +13,8 @@ body {
 
     min-height: 100vh;
 
+    margin-left: 260px;
+
     padding: 40px;
 
     background:
@@ -21,6 +23,8 @@ body {
             #eef2f6 0%,
             #f7fafc 100%
         );
+
+    transition: .3s ease;
 }
 
 /* ======================================

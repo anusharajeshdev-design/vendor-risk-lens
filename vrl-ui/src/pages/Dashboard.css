@@ -1,3 +1,31 @@
+.page-container {
+
+    padding: 0px;
+
+    min-height: 100vh;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+}
+
+.page-header h1 {
+
+    font-size: 64px;
+
+    font-weight: 800;
+
+    color: #0f172a;
+
+    margin-bottom: 32px;
+
+    letter-spacing: -2px;
+}
+
+/* ==========================
+   KPI CARDS
+========================== */
+
 .dashboard-grid {
 
     display: grid;
@@ -7,42 +35,257 @@
 
     gap: 24px;
 
-    margin-top: 20px;
+    margin-bottom: 32px;
 }
 
 .dashboard-card {
 
-    background: #f6fff8;
+    background:
+        rgba(255,255,255,.45);
 
-    border-radius: 24px;
+    backdrop-filter:
+        blur(18px);
 
-    padding: 24px;
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    border:
+        1px solid rgba(255,255,255,.55);
+
+    border-radius: 28px;
+
+    padding: 28px;
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,0.05);
+        0 15px 35px rgba(15,23,42,.05);
 
-    transition: 0.3s ease;
+    transition: .25s ease;
 }
 
 .dashboard-card:hover {
 
-    transform: translateY(-3px);
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 20px 40px rgba(15,23,42,.08);
 }
 
 .card-label {
 
-    font-size: 14px;
-
     color: #64748b;
 
-    margin-bottom: 12px;
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 14px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
 }
 
 .card-value {
 
-    font-size: 42px;
+    color: #0f172a;
+
+    font-size: 52px;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+/* ==========================
+   COMPLIANCE SCORE
+========================== */
+
+.dashboard-section {
+
+    margin-bottom: 32px;
+}
+
+.section-card {
+
+    background:
+        rgba(255,255,255,.45);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    border:
+        1px solid rgba(255,255,255,.55);
+
+    border-radius: 28px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 15px 35px rgba(15,23,42,.05);
+}
+
+.section-title {
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+
+    margin-bottom: 16px;
+}
+
+.compliance-card {
+
+    text-align: center;
+}
+
+.compliance-score {
+
+    font-size: 88px;
+
+    font-weight: 800;
+
+    color: #4F7DF3;
+}
+
+/* ==========================
+   TWO COLUMN
+========================== */
+
+.dashboard-two-column {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 24px;
+
+    margin-bottom: 32px;
+}
+
+.section-card h3 {
+
+    color: #0f172a;
+
+    font-size: 22px;
+
+    margin-bottom: 24px;
+}
+
+.data-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 14px 0;
+
+    border-bottom:
+        1px solid rgba(203,213,225,.35);
+}
+
+.data-row:last-child {
+
+    border-bottom: none;
+}
+
+.data-row span {
+
+    color: #64748b;
+}
+
+.data-row strong {
+
+    color: #0f172a;
+
+    font-size: 18px;
+}
+
+/* ==========================
+   RECENT VENDORS
+========================== */
+
+.vendor-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 16px 0;
+
+    border-bottom:
+        1px solid rgba(203,213,225,.35);
+}
+
+.vendor-row:last-child {
+
+    border-bottom: none;
+}
+
+.vendor-row span:first-child {
+
+    color: #0f172a;
+
+    font-weight: 600;
+}
+
+.vendor-row span:last-child {
+
+    padding: 6px 14px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(79,125,243,.10);
+
+    color: #4F7DF3;
+
+    font-size: 13px;
 
     font-weight: 700;
+}
 
-    color: #1f2937;
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:1200px){
+
+    .dashboard-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+@media(max-width:768px){
+
+    .dashboard-grid{
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .dashboard-two-column{
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-header h1{
+
+        font-size:48px;
+    }
 }

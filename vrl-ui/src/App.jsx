@@ -17,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Login />} />
         <Route path="/login" element={ <Login />} />
+        <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>}/>
         <Route path="/vendors" element={ <ProtectedRoute><MainLayout><Vendors /></MainLayout></ProtectedRoute>} />
         <Route path="/vendors/new" element={ <ProtectedRoute><MainLayout><VendorForm /></MainLayout></ProtectedRoute>} />
         <Route path="/vendors/edit/:id" element={ <ProtectedRoute><MainLayout><VendorForm /></MainLayout></ProtectedRoute> }/>
@@ -26,7 +27,6 @@ function App() {
         <Route path="/users"element={<ProtectedRoute><MainLayout><Users /></MainLayout></ProtectedRoute>}/>
         <Route path="/users/new" element={<ProtectedRoute><MainLayout><UserForm /></MainLayout></ProtectedRoute>}/>
         <Route path="/users/edit/:id" element={<ProtectedRoute><MainLayout><UserForm /></MainLayout></ProtectedRoute>}/>
-        <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   );

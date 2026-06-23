@@ -1,24 +1,22 @@
 import Sidebar from "../components/Sidebar";
+import "./MainLayout.css";
 
 function MainLayout({ children }) {
 
     return (
-        <div
-            style={{
-                display: "flex"
-            }}
-        >
+
+        <div className="layout">
+
             <Sidebar />
 
-            <div
-                style={{
-                    flex: 1,
-                    padding: "20px"
-                }}
-            >
+            <main className="main-content">
+
                 {children}
-            </div>
+
+            </main>
+
         </div>
+
     );
 }
 

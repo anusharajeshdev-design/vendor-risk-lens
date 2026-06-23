@@ -1,10 +1,6 @@
-
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
-    FaBars,
-    FaTimes,
     FaBuilding,
     FaExclamationTriangle,
     FaUsers,
@@ -18,8 +14,6 @@ function Sidebar() {
 
     const navigate = useNavigate();
 
-    const [collapsed, setCollapsed] = useState(false);
-
     const handleLogout = () => {
 
         localStorage.removeItem("token");
@@ -29,81 +23,37 @@ function Sidebar() {
 
     return (
 
-        <div
-            className={
-                collapsed
-                    ? "sidebar collapsed"
-                    : "sidebar"
-            }
-        >
+        <div className="sidebar">
 
-            <div className="sidebar-header">
+            <div className="sidebar-brand">
 
-                <button
-                    className="collapse-btn"
-                    onClick={() =>
-                        setCollapsed(!collapsed)
-                    }
-                >
-                    {
-                        collapsed
-                            ? <FaBars />
-                            : <FaTimes />
-                    }
-                </button>
+                <h1>VRL</h1>
+
+                <span>Vendor Risk Lens</span>
 
             </div>
 
             <nav className="sidebar-nav">
 
-                <Link to="/vendors">
+                <NavLink to="/dashboard">
+                    <FaChartLine className="menu-icon" />
+                    <span>Dashboard</span>
+                </NavLink>
 
-                    <FaBuilding
-                        className="menu-icon"
-                    />
+                <NavLink to="/vendors">
+                    <FaBuilding className="menu-icon" />
+                    <span>Vendors</span>
+                </NavLink>
 
-                    <span className="menu-text">
-                        Vendors
-                    </span>
+                <NavLink to="/incidents">
+                    <FaExclamationTriangle className="menu-icon" />
+                    <span>Incidents</span>
+                </NavLink>
 
-                </Link>
-
-                <Link to="/incidents">
-
-                    <FaExclamationTriangle
-                        className="menu-icon"
-                    />
-
-                    <span className="menu-text">
-                        Incidents
-                    </span>
-
-                </Link>
-
-                <Link to="/users">
-
-                    <FaUsers
-                        className="menu-icon"
-                    />
-
-                    <span className="menu-text">
-                        Users
-                    </span>
-
-                </Link>
-
-                <Link to="/dashboard">
-
-                    <FaChartLine
-                        className="menu-icon"
-                    />
-
-                    <span className="menu-text">
-                        Dashboard
-                    </span>
-
-                </Link>
-                
+                <NavLink to="/users">
+                    <FaUsers className="menu-icon" />
+                    <span>Users</span>
+                </NavLink>
 
             </nav>
 
@@ -115,21 +65,17 @@ function Sidebar() {
                         AR
                     </div>
 
-                    {!collapsed && (
+                    <div>
 
-                        <div>
-
-                            <div className="profile-name">
-                                Anusha R
-                            </div>
-
-                            <div className="profile-role">
-                                Administrator
-                            </div>
-
+                        <div className="profile-name">
+                            Anusha R
                         </div>
 
-                    )}
+                        <div className="profile-role">
+                            Administrator
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -137,17 +83,8 @@ function Sidebar() {
                     className="logout-btn"
                     onClick={handleLogout}
                 >
-
                     <FaSignOutAlt />
-
-                    {!collapsed && (
-
-                        <span className="logout-text">
-                            Logout
-                        </span>
-
-                    )}
-
+                    <span>Logout</span>
                 </button>
 
             </div>
@@ -158,4 +95,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-

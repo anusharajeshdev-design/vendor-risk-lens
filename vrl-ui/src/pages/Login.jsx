@@ -37,7 +37,7 @@ function Login() {
                     "token",
                     result.token);
 
-                navigate("/vendors");
+                navigate("/dashboard");
             }
             else {
 
