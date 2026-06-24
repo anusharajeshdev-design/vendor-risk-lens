@@ -29,8 +29,10 @@ builder.Services.AddScoped<IncidentsService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<DashboardService>();
+builder.Services.AddScoped<AuditLogService>();
+builder.Services.AddScoped<CurrentUserService>();
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen();
 builder.Services
     .AddAuthentication(

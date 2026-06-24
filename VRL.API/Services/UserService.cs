@@ -7,11 +7,16 @@ namespace VRL.API.Services;
 public class UserService
 {
     private readonly VrlDbContext _context;
+    private readonly AuditLogService _auditLogService;
+    private readonly CurrentUserService _currentUserService;
 
 
-    public UserService(VrlDbContext context)
+
+    public UserService(VrlDbContext context, AuditLogService auditLogService, CurrentUserService currentUserService)
     {
         _context = context;
+        _auditLogService = auditLogService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<List<Users>> GetUsers()
@@ -26,7 +31,12 @@ public class UserService
         _context.Users.Add(user);
 
         await _context.SaveChangesAsync();
-
+        await _auditLogService.LogAsync(
+            "User",
+            user.UserId,
+            "Created",
+            _currentUserService.Username,
+            $"User {user.Username} created");
         return user;
     }
 
@@ -52,7 +62,12 @@ public class UserService
         user.IsActive = updatedUser.IsActive;
 
         await _context.SaveChangesAsync();
-
+        await _auditLogService.LogAsync(
+            "User",
+            updatedUser.UserId,
+            "Updated",
+            _currentUserService.Username,
+            $"User {updatedUser.Username} updated");
         return true;
     }
 
@@ -68,7 +83,12 @@ public class UserService
         _context.Users.Remove(user);
 
         await _context.SaveChangesAsync();
-
+        await _auditLogService.LogAsync(
+            "User",
+            user.UserId,
+            "Deleted",
+            _currentUserService.Username,
+            $"User {user.Username} deleted");
         return true;
     }
 

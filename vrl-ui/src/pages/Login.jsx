@@ -37,6 +37,22 @@ function Login() {
                     "token",
                     result.token);
 
+                localStorage.setItem(
+                    "userId",
+                    result.userId);
+
+                localStorage.setItem(
+                    "username",
+                    result.username);
+
+                localStorage.setItem(
+                    "fullName",
+                    result.fullName);
+
+                localStorage.setItem(
+                    "roleName",
+                    result.roleName);
+
                 navigate("/dashboard");
             }
             else {

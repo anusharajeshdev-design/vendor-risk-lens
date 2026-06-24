@@ -6,11 +6,15 @@ namespace VRL.API.Services;
 
 public class VendorService
 {
+    
     private readonly VrlDbContext _context;
-
-    public VendorService(VrlDbContext context)
+    private readonly AuditLogService _auditLogService;
+    private readonly CurrentUserService _currentUserService;
+    public VendorService(VrlDbContext context, AuditLogService auditLogService, CurrentUserService currentUserService)
     {
         _context = context;
+        _auditLogService = auditLogService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<List<Vendor>> GetVendorsAsync()
@@ -25,8 +29,14 @@ public class VendorService
         _context.Vendors.Add(vendor);
 
         await _context.SaveChangesAsync();
+        await _auditLogService.LogAsync(
+                "Vendor",
+                vendor.VendorId,
+                "Created",
+                _currentUserService.Username,
+                $"Vendor {vendor.VendorName} created");
 
-        return vendor;
+            return vendor;
     }
 
     public async Task<bool> UpdateVendorAsync(int id, Vendor vendor)
@@ -45,7 +55,12 @@ public class VendorService
         existingVendor.UpdatedDate = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
-
+            await _auditLogService.LogAsync(
+            "Vendor",
+            existingVendor.VendorId,
+            "Updated",
+            _currentUserService.Username,
+            $"Vendor {existingVendor.VendorName} updated");
         return true;
     }
 
@@ -60,7 +75,12 @@ public class VendorService
         vendor.UpdatedDate = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
-
+        await _auditLogService.LogAsync(
+            "Vendor",
+            vendor.VendorId,
+            "Deleted",
+            _currentUserService.Username,
+            $"Vendor {vendor.VendorName} deleted");
         return true;
     }
 

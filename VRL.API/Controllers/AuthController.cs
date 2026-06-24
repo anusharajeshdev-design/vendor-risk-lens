@@ -17,14 +17,12 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(
-        LoginRequest request)
+    public async Task<IActionResult> Login(LoginRequest request)
     {
-        var token =
-            await _authService.LoginAsync(
-                request);
+        var loginResponse =  await _authService.LoginAsync(request);
 
-        if (token == null)
+
+        if (loginResponse == null)
         {
             return Unauthorized(
                 new
@@ -34,10 +32,6 @@ public class AuthController : ControllerBase
                 });
         }
 
-        return Ok(
-            new
-            {
-                token
-            });
+        return Ok(loginResponse);
     }
 }

@@ -21,14 +21,23 @@ public class AuthService
         _configuration = configuration;
     }
 
-    public async Task<string?> LoginAsync(
-        LoginRequest request)
+    public async Task<LoginResponseDto?> LoginAsync(LoginRequest request)
     {
         var user = await _context.Users
-            .FirstOrDefaultAsync(u =>
-                u.Username == request.Username &&
-                u.Password == request.Password &&
-                u.IsActive);
+        .Join(
+        _context.Roles,
+        u => u.RoleId,
+        r => r.RoleId,
+        (u, r) => new
+        {
+        User = u,
+        RoleName = r.RoleName
+        })
+        .FirstOrDefaultAsync(x =>
+        x.User.Username == request.Username &&
+        x.User.Password == request.Password &&
+        x.User.IsActive);
+
 
         if (user == null)
         {
@@ -39,15 +48,15 @@ public class AuthService
         {
             new Claim(
                 ClaimTypes.NameIdentifier,
-                user.UserId.ToString()),
+                user.User.UserId.ToString()),
 
             new Claim(
                 ClaimTypes.Name,
-                user.Username),
+                user.User.Username),
 
             new Claim(
-                "RoleId",
-                user.RoleId.ToString())
+                ClaimTypes.Role,
+                user.RoleName)
         };
 
         var key = new SymmetricSecurityKey(
@@ -74,7 +83,26 @@ public class AuthService
             signingCredentials:
                 credentials);
 
-        return new JwtSecurityTokenHandler()
-            .WriteToken(token);
+        var tokenString =
+            new JwtSecurityTokenHandler()
+                .WriteToken(token);
+
+        return new LoginResponseDto
+        {
+            Token = tokenString,
+
+            UserId = user.User.UserId,
+
+            Username = user.User.Username,
+
+            RoleName = user.RoleName,
+
+            FullName =
+                $"{user.User.FirstName} {user.User.LastName}"
+        };
+
+
     }
+
+
 }

@@ -13,11 +13,16 @@ import "./Sidebar.css";
 function Sidebar() {
 
     const navigate = useNavigate();
-
+    const fullName = localStorage.getItem("fullName");
+    const roleName = localStorage.getItem("roleName");
+    const initials =
+    fullName
+        ?.split(" ")
+        .map(name => name[0])
+        .join("")
+        .toUpperCase();
     const handleLogout = () => {
-
         localStorage.removeItem("token");
-
         navigate("/login");
     };
 
@@ -61,20 +66,12 @@ function Sidebar() {
 
                 <div className="profile-card">
 
-                    <div className="profile-avatar">
-                        AR
+                    <div className="profile-name">
+                        {fullName}
                     </div>
 
-                    <div>
-
-                        <div className="profile-name">
-                            Anusha R
-                        </div>
-
-                        <div className="profile-role">
-                            Administrator
-                        </div>
-
+                    <div className="profile-role">
+                        {roleName}
                     </div>
 
                 </div>

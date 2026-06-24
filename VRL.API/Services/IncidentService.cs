@@ -7,11 +7,13 @@ namespace VRL.API.Services;
 public class IncidentsService
 {
     private readonly VrlDbContext _context;
-
-
-    public IncidentsService(VrlDbContext context)
+    private readonly AuditLogService _auditLogService;
+    private readonly CurrentUserService _currentUserService;
+    public IncidentsService(VrlDbContext context, AuditLogService auditLogService, CurrentUserService currentUserService)
     {
         _context = context;
+        _auditLogService = auditLogService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<List<Incident>> GetIncidentsAsync()
@@ -28,7 +30,12 @@ public class IncidentsService
         _context.Incidents.Add(incident);
 
         await _context.SaveChangesAsync();
-
+        await _auditLogService.LogAsync(
+            "Incident",
+            incident.IncidentId,
+            "Created",
+            _currentUserService.Username,
+            $"Incident {incident.IncidentNumber} created");
         return incident;
     }
 
@@ -71,7 +78,12 @@ public class IncidentsService
         incident.UpdatedDate = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
-
+            await _auditLogService.LogAsync(
+            "Incident",
+            updatedIncident.IncidentId,
+            "Updated",
+            _currentUserService.Username,
+            $"Incident {updatedIncident.IncidentNumber} updated");
         return true;
     }
 

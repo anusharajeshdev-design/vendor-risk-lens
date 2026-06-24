@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react";
 
 import {
+    PieChart,
+    Pie,
+    Cell,
+    ResponsiveContainer,
+    Tooltip,
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis
+} from "recharts";
+
+import {
     getDashboardSummary,
     getRiskDistribution,
     getIncidentStatus,
     getRecentVendors
-}
-from "../services/dashboardService";
+} from "../services/dashboardService";
 
 import "./Dashboard.css";
 
@@ -22,6 +33,12 @@ function Dashboard() {
 
     const [recentVendors,
         setRecentVendors] = useState([]);
+
+    const COLORS = [
+    "#DBEAFE", // Low
+    "#93C5FD", // Medium
+    "#2563EB"  // High
+    ];
 
     useEffect(() => {
 
@@ -48,13 +65,16 @@ function Dashboard() {
             setSummary(summaryResult.data);
 
             setRiskDistribution(
-                riskResult.data);
+                riskResult.data
+            );
 
             setIncidentStatus(
-                incidentResult.data);
+                incidentResult.data
+            );
 
             setRecentVendors(
-                vendorsResult.data);
+                vendorsResult.data
+            );
 
         }
         catch (error) {
@@ -85,99 +105,75 @@ function Dashboard() {
             <div className="dashboard-grid">
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         Total Vendors
                     </div>
-
                     <div className="card-value">
                         {summary.totalVendors}
                     </div>
-
                 </div>
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         Critical Vendors
                     </div>
-
                     <div className="card-value">
                         {summary.criticalVendors}
                     </div>
-
                 </div>
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         Open Incidents
                     </div>
-
                     <div className="card-value">
                         {summary.openIncidents}
                     </div>
-
                 </div>
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         Active Users
                     </div>
-
                     <div className="card-value">
                         {summary.activeUsers}
                     </div>
-
                 </div>
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         Due For Review
                     </div>
-
                     <div className="card-value">
                         {summary.vendorsDueForReview}
                     </div>
-
                 </div>
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         Critical Incidents
                     </div>
-
                     <div className="card-value">
                         {summary.criticalIncidents}
                     </div>
-
                 </div>
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         Vendors Added
                     </div>
-
                     <div className="card-value">
                         {summary.vendorsAddedThisMonth}
                     </div>
-
                 </div>
 
                 <div className="dashboard-card">
-
                     <div className="card-label">
                         New Incidents
                     </div>
-
                     <div className="card-value">
                         {summary.incidentsOpenedThisMonth}
                     </div>
-
                 </div>
 
             </div>
@@ -200,7 +196,7 @@ function Dashboard() {
 
             </div>
 
-            {/* DISTRIBUTION */}
+            {/* CHARTS */}
 
             <div className="dashboard-two-column">
 
@@ -212,30 +208,54 @@ function Dashboard() {
 
                     {riskDistribution && (
 
-                        <>
+                        <ResponsiveContainer
+                            width="100%"
+                            height={300}
+                        >
 
-                            <div className="data-row">
-                                <span>Low Risk</span>
-                                <strong>
-                                    {riskDistribution.lowRisk}
-                                </strong>
-                            </div>
+                            <PieChart>
 
-                            <div className="data-row">
-                                <span>Medium Risk</span>
-                                <strong>
-                                    {riskDistribution.mediumRisk}
-                                </strong>
-                            </div>
+                                <Pie
+                                    data={[
+                                        {
+                                            name: "Low",
+                                            value:
+                                                riskDistribution.lowRisk
+                                        },
+                                        {
+                                            name: "Medium",
+                                            value:
+                                                riskDistribution.mediumRisk
+                                        },
+                                        {
+                                            name: "High",
+                                            value:
+                                                riskDistribution.highRisk
+                                        }
+                                    ]}
+                                    dataKey="value"
+                                    outerRadius={100}
+                                    label
+                                >
 
-                            <div className="data-row">
-                                <span>High Risk</span>
-                                <strong>
-                                    {riskDistribution.highRisk}
-                                </strong>
-                            </div>
+                                    {COLORS.map(
+                                        (color, index) => (
 
-                        </>
+                                            <Cell
+                                                key={index}
+                                                fill={color}
+                                            />
+
+                                        )
+                                    )}
+
+                                </Pie>
+
+                                <Tooltip />
+
+                            </PieChart>
+
+                        </ResponsiveContainer>
 
                     )}
 
@@ -249,30 +269,47 @@ function Dashboard() {
 
                     {incidentStatus && (
 
-                        <>
+                        <ResponsiveContainer
+                            width="100%"
+                            height={300}
+                        >
 
-                            <div className="data-row">
-                                <span>Open</span>
-                                <strong>
-                                    {incidentStatus.open}
-                                </strong>
-                            </div>
+                            <BarChart
+                                data={[
+                                    {
+                                        status: "Open",
+                                        count:
+                                            incidentStatus.open
+                                    },
+                                    {
+                                        status: "Progress",
+                                        count:
+                                            incidentStatus.inProgress
+                                    },
+                                    {
+                                        status: "Closed",
+                                        count:
+                                            incidentStatus.closed
+                                    }
+                                ]}
+                            >
 
-                            <div className="data-row">
-                                <span>In Progress</span>
-                                <strong>
-                                    {incidentStatus.inProgress}
-                                </strong>
-                            </div>
+                                <XAxis
+                                    dataKey="status"
+                                />
 
-                            <div className="data-row">
-                                <span>Closed</span>
-                                <strong>
-                                    {incidentStatus.closed}
-                                </strong>
-                            </div>
+                                <YAxis />
 
-                        </>
+                                <Tooltip />
+
+                                <Bar
+                                    dataKey="count"
+                                    fill="#4F7DF3"
+                                />
+
+                            </BarChart>
+
+                        </ResponsiveContainer>
 
                     )}
 
