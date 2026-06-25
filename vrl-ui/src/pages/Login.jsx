@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import VendorNetwork from "../components/VendorNetwork";
 import VrlLogo from "../components/Logo/VrlLogo";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 function Login() {
 
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async () => {
 
@@ -177,37 +179,29 @@ function Login() {
                             Password
                         </label>
 
-                        <input
-                            type="password"
-                            value={password}
-                            placeholder="Enter password"
-                            onChange={(e) =>
-                                setPassword(e.target.value)}
-                        />
-
-                    </div>
-
-                    <div className="login-options">
-
-                        <label className="remember-me">
-
+                        <div className="password-wrapper">
                             <input
-                                type="checkbox"
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                placeholder="Enter password"
+                                onChange={(e) => setPassword(e.target.value)}
                             />
 
-                            Remember Me
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {
+                                    showPassword
+                                        ? <FiEyeOff />
+                                        : <FiEye />
+                                }
+                            </button>
 
-                        </label>
-
-                        <a
-                            href="/"
-                            className="forgot-password"
-                        >
-                            Forgot Password?
-                        </a>
+                        </div>
 
                     </div>
-
                     <button
                         className="login-button"
                         onClick={handleLogin}
