@@ -1,0 +1,840 @@
+/* ======================================================
+   VRL LOGO
+====================================================== */
+
+.vrl-logo{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    height:105px;
+    gap:6px;
+    overflow:visible;
+}
+
+/* ======================================================
+   MOVING LENS CONTAINER
+====================================================== */
+
+.lens-wrapper{
+
+    position:absolute;
+
+    left:-12px;
+
+    top:6px;
+
+    width:60px;
+
+    height:72px;
+     margin-right:-6px;
+    z-index:5;
+
+    animation:lensIntro 1.4s ease-out forwards;
+}
+
+/* ======================================================
+   LENS
+====================================================== */
+
+.lens{
+
+    position:absolute;
+
+    width:58px;
+
+    height:58px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+/* ======================================================
+   GLASS
+====================================================== */
+
+.lens-glass{
+
+    position:relative;
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:
+        rgba(255,255,255,.22);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:
+        2px solid #0F172A;
+
+    box-shadow:
+
+        0 10px 24px rgba(15,23,42,.08),
+
+        inset 0 0 10px rgba(255,255,255,.28);
+}
+
+/* ======================================================
+   GLASS REFLECTION
+====================================================== */
+
+.lens-glass::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    top:8px;
+
+    left:8px;
+
+    background:
+        rgba(255,255,255,.45);
+
+    filter:blur(5px);
+}
+
+/* ======================================================
+   HANDLE
+====================================================== */
+
+.lens-handle{
+
+    position:absolute;
+
+    width:28px;
+
+    height:5px;
+
+    background:#0F172A;
+
+    border-radius:999px;
+
+    bottom:4px;
+
+    right:-15px;
+
+    transform:
+        rotate(45deg);
+
+    transform-origin:left center;
+}
+
+/* ======================================================
+   LOGO TEXT
+====================================================== */
+
+.logo-text{
+
+    margin-left:58px;
+
+    user-select:none;
+}
+
+/* ======================================================
+   VRL
+====================================================== */
+
+.logo-text h1{
+
+    margin:0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:2px;
+
+    font-size:76px;
+
+    line-height:1;
+
+    letter-spacing:-5px;
+
+    font-weight:900;
+
+    color:#0F172A;
+}
+
+/* ======================================================
+   LETTERS
+====================================================== */
+
+.letter{
+
+    position:relative;
+
+    display:inline-block;
+
+    transition:.35s;
+}
+
+/* glow added later */
+
+/* .letter-v{}
+
+.letter-r{}
+
+.letter-l{} */
+
+/* ======================================================
+   SUBTITLE
+====================================================== */
+
+.logo-text p{
+
+    margin-top:2px;
+
+    margin-left:4px;
+
+    font-size:17px;
+
+    font-weight:500;
+
+    color:#64748B;
+
+    letter-spacing:.3px;
+}
+
+/* ======================================================
+   AI CORE
+====================================================== */
+
+.ai-core{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    color:#1E40AF;
+
+    letter-spacing:.5px;
+
+    text-shadow:
+
+        0 0 8px rgba(30,64,175,.45);
+
+    animation:
+        aiPulse 2.5s ease-in-out infinite;
+}
+
+/* ======================================================
+   ORBITING PARTICLES
+====================================================== */
+
+.orbit{
+
+    position:absolute;
+
+    width:5px;
+
+    height:5px;
+
+    border-radius:50%;
+
+    background:#1E40AF;
+
+    box-shadow:
+
+        0 0 8px rgba(30,64,175,.75);
+}
+
+.orbit1{
+
+    animation:
+        orbitOne 3s linear infinite;
+}
+
+.orbit2{
+
+    animation:
+        orbitTwo 3.8s linear infinite;
+}
+
+.orbit3{
+
+    animation:
+        orbitThree 4.5s linear infinite;
+}
+
+/* ======================================================
+   SCAN LINE
+====================================================== */
+
+.scan-line{
+
+    position:absolute;
+
+    top:3px;
+
+    left:-16px;
+
+    width:12px;
+
+    height:42px;
+
+    border-radius:20px;
+
+    background:
+
+        linear-gradient(
+
+            to right,
+
+            transparent,
+
+            rgba(30,64,175,.55),
+
+            rgba(30,64,175,.18),
+
+            transparent
+
+        );
+
+    filter:blur(1px);
+
+    animation:
+
+        glassScan 2.2s linear infinite;
+}
+
+/* ======================================================
+   LENS GLOW
+====================================================== */
+
+.lens-glass::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset: 5px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(30,64,175,.18);
+
+    animation:
+
+        lensGlow 3s ease-in-out infinite;
+}
+
+/* ======================================================
+   LETTER BASE
+====================================================== */
+
+.letter{
+
+    position:relative;
+
+    transition:.45s;
+}
+
+/* ======================================================
+   BLUE UNDERGLOW
+====================================================== */
+
+.logo-text h1{
+
+    position:relative;
+}
+
+.logo-text h1::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:6px;
+
+    width:0;
+
+    height:10px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(30,64,175,.28),
+
+            rgba(30,64,175,.06)
+
+        );
+
+    filter:blur(8px);
+
+    animation:
+
+        wordGlow 8s linear infinite;
+}
+/* ======================================================
+   LENS TRAVEL
+====================================================== */
+@keyframes lensIntro{
+
+    0%{
+
+        transform:translateX(-140px);
+
+        opacity:0;
+    }
+
+    60%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:translateX(0);
+
+        opacity:1;
+    }
+}
+
+/* ======================================================
+   AI PULSE
+====================================================== */
+
+@keyframes aiPulse{
+
+    0%,100%{
+
+        transform:scale(1);
+
+        text-shadow:
+            0 0 8px rgba(30,64,175,.35);
+    }
+
+    50%{
+
+        transform:scale(1.18);
+
+        text-shadow:
+
+            0 0 18px rgba(30,64,175,.9),
+
+            0 0 35px rgba(30,64,175,.45);
+    }
+}
+
+/* ======================================================
+   SCAN INSIDE GLASS
+====================================================== */
+
+@keyframes glassScan{
+
+    0%{
+
+        left:-16px;
+    }
+
+    100%{
+
+        left:50px;
+    }
+}
+
+/* ======================================================
+   LENS GLOW
+====================================================== */
+
+@keyframes lensGlow{
+
+    0%,100%{
+
+        opacity:.15;
+
+        transform:scale(1);
+    }
+
+    50%{
+
+        opacity:.65;
+
+        transform:scale(1.08);
+    }
+}
+
+/* ======================================================
+   LETTER GLOW
+====================================================== */
+
+@keyframes wordGlow{
+
+    0%{
+
+        width:0;
+        left:0;
+    }
+
+    12%{
+
+        width:70px;
+    }
+
+    28%{
+
+        width:120px;
+    }
+
+    45%{
+
+        width:170px;
+    }
+
+    60%{
+
+        width:230px;
+    }
+
+    80%{
+
+        width:260px;
+    }
+
+    100%{
+
+        width:0;
+        left:270px;
+    }
+}
+
+/* ======================================================
+   ORBIT ONE
+====================================================== */
+
+@keyframes orbitOne{
+
+    0%{
+
+        transform:
+            rotate(0deg)
+            translateX(11px)
+            rotate(0deg);
+    }
+
+    100%{
+
+        transform:
+            rotate(360deg)
+            translateX(11px)
+            rotate(-360deg);
+    }
+}
+
+/* ======================================================
+   ORBIT TWO
+====================================================== */
+
+@keyframes orbitTwo{
+
+    0%{
+
+        transform:
+            rotate(120deg)
+            translateX(13px)
+            rotate(-120deg);
+    }
+
+    100%{
+
+        transform:
+            rotate(480deg)
+            translateX(13px)
+            rotate(-480deg);
+    }
+}
+
+/* ======================================================
+   ORBIT THREE
+====================================================== */
+
+@keyframes orbitThree{
+
+    0%{
+
+        transform:
+            rotate(240deg)
+            translateX(15px)
+            rotate(-240deg);
+    }
+
+    100%{
+
+        transform:
+            rotate(600deg)
+            translateX(15px)
+            rotate(-600deg);
+    }
+}
+/* ======================================================
+   LETTER SCAN HIGHLIGHT
+====================================================== */
+
+.letter-v{
+
+    animation:
+        scanV 8s linear infinite;
+}
+
+.letter-r{
+
+    animation:
+        scanR 8s linear infinite;
+}
+
+.letter-l{
+
+    animation:
+        scanL 8s linear infinite;
+}
+
+/* ======================================================
+   V
+====================================================== */
+
+@keyframes scanV{
+
+    0%,16%{
+
+        color:#0F172A;
+
+        text-shadow:none;
+    }
+
+    18%,24%{
+
+        color:#2563EB;
+
+        text-shadow:
+
+            0 0 10px rgba(37,99,235,.8),
+
+            0 0 22px rgba(37,99,235,.35);
+    }
+
+    26%,100%{
+
+        color:#0F172A;
+
+        text-shadow:none;
+    }
+}
+
+/* ======================================================
+   R
+====================================================== */
+
+@keyframes scanR{
+
+    0%,34%{
+
+        color:#0F172A;
+
+        text-shadow:none;
+    }
+
+    36%,44%{
+
+        color:#2563EB;
+
+        text-shadow:
+
+            0 0 10px rgba(37,99,235,.8),
+
+            0 0 22px rgba(37,99,235,.35);
+    }
+
+    46%,100%{
+
+        color:#0F172A;
+
+        text-shadow:none;
+    }
+}
+
+/* ======================================================
+   L
+====================================================== */
+
+@keyframes scanL{
+
+    0%,56%{
+
+        color:#0F172A;
+
+        text-shadow:none;
+    }
+
+    58%,66%{
+
+        color:#2563EB;
+
+        text-shadow:
+
+            0 0 10px rgba(37,99,235,.8),
+
+            0 0 22px rgba(37,99,235,.35);
+    }
+
+    68%,100%{
+
+        color:#0F172A;
+
+        text-shadow:none;
+    }
+}
+
+/* ======================================================
+   LENS FOCUS
+====================================================== */
+
+.lens{
+
+    animation:
+
+        lensFocus 8s ease-in-out infinite;
+}
+
+@keyframes lensFocus{
+
+    0%,100%{
+
+        transform:scale(1);
+    }
+
+    25%{
+
+        transform:scale(1.05);
+    }
+
+    50%{
+
+        transform:scale(1.12);
+    }
+
+    75%{
+
+        transform:scale(1.05);
+    }
+}
+
+/* ======================================================
+   GLASS SHIMMER
+====================================================== */
+
+.lens-glass::before{
+
+    animation:
+
+        glassReflection 6s linear infinite;
+}
+
+@keyframes glassReflection{
+
+    0%{
+
+        transform:
+            translateX(-8px);
+
+        opacity:.45;
+    }
+
+    50%{
+
+        transform:
+            translateX(10px);
+
+        opacity:.75;
+    }
+
+    100%{
+
+        transform:
+            translateX(-8px);
+
+        opacity:.45;
+    }
+}
+
+/* ======================================================
+   SUBTITLE
+====================================================== */
+
+.logo-text p{
+
+    animation:
+
+        subtitleFade 8s ease-in-out infinite;
+}
+
+@keyframes subtitleFade{
+
+    0%,100%{
+
+        opacity:.85;
+    }
+
+    50%{
+
+        opacity:1;
+    }
+}
+
+/* ======================================================
+   HOVER
+====================================================== */
+
+.vrl-logo:hover .lens{
+
+    animation-play-state:paused;
+}
+
+.vrl-logo:hover .lens-glass{
+
+    border-color:#2563EB;
+
+    transition:.35s;
+}
+
+.vrl-logo:hover .logo-text h1{
+
+    color:#1E40AF;
+
+    transition:.35s;
+}

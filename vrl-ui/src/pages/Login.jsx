@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-
+import VendorNetwork from "../components/VendorNetwork";
+import VrlLogo from "../components/Logo/VrlLogo";
 function Login() {
 
     const navigate = useNavigate();
@@ -77,77 +78,50 @@ function Login() {
             {/* LEFT SIDE */}
 
             <div className="login-left">
-
+                <VendorNetwork />
                 <div className="brand-section">
-                    <h1 className="brand-logo">
-                        VRL
-                    </h1>
-
-                    <p className="brand-name">
-                        Vendor Risk Lens
-                    </p>
-
-                    <h2 className="brand-heading">
+                    <VrlLogo />
+                  <h2 className="brand-heading">
                         See Risk Clearly.
                         <br />
-                        Manage Vendors Confidently.
+                        Manage Vendors
+                        <br />
+                        Confidently.
                     </h2>
 
-                    <p className="brand-description">
-
-                        Centralize vendor assessments,
-                        incident tracking, compliance monitoring
-                        and risk intelligence in one unified
-                        platform designed for modern enterprises.
-
-                    </p>
+                  
 
                 </div>
 
                 <div className="feature-grid">
+                    <div className="brand-info-card">
 
-                    <div className="feature-card">
-                        <h4>
-                            Unified Risk View
-                        </h4>
+                        <div className="brand-info-header">
 
-                        <p>
-                            Monitor all vendors from a
-                            single intelligent dashboard.
-                        </p>
-                    </div>
+                            <div className="status-dot"></div>
 
-                    <div className="feature-card">
-                        <h4>
-                            Proactive Alerts
-                        </h4>
+                            <span>AI Risk Engine</span>
+
+                        </div>
 
                         <p>
-                            Identify potential issues
-                            before they become incidents.
+
+                            AI-powered vendor governance that unifies vendor onboarding,
+                            continuous risk monitoring, compliance, incident management
+                            and third-party intelligence into one secure platform.
+
                         </p>
-                    </div>
 
-                    <div className="feature-card">
-                        <h4>
-                            Smarter Assessments
-                        </h4>
+                        <div className="brand-tags">
 
-                        <p>
-                            Streamline reviews with
-                            AI-powered risk insights.
-                        </p>
-                    </div>
+                            <span>AI Insights</span>
 
-                    <div className="feature-card">
-                        <h4>
-                            Strong Compliance
-                        </h4>
+                            <span>Compliance</span>
 
-                        <p>
-                            Stay audit-ready with
-                            continuous monitoring.
-                        </p>
+                            <span>Vendor Intelligence</span>
+
+                        </div>
+
                     </div>
 
                 </div>

@@ -1,0 +1,1022 @@
+/* =====================================================
+   VENDOR NETWORK
+   ===================================================== */
+
+.vendor-network{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:2;
+}
+
+/* =====================================================
+   SVG POSITION
+   ===================================================== */
+
+.network-svg{
+
+   position:absolute;
+
+    width:470px;
+    height:360px;
+
+    top:35px;
+    right:40px;
+
+    opacity:.95;
+
+    overflow:visible;
+
+    transform-origin:center;
+
+    transform:scale(1.05);
+}
+
+/* =====================================================
+   ENTERPRISE BLUE AMBIENT GLOW
+   ===================================================== */
+
+.vendor-network::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+
+    height:700px;
+
+    top:-180px;
+
+    right:-180px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(30,64,175,.16),
+
+            transparent 72%
+
+        );
+
+    filter:blur(90px);
+
+    animation:
+        ambientOne 18s ease-in-out infinite;
+}
+
+.vendor-network::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    top:120px;
+
+    right:180px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(37,99,235,.08),
+
+            transparent 72%
+
+        );
+
+    filter:blur(70px);
+
+    animation:
+        ambientTwo 22s ease-in-out infinite;
+}
+
+/* =====================================================
+   FLOATING KPI CARDS
+   ===================================================== */
+
+.floating-card{
+
+    position:absolute;
+
+    width:130px;
+
+    padding:16px 18px;
+
+    border-radius:22px;
+
+    background:
+
+        rgba(255,255,255,.18);
+
+    backdrop-filter:blur(28px);
+
+    -webkit-backdrop-filter:blur(28px);
+
+    border:
+
+        1px solid rgba(255,255,255,.45);
+
+    box-shadow:
+
+        0 18px 40px rgba(30,64,175,.08);
+
+    animation:
+
+        cardFloat 8s ease-in-out infinite;
+}
+
+/* =====================================================
+   CARD TEXT
+   ===================================================== */
+
+.floating-card span{
+
+    display:block;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    color:#64748B;
+
+    margin-bottom:8px;
+}
+
+.floating-card strong{
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:#0F172A;
+
+    line-height:1;
+}
+
+/* =====================================================
+   COMPLIANCE
+   ===================================================== */
+
+.compliance{
+
+    top:400px;
+
+    right:220px;
+}
+
+/* =====================================================
+   HIGH RISK
+   ===================================================== */
+
+.risk{
+
+    top:430px;
+
+    right:40px;
+
+    animation-delay:2s;
+}
+
+/* =====================================================
+   SCAN BEAM
+   ===================================================== */
+
+.scan-beam{
+
+    position:absolute;
+
+    top:-80px;
+
+    right:160px;
+
+    width:220px;
+
+    height:620px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(30,64,175,.03),
+
+            rgba(30,64,175,.14),
+
+            rgba(30,64,175,.03),
+
+            transparent
+
+        );
+
+    filter:blur(20px);
+
+    transform:rotate(-18deg);
+
+    mix-blend-mode:screen;
+
+    opacity:.8;
+
+    animation:
+
+        scanBeam 10s linear infinite;
+}
+/* =====================================================
+   SVG LINKS
+   ===================================================== */
+
+.link{
+
+    stroke:#1E40AF;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+
+    stroke-opacity:.28;
+
+    stroke-dasharray:8 8;
+
+    fill:none;
+
+    animation:
+        linkFlow 12s linear infinite;
+}
+
+/* =====================================================
+   AI CORE GLOW
+   ===================================================== */
+
+.core-glow{
+
+    fill:url(#coreGlow);
+
+    opacity:.55;
+
+    animation:
+        coreGlowPulse 5s ease-in-out infinite;
+}
+
+/* =====================================================
+   AI RINGS
+   ===================================================== */
+
+.ring{
+
+    fill:none;
+
+    stroke:#1E40AF;
+
+    stroke-width:1.5;
+
+    opacity:.45;
+
+    transform-origin:center;
+}
+
+.outer{
+
+    animation:
+        rotateClockwise 22s linear infinite;
+}
+
+.middle{
+
+    animation:
+        rotateCounter 16s linear infinite;
+}
+
+.inner{
+
+    animation:
+        ringPulse 4s ease-in-out infinite;
+}
+
+/* =====================================================
+   AI CENTER
+   ===================================================== */
+
+.ai-dot{
+
+    fill:#1E40AF;
+
+    filter:
+
+        drop-shadow(0 0 14px rgba(30,64,175,.65))
+
+        drop-shadow(0 0 30px rgba(30,64,175,.30));
+
+    animation:
+        aiPulse 3s ease-in-out infinite;
+}
+
+.ai-text{
+
+    fill:white;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    user-select:none;
+
+    letter-spacing:.5px;
+}
+
+/* =====================================================
+   NETWORK NODES
+   ===================================================== */
+
+.node{
+
+    transform-origin:center;
+
+    animation:
+        nodeFloat 6s ease-in-out infinite;
+}
+
+.vendor{
+
+    animation-delay:0s;
+}
+
+.analytics{
+
+    animation-delay:1s;
+}
+
+.search{
+
+    animation-delay:2s;
+}
+
+.shield{
+
+    animation-delay:3s;
+}
+
+.warning{
+
+    animation-delay:4s;
+}
+
+/* =====================================================
+   NODE CIRCLE
+   ===================================================== */
+
+.node-circle{
+
+    fill:rgba(255,255,255,.22);
+
+    stroke:rgba(255,255,255,.70);
+
+    stroke-width:1.3;
+
+    filter:
+
+        drop-shadow(
+            0 10px 22px
+            rgba(30,64,175,.15)
+        );
+
+    transition:.35s;
+}
+
+/* =====================================================
+   NODE ICON
+   ===================================================== */
+
+.node-icon{
+
+    width:24px;
+
+    height:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#1E40AF;
+
+    font-size:18px;
+
+    filter:
+
+        drop-shadow(
+            0 0 8px
+            rgba(30,64,175,.45)
+        );
+}
+
+/* =====================================================
+   WARNING NODE
+   ===================================================== */
+
+.warning .node-circle{
+
+    fill:rgba(255,247,237,.35);
+
+    stroke:#FB923C;
+}
+
+.warning .node-icon{
+
+    color:#EA580C;
+
+    filter:
+
+        drop-shadow(
+            0 0 10px
+            rgba(234,88,12,.35)
+        );
+}
+
+/* =====================================================
+   DATA PACKETS
+   ===================================================== */
+
+.packet{
+
+    fill:#2563EB;
+
+    opacity:.95;
+
+    filter:
+
+        drop-shadow(
+            0 0 10px
+            rgba(37,99,235,.65)
+        );
+}
+/* =====================================================
+   AI CORE
+===================================================== */
+
+@keyframes aiPulse{
+
+    0%,100%{
+
+        transform:scale(1);
+
+        filter:
+
+            drop-shadow(0 0 15px rgba(30,64,175,.55))
+
+            drop-shadow(0 0 35px rgba(30,64,175,.25));
+    }
+
+    50%{
+
+        transform:scale(1.18);
+
+        filter:
+
+            drop-shadow(0 0 30px rgba(30,64,175,.9))
+
+            drop-shadow(0 0 60px rgba(30,64,175,.45));
+    }
+}
+
+/* =====================================================
+   GLOW
+===================================================== */
+
+@keyframes coreGlowPulse{
+
+    0%,100%{
+
+        transform:scale(1);
+
+        opacity:.30;
+    }
+
+    50%{
+
+        transform:scale(1.30);
+
+        opacity:.70;
+    }
+}
+
+/* =====================================================
+   ROTATING RINGS
+===================================================== */
+
+@keyframes rotateClockwise{
+
+    from{
+
+        transform:rotate(0deg);
+    }
+
+    to{
+
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes rotateCounter{
+
+    from{
+
+        transform:rotate(360deg);
+    }
+
+    to{
+
+        transform:rotate(0deg);
+    }
+}
+
+@keyframes ringPulse{
+
+    0%,100%{
+
+        transform:scale(1);
+
+        opacity:.45;
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+        opacity:.90;
+    }
+}
+
+/* =====================================================
+   NODE FLOAT
+===================================================== */
+
+@keyframes nodeFloat{
+
+    0%{
+
+        transform:translateY(0px);
+    }
+
+    20%{
+
+        transform:translateY(-5px);
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+    }
+
+    80%{
+
+        transform:translateY(-4px);
+    }
+
+    100%{
+
+        transform:translateY(0px);
+    }
+}
+
+/* =====================================================
+   FLOATING KPI
+===================================================== */
+
+@keyframes cardFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+    }
+}
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+@keyframes ambientOne{
+
+    0%{
+
+        transform:translate(0,0);
+    }
+
+    50%{
+
+        transform:translate(-45px,35px);
+    }
+
+    100%{
+
+        transform:translate(0,0);
+    }
+}
+
+@keyframes ambientTwo{
+
+    0%{
+
+        transform:translate(0,0);
+    }
+
+    50%{
+
+        transform:translate(40px,-30px);
+    }
+
+    100%{
+
+        transform:translate(0,0);
+    }
+}
+
+/* =====================================================
+   NETWORK FLOW
+===================================================== */
+
+@keyframes linkFlow{
+
+    from{
+
+        stroke-dashoffset:0;
+    }
+
+    to{
+
+        stroke-dashoffset:-140;
+    }
+}
+
+/* =====================================================
+   SCAN
+===================================================== */
+
+@keyframes scanBeam{
+
+    0%{
+
+        transform:
+
+            translateX(-350px)
+
+            rotate(-18deg);
+
+        opacity:0;
+    }
+
+    15%{
+
+        opacity:1;
+    }
+
+    80%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+
+            translateX(1200px)
+
+            rotate(-18deg);
+
+        opacity:0;
+    }
+}
+/* =====================================================
+   NODE HEARTBEAT
+===================================================== */
+
+.node-circle{
+
+    animation:
+
+        nodeHeartbeat 7s ease-in-out infinite;
+}
+
+.vendor{
+
+    animation-delay:0s;
+}
+
+.analytics{
+
+    animation-delay:1.2s;
+}
+
+.search{
+
+    animation-delay:2.4s;
+}
+
+.shield{
+
+    animation-delay:3.6s;
+}
+
+.warning{
+
+    animation-delay:4.8s;
+}
+
+@keyframes nodeHeartbeat{
+
+    0%,100%{
+
+        transform:scale(1);
+
+        filter:
+
+            drop-shadow(0 0 8px rgba(30,64,175,.12));
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+        filter:
+
+            drop-shadow(0 0 20px rgba(30,64,175,.35));
+    }
+}
+
+/* =====================================================
+   AI FLASH
+===================================================== */
+
+.ai-dot::after{
+
+    content:"";
+}
+
+@keyframes aiFlash{
+
+    0%,95%{
+
+        opacity:0;
+    }
+
+    96%{
+
+        opacity:.9;
+    }
+
+    100%{
+
+        opacity:0;
+    }
+}
+
+/* =====================================================
+   WARNING ALERT
+===================================================== */
+
+.warning{
+
+    animation:
+
+        nodeFloat 6s ease-in-out infinite,
+
+        warningBlink 8s infinite;
+}
+
+@keyframes warningBlink{
+
+    0%,82%{
+
+        filter:none;
+    }
+
+    84%{
+
+        filter:
+
+            drop-shadow(0 0 10px rgba(249,115,22,.8));
+    }
+
+    86%{
+
+        filter:none;
+    }
+
+    88%{
+
+        filter:
+
+            drop-shadow(0 0 18px rgba(249,115,22,.9));
+    }
+
+    90%{
+
+        filter:none;
+    }
+
+    100%{
+
+        filter:none;
+    }
+}
+
+/* =====================================================
+   PACKETS
+===================================================== */
+
+.packet{
+
+    animation:
+
+        packetPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes packetPulse{
+
+    0%,100%{
+
+        transform:scale(.8);
+
+        opacity:.65;
+    }
+
+    50%{
+
+        transform:scale(1.45);
+
+        opacity:1;
+    }
+}
+
+/* =====================================================
+   GLASS SHIMMER
+===================================================== */
+
+.floating-card{
+
+    overflow:hidden;
+}
+
+.floating-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent,
+
+            rgba(255,255,255,.28),
+
+            transparent
+
+        );
+
+    transform:skewX(-25deg);
+
+    animation:
+
+        glassShimmer 9s linear infinite;
+}
+
+@keyframes glassShimmer{
+
+    0%{
+
+        left:-120%;
+    }
+
+    45%{
+
+        left:-120%;
+    }
+
+    100%{
+
+        left:170%;
+    }
+}
+
+/* =====================================================
+   STRONGER AI GLOW
+===================================================== */
+
+.ai-dot{
+
+    animation:
+
+        aiPulse 3s ease-in-out infinite,
+
+        aiBreathing 7s ease-in-out infinite;
+}
+
+@keyframes aiBreathing{
+
+    0%,100%{
+
+        filter:
+
+            drop-shadow(0 0 15px rgba(30,64,175,.45))
+
+            drop-shadow(0 0 40px rgba(30,64,175,.20));
+    }
+
+    50%{
+
+        filter:
+
+            drop-shadow(0 0 28px rgba(30,64,175,.8))
+
+            drop-shadow(0 0 70px rgba(30,64,175,.35));
+    }
+}
+
+/* =====================================================
+   NETWORK DEPTH
+===================================================== */
+
+.network-svg{
+
+    filter:
+
+        drop-shadow(
+            0 20px 40px
+            rgba(30,64,175,.08)
+        );
+}
+
+/* =====================================================
+   FINAL POLISH
+===================================================== */
+
+.node-icon{
+
+    transition:.35s;
+}
+
+.node:hover .node-icon{
+
+    transform:scale(1.15);
+
+    color:#1D4ED8;
+}
+
+.node:hover .node-circle{
+
+    stroke:#2563EB;
+
+    fill:rgba(255,255,255,.35);
+}
+
+.floating-card:hover{
+
+    transform:
+
+        translateY(-4px)
+
+        scale(1.03);
+}
