@@ -22,21 +22,10 @@ body{
         Inter,
         "Segoe UI",
         sans-serif;
-
     background:#EEF2F6;
-
     color:#0F172A;
-
-    overflow:hidden;
-
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-}
-
-#root{
-
-    width:100%;
-    height:100vh;
 }
 
 /* ==========================================================
