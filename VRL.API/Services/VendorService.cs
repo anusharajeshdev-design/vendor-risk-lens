@@ -29,12 +29,13 @@ public class VendorService
         _context.Vendors.Add(vendor);
 
         await _context.SaveChangesAsync();
-        await _auditLogService.LogAsync(
-                "Vendor",
-                vendor.VendorId,
-                "Created",
-                _currentUserService.Username,
-                $"Vendor {vendor.VendorName} created");
+         _auditLogService.LogCreate(
+            "Vendor",
+            vendor.VendorId,
+            vendor,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
 
             return vendor;
     }
@@ -46,6 +47,19 @@ public class VendorService
         if (existingVendor == null)
             return false;
 
+        var oldVendor = new Vendor
+        {
+            VendorId = existingVendor.VendorId,
+            VendorName = existingVendor.VendorName,
+            VendorType = existingVendor.VendorType,
+            ContactEmail = existingVendor.ContactEmail,
+            Website = existingVendor.Website,
+            RiskRating = existingVendor.RiskRating,
+            IsActive = existingVendor.IsActive,
+            CreatedDate = existingVendor.CreatedDate,
+            UpdatedDate = existingVendor.UpdatedDate,
+            IsDeleted = existingVendor.IsDeleted
+        };
         existingVendor.VendorName = vendor.VendorName;
         existingVendor.VendorType = vendor.VendorType;
         existingVendor.ContactEmail = vendor.ContactEmail;
@@ -54,13 +68,14 @@ public class VendorService
         existingVendor.IsActive = vendor.IsActive;
         existingVendor.UpdatedDate = DateTime.UtcNow;
 
-        await _context.SaveChangesAsync();
-            await _auditLogService.LogAsync(
+       _auditLogService.LogUpdate(
             "Vendor",
             existingVendor.VendorId,
-            "Updated",
-            _currentUserService.Username,
-            $"Vendor {existingVendor.VendorName} updated");
+            oldVendor,
+            existingVendor,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
         return true;
     }
 
@@ -75,12 +90,13 @@ public class VendorService
         vendor.UpdatedDate = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();
-        await _auditLogService.LogAsync(
+        _auditLogService.LogDelete(
             "Vendor",
             vendor.VendorId,
-            "Deleted",
-            _currentUserService.Username,
-            $"Vendor {vendor.VendorName} deleted");
+            vendor,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
         return true;
     }
 

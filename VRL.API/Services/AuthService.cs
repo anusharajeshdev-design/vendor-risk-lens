@@ -12,13 +12,16 @@ public class AuthService
 {
     private readonly VrlDbContext _context;
     private readonly IConfiguration _configuration;
+    private readonly AuditLogService _auditLogService;
 
     public AuthService(
         VrlDbContext context,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        AuditLogService auditLogService)
     {
         _context = context;
         _configuration = configuration;
+        _auditLogService = auditLogService;
     }
 
     public async Task<LoginResponseDto?> LoginAsync(LoginRequest request)
@@ -43,7 +46,16 @@ public class AuthService
         {
             return null;
         }
+        _auditLogService.LogFieldChange(
+            "Login",
+            user.User.UserId,
+            "LoginStatus",
+            null,
+            "Success",
+            "Login",
+            user.User.Username);
 
+        await _auditLogService.SaveAsync();
         var claims = new[]
         {
             new Claim(

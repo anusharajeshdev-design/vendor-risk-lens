@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VRL.API.Data;
 using VRL.API.Models;
-
+using VRL.API.Services;
 namespace VRL.API.Controllers;
 
 [Authorize]
@@ -12,11 +12,13 @@ namespace VRL.API.Controllers;
 public class AuditLogsController : ControllerBase
 {
     private readonly VrlDbContext _context;
+    private readonly AuditLogService _auditLogService;
 
     public AuditLogsController(
-        VrlDbContext context)
+        VrlDbContext context, AuditLogService auditLogService)
     {
         _context = context;
+        _auditLogService = auditLogService;
     }
 
     [HttpGet]
@@ -40,5 +42,16 @@ public class AuditLogsController : ControllerBase
         await _context.SaveChangesAsync();
 
         return Ok(auditLog);
+    }
+
+    [HttpGet("{entityType}/{entityId}")]
+    public async Task<IActionResult> GetHistory(
+        string entityType,
+        int entityId)
+    {
+        var history = await _auditLogService
+            .GetHistoryAsync(entityType, entityId);
+
+        return Ok(history);
     }
 }

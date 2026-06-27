@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using VRL.API.Data;
 using VRL.API.Models;
+using System.Text.Json;
 
 namespace VRL.API.Services;
 
@@ -30,12 +31,13 @@ public class IncidentsService
         _context.Incidents.Add(incident);
 
         await _context.SaveChangesAsync();
-        await _auditLogService.LogAsync(
+        _auditLogService.LogCreate(
             "Incident",
             incident.IncidentId,
-            "Created",
-            _currentUserService.Username,
-            $"Incident {incident.IncidentNumber} created");
+            incident,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
         return incident;
     }
 
@@ -49,6 +51,28 @@ public class IncidentsService
         {
             return false;
         }
+
+        var oldIncident = new Incident
+        {
+            IncidentId = incident.IncidentId,
+            IncidentNumber = incident.IncidentNumber,
+            VendorId = incident.VendorId,
+            Title = incident.Title,
+            Description = incident.Description,
+            IncidentType = incident.IncidentType,
+            Severity = incident.Severity,
+            Priority = incident.Priority,
+            Status = incident.Status,
+            AssignedUserId = incident.AssignedUserId,
+            CreatedByUserId = incident.CreatedByUserId,
+            ReportedDate = incident.ReportedDate,
+            DueDate = incident.DueDate,
+            ExpectedCloseDate = incident.ExpectedCloseDate,
+            ActualCloseDate = incident.ActualCloseDate,
+            ResolutionSummary = incident.ResolutionSummary,
+            CreatedDate = incident.CreatedDate,
+            UpdatedDate = incident.UpdatedDate
+        };
 
         incident.Title = updatedIncident.Title;
         incident.Description = updatedIncident.Description;
@@ -77,13 +101,14 @@ public class IncidentsService
 
         incident.UpdatedDate = DateTime.UtcNow;
 
-        await _context.SaveChangesAsync();
-            await _auditLogService.LogAsync(
+        _auditLogService.LogUpdate(
             "Incident",
-            updatedIncident.IncidentId,
-            "Updated",
-            _currentUserService.Username,
-            $"Incident {updatedIncident.IncidentNumber} updated");
+            incident.IncidentId,
+            oldIncident,
+            incident,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
         return true;
     }
 

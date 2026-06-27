@@ -31,12 +31,13 @@ public class UserService
         _context.Users.Add(user);
 
         await _context.SaveChangesAsync();
-        await _auditLogService.LogAsync(
+       _auditLogService.LogCreate(
             "User",
             user.UserId,
-            "Created",
-            _currentUserService.Username,
-            $"User {user.Username} created");
+            user,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
         return user;
     }
 
@@ -53,6 +54,19 @@ public class UserService
             return false;
         }
 
+        var oldUser = new Users
+        {
+            UserId = user.UserId,
+            RoleId = user.RoleId,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            Username = user.Username,
+            Password = user.Password,
+            IsActive = user.IsActive,
+            CreatedDate = user.CreatedDate
+        };
+
         user.RoleId = updatedUser.RoleId;
         user.FirstName = updatedUser.FirstName;
         user.LastName = updatedUser.LastName;
@@ -62,12 +76,14 @@ public class UserService
         user.IsActive = updatedUser.IsActive;
 
         await _context.SaveChangesAsync();
-        await _auditLogService.LogAsync(
+        _auditLogService.LogUpdate(
             "User",
-            updatedUser.UserId,
-            "Updated",
-            _currentUserService.Username,
-            $"User {updatedUser.Username} updated");
+            user.UserId,
+            oldUser,
+            user,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
         return true;
     }
 
@@ -83,12 +99,13 @@ public class UserService
         _context.Users.Remove(user);
 
         await _context.SaveChangesAsync();
-        await _auditLogService.LogAsync(
+        _auditLogService.LogDelete(
             "User",
             user.UserId,
-            "Deleted",
-            _currentUserService.Username,
-            $"User {user.Username} deleted");
+            user,
+            _currentUserService.Username);
+
+        await _auditLogService.SaveAsync();
         return true;
     }
 
