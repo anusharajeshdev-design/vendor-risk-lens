@@ -4,6 +4,8 @@ import { Pencil, Trash2 } from "lucide-react";
 import SuccessModal from "../components/SuccessModal";
 import ConfirmModal from "../components/ConfirmModal";
 import { useNavigate } from "react-router-dom";
+import ViewHistoryModal from "../components/ViewHistoryModal";
+import { History } from "lucide-react";
 
 import "./Vendors.css";
 
@@ -12,7 +14,8 @@ function Vendors() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [vendorToDelete, setVendorToDelete] = useState(null);
-
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [selectedVendorId, setSelectedVendorId] = useState(null);
   useEffect(() => {
     loadVendors();
   }, []);
@@ -84,6 +87,14 @@ function Vendors() {
                 <td>
                     <div className="action-icons">
                         <Pencil size={18} className="edit-icon" onClick={() => navigate(`/vendors/edit/${vendor.vendorId}`)}/>
+                          <History
+                              size={18}
+                              className="edit-icon"
+                              onClick={() => {
+                                  setSelectedVendorId(vendor.vendorId);
+                                  setShowHistoryModal(true);
+                              }}
+                          />
                         <Trash2 size={18} className="delete-icon" onClick={() => {
     setVendorToDelete(vendor.vendorId);
     setShowDeleteModal(true);
@@ -121,6 +132,12 @@ function Vendors() {
           />
         )
       }
+      <ViewHistoryModal
+        isOpen={showHistoryModal}
+        onClose={() => setShowHistoryModal(false)}
+        entityType="Vendor"
+        entityId={selectedVendorId}
+    />
     </div>
   );
 }

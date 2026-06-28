@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Pencil } from "lucide-react";
+import { Pencil, History } from "lucide-react";
+import ViewHistoryModal from "../components/ViewHistoryModal";
 
 import { getIncidents } from "../services/incidentService";
 
@@ -22,7 +23,8 @@ function Incidents() {
 
     setIncidents(result.data);
   };
-
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [selectedIncidentId, setSelectedIncidentId] = useState(null);
   return (
     <div className="page-container">
 
@@ -87,6 +89,14 @@ function Incidents() {
                       onClick={() => navigate(`/incidents/edit/${incident.incidentId}`)}
                     />
 
+                     <History
+                          size={18}
+                          className="edit-icon"
+                          onClick={() => {
+                              setSelectedIncidentId(incident.incidentId);
+                              setShowHistoryModal(true);
+                          }}
+                      />
                   </div>
 
                 </td>
@@ -100,7 +110,12 @@ function Incidents() {
         </table>
 
       </div>
-
+      <ViewHistoryModal
+              isOpen={showHistoryModal}
+              onClose={() => setShowHistoryModal(false)}
+              entityType="Incident"
+              entityId={selectedIncidentId}
+          />
     </div>
   );
 }

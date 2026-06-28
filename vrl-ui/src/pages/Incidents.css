@@ -274,3 +274,17 @@ tbody tr:hover {
     font-weight: 700;
 }
 
+
+.history-icon {
+
+    cursor: pointer;
+
+    
+
+    transition: .2s;
+}
+
+.history-icon:hover {
+
+    transform: scale(1.15);
+}

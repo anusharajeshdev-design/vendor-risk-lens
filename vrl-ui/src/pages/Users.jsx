@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getUsers, deleteUser } from "../services/userService";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, History } from "lucide-react";
 import SuccessModal from "../components/SuccessModal";
 import ConfirmModal from "../components/ConfirmModal";
+import ViewHistoryModal from "../components/ViewHistoryModal";
 import { useNavigate } from "react-router-dom";
 import "./Vendors.css";
 
@@ -17,6 +18,8 @@ const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 const [userToDelete, setUserToDelete] = useState(null);
 
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 const navigate = useNavigate();
 
 useEffect(() => {
@@ -135,6 +138,14 @@ return (
                                                 `/users/edit/${user.userId}`
                                             )}
                                     />
+                                  <History
+                                        size={18}
+                                        className="edit-icon"
+                                        onClick={() => {
+                                            setSelectedUserId(user.userId);
+                                            setShowHistoryModal(true);
+                                        }}
+                                    />
 
                                     <Trash2
                                         size={18}
@@ -193,6 +204,13 @@ return (
                 />
             )
         }
+
+        <ViewHistoryModal
+                isOpen={showHistoryModal}
+                onClose={() => setShowHistoryModal(false)}
+                entityType="User"
+                entityId={selectedUserId}
+            />
 
     </div>
 );
