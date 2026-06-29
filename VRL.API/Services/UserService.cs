@@ -27,7 +27,7 @@ public class UserService
     public async Task<Users> CreateUserAsync(Users user)
     {
         user.CreatedDate = DateTime.UtcNow;
-
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         _context.Users.Add(user);
 
         await _context.SaveChangesAsync();
@@ -72,7 +72,10 @@ public class UserService
         user.LastName = updatedUser.LastName;
         user.Email = updatedUser.Email;
         user.Username = updatedUser.Username;
-        user.Password = updatedUser.Password;
+        if (!string.IsNullOrWhiteSpace(updatedUser.Password))
+        {
+            user.Password = BCrypt.Net.BCrypt.HashPassword(updatedUser.Password);
+        }
         user.IsActive = updatedUser.IsActive;
 
         await _context.SaveChangesAsync();

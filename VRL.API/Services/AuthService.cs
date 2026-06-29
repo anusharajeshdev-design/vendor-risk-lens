@@ -38,11 +38,14 @@ public class AuthService
         })
         .FirstOrDefaultAsync(x =>
         x.User.Username == request.Username &&
-        x.User.Password == request.Password &&
         x.User.IsActive);
 
 
         if (user == null)
+        {
+            return null;
+        }
+        if (!BCrypt.Net.BCrypt.Verify(request.Password, user.User.Password))
         {
             return null;
         }
