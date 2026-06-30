@@ -31,6 +31,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<DashboardService>();
 builder.Services.AddScoped<AuditLogService>();
 builder.Services.AddScoped<CurrentUserService>();
+builder.Services.AddScoped<AIService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen();
