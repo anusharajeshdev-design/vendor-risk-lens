@@ -10,13 +10,14 @@ public class AIController : ControllerBase
 {
     private readonly AIService _aiService;
     private readonly VendorService _vendorService;
-
+    private readonly IncidentsService _incidentService;
     public AIController(
         AIService aiService,
-        VendorService vendorService)
+        VendorService vendorService, IncidentsService incidentService)
     {
         _aiService = aiService;
         _vendorService = vendorService;
+        _incidentService = incidentService;
     }
 
     [HttpPost("ask")]
@@ -33,12 +34,9 @@ public class AIController : ControllerBase
     }
 
     [HttpPost("vendor-summary")]
-    public async Task<IActionResult> VendorSummary(
-        VendorSummaryRequest request)
+    public async Task<IActionResult> VendorSummary(VendorSummaryRequest request)
     {
-        var vendor =
-            await _vendorService.GetVendorByIdAsync(request.VendorId);
-
+        var vendor = await _vendorService.GetVendorByIdAsync(request.VendorId);
         if (vendor == null)
         {
             return NotFound(new
@@ -48,8 +46,8 @@ public class AIController : ControllerBase
             });
         }
 
-        var summary =
-            await _aiService.GenerateVendorSummaryAsync(vendor);
+        var incidents = await _incidentService.GetIncidentsByVendorIdAsync(request.VendorId);
+        var summary = await _aiService.GenerateVendorSummaryAsync(vendor, incidents);
 
         return Ok(new
         {

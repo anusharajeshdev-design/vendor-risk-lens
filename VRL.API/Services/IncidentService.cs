@@ -117,6 +117,12 @@ public class IncidentsService
         return await _context.Incidents
             .FirstOrDefaultAsync(i => i.IncidentId == id);
     }
+    public async Task<List<Incident>> GetIncidentsByVendorIdAsync(int vendorId)
+    {
+        return await _context.Incidents
+            .Where(i => i.VendorId == vendorId)
+            .ToListAsync();
+    }
 
     public async Task<List<IncidentType>> GetIncidentTypeAsync()
     {
