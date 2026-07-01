@@ -7,19 +7,21 @@ using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+//[Authorize]
 public class AIController : ControllerBase
 {
     private readonly AIService _aiService;
     private readonly VendorService _vendorService;
     private readonly IncidentsService _incidentService;
+    private readonly DashboardService _dashboardService;
     public AIController(
         AIService aiService,
-        VendorService vendorService, IncidentsService incidentService)
+        VendorService vendorService, IncidentsService incidentService, DashboardService dashboardService)
     {
         _aiService = aiService;
         _vendorService = vendorService;
         _incidentService = incidentService;
+        _dashboardService = dashboardService;
     }
 
     [HttpPost("ask")]
@@ -56,6 +58,24 @@ public class AIController : ControllerBase
             Success = true,
             Message = "Vendor summary generated successfully.",
             Data = summary
+        });
+    }
+
+    [HttpPost("ask-vrl")]
+    public async Task<IActionResult> AskVRL(AskAIRequest request)
+    {
+        var context =
+            await _dashboardService.BuildBusinessContextAsync();
+
+        var response =
+            await _aiService.AskVRLAsync(
+                request.Prompt,
+                context);
+
+        return Ok(new
+        {
+            Success = true,
+            Data = response
         });
     }
 }

@@ -121,4 +121,34 @@ public class DashboardService
             })
             .ToListAsync();
     }
+
+    public async Task<string> BuildBusinessContextAsync()
+    {
+        var vendors = await _context.Vendors
+            .Where(v => !v.IsDeleted)
+            .ToListAsync();
+
+        var incidents = await _context.Incidents
+            .ToListAsync();
+
+        return $@"
+    Total Vendors: {vendors.Count}
+
+    High Risk Vendors:
+    {string.Join(", ",
+        vendors.Where(v => v.RiskRating == "High")
+            .Select(v => v.VendorName))}
+
+    Open Incidents:
+    {incidents.Count(i => i.Status == "Open")}
+
+    Critical Incidents:
+    {incidents.Count(i => i.Severity == "Critical")}
+
+    Vendors Due For Review:
+    {string.Join(", ",
+        vendors.Where(v => v.NextReviewDate <= DateTime.UtcNow)
+            .Select(v => v.VendorName))}
+    ";
+    }
 }

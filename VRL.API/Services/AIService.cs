@@ -104,4 +104,41 @@ public class AIService
         return result.Value.Content[0].Text;
     }
 
+    public async Task<string> AskVRLAsync(string question, string businessContext)
+    {
+        var prompt = $@"
+        You are VRL AI, an intelligent Vendor Risk Management assistant.
+
+        You answer questions ONLY using the business data provided below.
+
+        Business Data
+
+        {businessContext}
+
+        User Question
+
+        {question}
+
+        Instructions
+
+        - Answer only using the supplied business data.
+        - Do not invent information.
+        - If the answer cannot be determined from the supplied data, clearly state that.
+        - Respond in a professional business tone.
+        - Keep the response concise.
+        ";
+
+        var messages = new List<ChatMessage>
+        {
+            new SystemChatMessage(
+                "You are an enterprise Vendor Risk Management AI assistant."
+            ),
+
+            new UserChatMessage(prompt)
+        };
+
+        var result = await _chatClient.CompleteChatAsync(messages);
+
+        return result.Value.Content[0].Text;
+    }
 }
