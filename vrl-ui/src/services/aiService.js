@@ -1,0 +1,28 @@
+const API_URL = "http://localhost:5037/api/AI";
+
+const getAuthHeader = () => {
+
+    const token = localStorage.getItem("token");
+
+    return {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+    };
+};
+
+export const generateVendorSummary = async (vendorId) => {
+
+    const response = await fetch(
+        `${API_URL}/vendor-summary`,
+        {
+            method: "POST",
+
+            headers: getAuthHeader(),
+
+            body: JSON.stringify({
+                vendorId: vendorId
+            })
+        });
+
+    return await response.json();
+};

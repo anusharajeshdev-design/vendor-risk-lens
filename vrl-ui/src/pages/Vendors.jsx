@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getVendors, deleteVendor } from "../services/vendorService";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Sparkles, History } from "lucide-react";
 import SuccessModal from "../components/SuccessModal";
 import ConfirmModal from "../components/ConfirmModal";
 import { useNavigate } from "react-router-dom";
 import ViewHistoryModal from "../components/ViewHistoryModal";
-import { History } from "lucide-react";
-
 import "./Vendors.css";
+import { generateVendorSummary } from "../services/aiService";
+import AISummaryModal from "../components/AISummaryModal";
 
 function Vendors() {
   const [vendors, setVendors] = useState([]);
@@ -16,6 +16,10 @@ function Vendors() {
   const [vendorToDelete, setVendorToDelete] = useState(null);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [selectedVendorId, setSelectedVendorId] = useState(null);
+  const [showAISummaryModal, setShowAISummaryModal] = useState(false);
+  const [aiSummary, setAISummary] = useState("");
+  const [aiLoading, setAILoading] = useState(false);
+  const [selectedVendorForAI, setSelectedVendorForAI] = useState(null);
   useEffect(() => {
     loadVendors();
   }, []);
@@ -50,6 +54,33 @@ function Vendors() {
       alert("Error deleting vendor");
     }
   };
+
+  const handleGenerateSummary = async (vendorId) => {
+
+    setSelectedVendorForAI(vendorId);
+
+    setShowAISummaryModal(true);
+
+    setAILoading(true);
+
+    try {
+
+        const result = await generateVendorSummary(vendorId);
+
+        setAISummary(result.data);
+
+    } catch (error) {
+
+        console.error(error);
+
+        setAISummary("Failed to generate AI summary.");
+
+    } finally {
+
+        setAILoading(false);
+    }
+};
+
   const navigate = useNavigate();
   return (
     <div className="page-container">
@@ -95,10 +126,17 @@ function Vendors() {
                                   setShowHistoryModal(true);
                               }}
                           />
+                           <Sparkles
+                              size={18}
+                              className="ai-icon"
+                              onClick={() => {
+                                  handleGenerateSummary(vendor.vendorId);
+                              }}
+                          />
                         <Trash2 size={18} className="delete-icon" onClick={() => {
-    setVendorToDelete(vendor.vendorId);
-    setShowDeleteModal(true);
-  }}/>
+                            setVendorToDelete(vendor.vendorId);
+                            setShowDeleteModal(true);
+                          }}/>
                     </div>
                 </td>
               </tr>
@@ -138,6 +176,15 @@ function Vendors() {
         entityType="Vendor"
         entityId={selectedVendorId}
     />
+      <AISummaryModal
+          isOpen={showAISummaryModal}
+          onClose={() => setShowAISummaryModal(false)}
+          summary={aiSummary}
+          loading={aiLoading}
+          onRegenerate={() =>
+              handleGenerateSummary(selectedVendorForAI)
+          }
+      />
     </div>
   );
 }

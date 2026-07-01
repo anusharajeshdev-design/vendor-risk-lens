@@ -388,4 +388,13 @@ td {
     border-radius: 999px;
 }
 
+.ai-icon {
+    color: #6366F1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
 
+.ai-icon:hover {
+    color: #4338CA;
+    transform: scale(1.15);
+}

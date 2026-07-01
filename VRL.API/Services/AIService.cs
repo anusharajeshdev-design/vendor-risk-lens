@@ -46,15 +46,16 @@ public class AIService
         var criticalIncidents = openIncidents.Count(i => i.Severity == "Critical");
 
         var prompt = $@"
-        You are a Senior Vendor Risk Analyst.
+        You are a Senior Vendor Risk Analyst with extensive experience in Third-Party Risk Management.
 
-        Analyze the following vendor and generate a professional executive summary.
+        Analyze the following vendor information and prepare a professional executive report.
+
+        Vendor Information
 
         Vendor Name: {vendor.VendorName}
         Vendor Type: {vendor.VendorType}
         Risk Rating: {vendor.RiskRating}
         Status: {(vendor.IsActive ? "Active" : "Inactive")}
-        Owner User Id: {vendor.OwnerUserId}
         Next Review Date: {vendor.NextReviewDate:dd-MMM-yyyy}
 
         Open Incident Count: {openIncidents.Count}
@@ -63,13 +64,30 @@ public class AIService
         Open Incident Numbers:
         {string.Join(", ", openIncidentNumbers)}
 
-        Generate a professional executive summary in less than 150 words.
+        Instructions:
 
-        Mention the vendor's current risk posture and the impact of the open incidents.
+        1. Start with the heading:
+        📋 Executive Summary
 
-        Do not use bullet points.
+        Write one concise executive summary (80-120 words).
 
-        Use professional language suitable for senior management.
+        2. Then add the heading:
+        🔍 Key Observations
+
+        Provide exactly THREE bullet points highlighting the most important findings.
+
+        3. Then add the heading:
+        ✅ Recommendations
+
+        Provide exactly THREE actionable recommendations that help reduce vendor risk.
+
+        Rules:
+
+        - Use professional business language.
+        - Do not invent information.
+        - Base conclusions only on the data provided.
+        - Do not repeat the vendor information verbatim.
+        - Keep the overall response under 250 words.
         ";
 
         var messages = new List<ChatMessage>

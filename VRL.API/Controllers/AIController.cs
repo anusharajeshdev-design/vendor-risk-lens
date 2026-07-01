@@ -3,9 +3,11 @@ using VRL.API.DTOs;
 using VRL.API.Services;
 using VRL.API.Models;
 namespace VRL.API.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class AIController : ControllerBase
 {
     private readonly AIService _aiService;
