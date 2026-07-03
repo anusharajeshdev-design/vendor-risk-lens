@@ -40,10 +40,11 @@ body{
 
     width:100%;
 
-    height:100vh;
+    min-height:100vh;
 
-    overflow:hidden;
+    overflow-x:hidden;
 
+    overflow-y:auto;
     background:
 
         linear-gradient(
@@ -88,8 +89,9 @@ body{
 
 .login-right{
 
-    width:560px;
+     flex:0 0 560px;
 
+    width:auto;
     display:flex;
 
     align-items:center;
@@ -117,149 +119,6 @@ body{
     -webkit-backdrop-filter:blur(24px);
 }
 
-/* ==========================================================
-   BACKGROUND LIGHT BLOBS
-========================================================== */
-
-.login-left::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:700px;
-
-    height:700px;
-
-    right:-260px;
-
-    top:-260px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(255,255,255,.42),
-
-            transparent 72%
-
-        );
-
-    filter:blur(24px);
-
-    animation:
-
-        blobFloatOne 18s ease-in-out infinite;
-}
-
-.login-left::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:480px;
-
-    height:480px;
-
-    left:-180px;
-
-    bottom:-180px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(255,255,255,.28),
-
-            transparent 72%
-
-        );
-
-    filter:blur(22px);
-
-    animation:
-
-        blobFloatTwo 22s ease-in-out infinite;
-}
-
-/* ==========================================================
-   RIGHT PANEL GLOW
-========================================================== */
-
-.login-right::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:380px;
-
-    height:380px;
-
-    top:-140px;
-
-    right:-140px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(30,64,175,.12),
-
-            transparent 72%
-
-        );
-
-    filter:blur(34px);
-
-    pointer-events:none;
-}
-
-.login-right::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-
-    height:220px;
-
-    bottom:-90px;
-
-    left:-90px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(255,255,255,.60),
-
-            transparent 72%
-
-        );
-
-    filter:blur(26px);
-
-    pointer-events:none;
-}
 
 /* ==========================================================
    BRAND CONTAINER
@@ -274,24 +133,6 @@ body{
     margin-top:8px;
 }
 
-/* ==========================================================
-   FEATURE CONTAINER
-========================================================== */
-
-.feature-grid{
-
-    position:relative;
-
-    z-index:2;
-
-    display:grid;
-
-    grid-template-columns:1fr;
-
-    margin-top:36px;
-
-    max-width:560px;
-}
 /* ==========================================================
    LOGIN.CSS
    Part 2 / 5
@@ -315,7 +156,7 @@ body{
 
     color:#0F172A;
 
-    font-size:52px;
+    font-size:clamp(2.2rem,3.8vw,3.25rem);
 
     font-weight:800;
 
@@ -376,127 +217,7 @@ body{
         );
 }
 
-/* ==========================================================
-   AI RISK ENGINE CARD
-========================================================== */
 
-.brand-info-card{
-
-    position:relative;
-
-    width:530px;
-
-    overflow:hidden;
-
-    padding:30px;
-
-    border-radius:30px;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            rgba(255,255,255,.28),
-
-            rgba(255,255,255,.18)
-
-        );
-
-    backdrop-filter:blur(28px);
-
-    -webkit-backdrop-filter:blur(28px);
-
-    border:
-
-        1px solid rgba(255,255,255,.50);
-
-    box-shadow:
-
-        0 24px 50px rgba(30,64,175,.08),
-
-        inset 0 1px 0 rgba(255,255,255,.55);
-
-    transition:.35s ease;
-}
-
-.brand-info-card:hover{
-
-    transform:
-
-        translateY(-4px);
-
-    box-shadow:
-
-        0 35px 65px rgba(30,64,175,.12);
-}
-
-/* ==========================================================
-   BLUE AMBIENT GLOW
-========================================================== */
-
-.brand-info-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:170px;
-
-    height:170px;
-
-    left:-60px;
-
-    top:-60px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(30,64,175,.20),
-
-            transparent 72%
-
-        );
-
-    filter:blur(35px);
-}
-
-.brand-info-card::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:120px;
-
-    height:120px;
-
-    right:-30px;
-
-    bottom:-30px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(255,255,255,.35),
-
-            transparent 72%
-
-        );
-
-    filter:blur(24px);
-}
 
 /* ==========================================================
    HEADER
@@ -566,75 +287,6 @@ body{
 }
 
 /* ==========================================================
-   CARD DESCRIPTION
-========================================================== */
-
-.brand-info-card p{
-
-    color:#475569;
-
-    font-size:17px;
-
-    line-height:1.85;
-
-    margin-bottom:26px;
-}
-
-/* ==========================================================
-   TAGS
-========================================================== */
-
-.brand-tags{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-}
-
-.brand-tags span{
-
-    padding:11px 18px;
-
-    border-radius:999px;
-
-    background:
-
-        rgba(255,255,255,.38);
-
-    backdrop-filter:blur(14px);
-
-    border:
-
-        1px solid rgba(255,255,255,.55);
-
-    color:#1E293B;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    transition:.30s ease;
-}
-
-.brand-tags span:hover{
-
-    transform:
-
-        translateY(-3px);
-
-    background:
-
-        rgba(30,64,175,.12);
-
-    color:#1E40AF;
-
-    border-color:
-
-        rgba(30,64,175,.18);
-}
-/* ==========================================================
    LOGIN.CSS
    Part 3 / 5
    LOGIN CARD + FORM
@@ -648,7 +300,7 @@ body{
 
     position:relative;
 
-    width:100%;
+   width:100%;
 
     max-width:500px;
 
@@ -1317,43 +969,311 @@ a:focus-visible{
     }
 }
 
-/* ==========================================================
-   SUBTLE FLOAT
-========================================================== */
+.feature-highlights{
 
-.brand-info-card{
+    display:flex;
 
-    animation:
+    flex-direction:column;
 
-        floatingCard 7s ease-in-out infinite;
+    gap:18px;
+
+    margin:38px 0 42px;
+
+    max-width:520px;
 }
 
-@keyframes floatingCard{
+.feature-item{
 
-    0%,100%{
+    display:flex;
 
-        transform:
-            translateY(0px);
+    align-items:center;
+
+    gap:18px;
+
+    padding:18px 22px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.38);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.55);
+
+    box-shadow:0 12px 24px rgba(15,23,42,.06);
+
+    transition:.3s ease;
+}
+
+.feature-item:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 32px rgba(30,64,175,.12);
+}
+
+.feature-icon{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:24px;
+
+    background:linear-gradient(135deg,#1E40AF,#3B82F6);
+
+    color:white;
+
+    flex-shrink:0;
+}
+
+.feature-item h3{
+
+    margin:0 0 6px;
+
+    font-size:18px;
+
+    color:#0F172A;
+
+    font-weight:700;
+}
+
+.feature-item p{
+
+    margin:0;
+
+    color:#64748B;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+/*==========================================================
+LEFT PANEL
+==========================================================*/
+
+.brand-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    max-width:720px;
+
+    height:100%;
+
+    animation:fadeLeft .8s ease;
+}
+
+
+
+/*==========================================================
+DESCRIPTION
+==========================================================*/
+
+.brand-description{
+
+    margin-top:28px;
+
+    max-width:620px;
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    color:#64748B;
+}
+/*==========================================================
+LEFT SIDE
+==========================================================*/
+
+.login-left{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:70px;
+
+    background:linear-gradient(
+        135deg,
+        #edf4ff,
+        #e6eefb
+    );
+}
+
+.brand-section{
+
+    width:100%;
+
+    max-width:760px;
+
+    animation:fadeLeft .8s ease;
+}
+
+
+
+.brand-description{
+
+    margin-top:28px;
+
+    max-width:650px;
+
+    font-size:1.35rem;
+
+    line-height:1.8;
+
+    color:#64748B;
+}
+
+/*==========================================================
+FEATURES
+==========================================================*/
+
+.quick-features{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:22px;
+
+    margin-top:6px;
+
+    max-width:700px;
+}
+
+/*==========================================================
+CARD
+==========================================================*/
+
+.quick-feature-card{
+
+    height:150px;
+
+    padding:22px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.45),
+            rgba(255,255,255,.22)
+        );
+
+    backdrop-filter:blur(22px);
+
+    border:1px solid rgba(255,255,255,.55);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    transition:.3s;
+}
+
+.quick-feature-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 36px rgba(37,99,235,.12);
+}
+
+
+
+/*==========================================================
+ICON
+==========================================================*/
+
+.quick-feature-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:fit-content;
+
+    color: #1E40AF;
+
+    margin-bottom:16px;
+
+    animation:iconPulse 2.8s ease-in-out infinite;
+
+    will-change:transform;
+
+}
+
+@keyframes iconPulse{
+
+    0%{
+
+        transform:scale(1);
+
+        opacity:.9;
     }
 
     50%{
 
-        transform:
-            translateY(-6px);
+        transform:scale(1.15);
+
+        opacity:1;
     }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:.9;
+    }
+
 }
 
-/* ==========================================================
-   TAG HOVER
-========================================================== */
+/*==========================================================
+TEXT
+==========================================================*/
 
-.brand-tags span:hover{
+.quick-feature-card h4{
 
-    box-shadow:
+    margin:0 0 8px;
 
-        0 10px 22px rgba(30,64,175,.12);
+    font-size:1.1rem;
+
+    color:#0F172A;
+
+    font-weight:700;
 }
 
+.quick-feature-card p{
+
+    margin:0;
+
+    color:#64748B;
+
+    font-size:.92rem;
+
+    line-height:1.5;
+}
 /* ==========================================================
    INPUT PLACEHOLDER
 ========================================================== */
@@ -1388,86 +1308,97 @@ a:focus-visible{
 
     background:transparent;
 }
-
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 
-@media (max-width:1280px){
-
-    .brand-heading{
-
-        font-size:46px;
-    }
-
-    .brand-info-card{
-
-        width:100%;
-        max-width:500px;
-    }
-
-    .login-right{
-
-        width:520px;
-    }
-}
+/* ------------------------------------------
+   Laptop (1366 / 1280 / Small Desktop)
+------------------------------------------- */
 
 @media (max-width:1100px){
 
-    .login-page{
+    .login-right{
 
-        flex-direction:column;
+        flex:0 0 460px;
+
+        width:auto;
+
+        padding:28px;
     }
 
     .login-left{
 
-        min-height:62vh;
+        padding:28px;
+    }
 
-        padding:30px;
+    .brand-heading{
+
+        font-size:22px;
+
+        max-width:470px;
+    }
+
+    .login-card{
+
+        max-width:460px;
+
+        padding:42px;
+    }
+
+}
+
+/* ------------------------------------------
+   Tablet
+------------------------------------------- */
+
+@media (max-width:900px){
+
+    .login-page{
+
+        flex-direction:column;
+
+        height:auto;
+
+        min-height:100vh;
+
+        overflow-y:auto;
+    }
+
+    .login-left{
+
+        justify-content:flex-start;
+
+        min-height:auto;
+
+        gap:32px;
+
+        padding:32px 24px;
     }
 
     .login-right{
 
+        flex:none;
+
         width:100%;
 
-        padding:30px;
+        padding:32px 24px 40px;
     }
 
     .login-card{
+
+        width:100%;
 
         max-width:560px;
     }
+
 }
 
-@media (max-width:768px){
+/* ------------------------------------------
+   Mobile
+------------------------------------------- */
 
-    .brand-heading{
-
-        font-size:38px;
-    }
-
-    .login-card{
-
-        padding:34px;
-    }
-
-    .brand-info-card{
-
-        padding:22px;
-    }
-
-    .login-title{
-
-        font-size:34px;
-    }
-
-    .login-button{
-
-        height:56px;
-    }
-}
-
-@media (max-width:540px){
+@media (max-width:600px){
 
     .login-left{
 
@@ -1476,7 +1407,7 @@ a:focus-visible{
 
     .login-right{
 
-        padding:18px;
+        padding:20px;
     }
 
     .brand-heading{
@@ -1488,39 +1419,185 @@ a:focus-visible{
 
     .login-card{
 
-        padding:26px;
+        padding:24px;
 
         border-radius:24px;
     }
 
-    .brand-info-card{
-
-        border-radius:22px;
-    }
-
-    .brand-tags{
-
-        gap:8px;
-    }
-
-    .brand-tags span{
-
-        font-size:12px;
-
-        padding:8px 14px;
-    }
-
     .login-title{
 
-        font-size:28px;
+        font-size:30px;
+    }
+
+    .login-subtitle{
+
+        font-size:15px;
     }
 
     .login-group input{
 
         height:52px;
+
+        font-size:14px;
     }
+
+    .login-button{
+
+        height:54px;
+    }
+
 }
 
+/* ------------------------------------------
+   Small Phones
+------------------------------------------- */
+
+@media (max-width:380px){
+
+    .brand-heading{
+
+        font-size:26px;
+    }
+
+    .login-card{
+
+        padding:20px;
+    }
+
+
+}
+
+/*==========================================================
+RESPONSIVE - FEATURE SECTION
+==========================================================*/
+
+/* Laptop */
+
+@media (max-width:1100px){
+
+    .quick-features{
+
+        gap:18px;
+
+        max-width:560px;
+    }
+
+    .quick-feature-card{
+
+        height:135px;
+
+        padding:18px;
+    }
+
+    .quick-feature-card h4{
+
+        font-size:18px;
+    }
+
+    .quick-feature-card p{
+
+        font-size:13px;
+    }
+
+}
+
+/* Tablet */
+
+@media (max-width:900px){
+
+    .brand-section{
+
+        width:100%;
+
+        max-width:650px;
+
+        margin:auto;
+    }
+
+    .quick-features{
+
+        grid-template-columns:repeat(3,1fr);
+
+        gap:16px;
+
+        max-width:100%;
+    }
+
+    .quick-feature-card{
+
+        height:125px;
+
+        padding:16px;
+    }
+
+    .quick-feature-icon{
+
+        margin-bottom:12px;
+    }
+
+}
+
+/* Mobile */
+
+@media (max-width:600px){
+
+    .brand-section{
+
+        text-align:center;
+    }
+
+    .brand-description{
+
+        max-width:100%;
+    }
+
+    .quick-features{
+
+        grid-template-columns:1fr;
+
+        gap:14px;
+
+        margin-top:28px;
+    }
+
+    .quick-feature-card{
+
+        height:auto;
+
+        min-height:110px;
+
+        text-align:left;
+
+        padding:18px;
+    }
+
+    .quick-feature-icon{
+
+        margin-bottom:10px;
+    }
+
+}
+
+/* Small Phones */
+
+@media (max-width:380px){
+
+    .quick-feature-card{
+
+        padding:16px;
+    }
+
+    .quick-feature-card h4{
+
+        font-size:17px;
+    }
+
+    .quick-feature-card p{
+
+        font-size:12px;
+    }
+
+}
 /* ==========================================================
    SELECTION
 ========================================================== */
@@ -1581,3 +1658,4 @@ a:focus-visible{
 
     color:#16358F;
 }
+

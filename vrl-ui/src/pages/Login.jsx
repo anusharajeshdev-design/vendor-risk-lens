@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import VendorNetwork from "../components/VendorNetwork";
 import VrlLogo from "../components/Logo/VrlLogo";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { FiEye, FiEyeOff, FiShield, FiActivity } from "react-icons/fi";
+import { Sparkles } from "lucide-react";
 function Login() {
 
     const navigate = useNavigate();
@@ -79,56 +80,73 @@ function Login() {
 
             {/* LEFT SIDE */}
 
-            <div className="login-left">
-                <VendorNetwork />
-                <div className="brand-section">
-                    <VrlLogo />
-                  <h2 className="brand-heading">
-                        See Risk Clearly.
-                        <br />
-                        Manage Vendors
-                        <br />
-                        Confidently.
-                    </h2>
+<div className="login-left">
 
-                  
+    <div className="brand-section">
 
+        <VrlLogo />
+
+        <h1 className="brand-heading">
+
+            See Risk Clearly.
+            <br />
+            Manage Vendors.
+            <br />
+            Confidently.
+
+        </h1>
+
+        <p className="brand-description">
+
+            Enterprise-grade vendor risk management powered by AI,
+            continuous compliance monitoring and intelligent incident
+            management.
+
+        </p>
+
+        <div className="quick-features">
+
+            <div className="quick-feature-card">
+
+                <div className="quick-feature-icon">
+                    <Sparkles size={18}/>
                 </div>
 
-                <div className="feature-grid">
-                    <div className="brand-info-card">
+                <h4>AI Powered</h4>
 
-                        <div className="brand-info-header">
-
-                            <div className="status-dot"></div>
-
-                            <span>AI Risk Engine</span>
-
-                        </div>
-
-                        <p>
-
-                            AI-powered vendor governance that unifies vendor onboarding,
-                            continuous risk monitoring, compliance, incident management
-                            and third-party intelligence into one secure platform.
-
-                        </p>
-
-                        <div className="brand-tags">
-
-                            <span>AI Insights</span>
-
-                            <span>Compliance</span>
-
-                            <span>Vendor Intelligence</span>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                <p>Intelligent Analysis</p>
 
             </div>
+
+            <div className="quick-feature-card">
+
+                <div className="quick-feature-icon">
+                    <FiShield size={18}/>
+                </div>
+
+                <h4>Compliance</h4>
+
+                <p>Governance</p>
+
+            </div>
+
+            <div className="quick-feature-card">
+
+                <div className="quick-feature-icon">
+                    <FiActivity size={18}/>
+                </div>
+
+                <h4>Risk Monitor</h4>
+
+                <p>Live Vendor Health</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
             {/* RIGHT SIDE */}
 
