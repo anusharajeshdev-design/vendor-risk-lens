@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import AISummaryModal from "../components/AISummaryModal";
 import {
     PieChart,
     Pie,
@@ -11,29 +11,26 @@ import {
     XAxis,
     YAxis
 } from "recharts";
-
+import { ScanSearch } from "lucide-react";
 import {
     getDashboardSummary,
     getRiskDistribution,
     getIncidentStatus,
     getRecentVendors
 } from "../services/dashboardService";
-
+import { askVRL } from "../services/aiService";
 import "./Dashboard.css";
 
 function Dashboard() {
 
     const [summary, setSummary] = useState(null);
-
-    const [riskDistribution,
-        setRiskDistribution] = useState(null);
-
-    const [incidentStatus,
-        setIncidentStatus] = useState(null);
-
-    const [recentVendors,
-        setRecentVendors] = useState([]);
-
+    const [riskDistribution, setRiskDistribution] = useState(null);
+    const [incidentStatus, setIncidentStatus] = useState(null);
+    const [recentVendors, setRecentVendors] = useState([]);
+    const [showAI, setShowAI] = useState(false);
+    const [question, setQuestion] = useState("");
+    const [response, setResponse] = useState("");
+    const [loading, setLoading] = useState(false);
     const COLORS = [
     "#DBEAFE", // Low
     "#93C5FD", // Medium
@@ -83,6 +80,33 @@ function Dashboard() {
         }
     };
 
+    const askAI = async () => {
+
+        if (!question.trim())
+            return;
+
+        try {
+
+            setLoading(true);
+
+            const result = await askVRL(question);
+
+            setResponse(result.data);
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+            alert("Failed to get AI response.");
+
+        }
+        finally {
+
+            setLoading(false);
+        }
+    };
+
     if (!summary) {
 
         return <div>Loading...</div>;
@@ -97,7 +121,17 @@ function Dashboard() {
                 <h1>
                     Dashboard
                 </h1>
+                <button
+                    className="ask-ai-button"
+                    onClick={() => {
+                        console.log("Button clicked");
+                        setShowAI(true);
+                    }}
+                >
+                    <ScanSearch size={18} strokeWidth={2.2} />
 
+                    Risk Lens AI
+                </button>
             </div>
 
             {/* KPI CARDS */}
@@ -346,9 +380,25 @@ function Dashboard() {
 
                     ))}
 
+                    
+
                 </div>
 
             </div>
+
+            <AISummaryModal
+                    isOpen={showAI}
+                    onClose={() => setShowAI(false)}
+                    summary={response}
+                    loading={loading}
+                    title="Risk Lens AI"
+                    showQuestion={true}
+                    question={question}
+                    setQuestion={setQuestion}
+                    onAsk={askAI}
+                    loadingTitle="Analyzing Business Data..."
+                    loadingDescription="Risk Lens AI is reviewing your vendors and incidents."
+                />
 
         </div>
     );

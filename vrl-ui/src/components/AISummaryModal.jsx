@@ -6,16 +6,37 @@ function AISummaryModal({
     onClose,
     summary,
     loading,
-    onRegenerate
+    onRegenerate,
+
+    // Optional Props
+    title = "AI Executive Summary",
+    showQuestion = false,
+    question = "",
+    setQuestion = () => {},
+    onAsk = () => {},
+    loadingTitle = "Generating AI Summary...",
+    loadingDescription = "Please wait while AI analyzes the data.",
+    primaryButtonText = "Regenerate"
 }) {
 
     if (!isOpen) return null;
 
+    const suggestions = [
+    "Show high risk vendors",
+    "Show open incidents",
+    "Which vendors have critical incidents?",
+    "Tell me about Azure",
+    "Give me an executive summary",
+    "Show vendors due for review"
+];
+
     const copySummary = async () => {
+
+        if (!summary) return;
 
         await navigator.clipboard.writeText(summary);
 
-        alert("Summary copied to clipboard.");
+        alert("Copied to clipboard.");
     };
 
     return (
@@ -33,7 +54,7 @@ function AISummaryModal({
                             strokeWidth={2.2}
                         />
 
-                        <h2>AI Executive Summary</h2>
+                        <h2>{title}</h2>
 
                     </div>
 
@@ -47,6 +68,54 @@ function AISummaryModal({
 
                 <div className="history-modal-body">
 
+                    {!loading && showQuestion && (
+
+                        <div className="ai-question-section">
+
+                            <label className="ai-question-label">
+                                Ask a question
+                            </label>
+
+                            <textarea
+                                className="ai-question-box"
+                                rows={4}
+                                placeholder="Ask anything about vendors, incidents or dashboard..."
+                                value={question}
+                                onChange={(e) =>
+                                    setQuestion(e.target.value)
+                                }
+                            />
+
+                                <div className="ai-suggestions">
+
+                                {suggestions.map((item) => (
+
+                                    <button
+                                        key={item}
+                                        type="button"
+                                        className="ai-suggestion-chip"
+                                        onClick={() => setQuestion(item)}
+                                    >
+                                        {item}
+                                    </button>
+
+                                ))}
+
+                            </div>
+                            <button
+                                className="ai-primary-button"
+                                onClick={onAsk}>
+
+                                <Sparkles size={18} />
+
+                                Ask AI
+
+                            </button>
+
+                        </div>
+
+                    )}
+
                     {loading ? (
 
                         <div className="ai-loading">
@@ -56,27 +125,29 @@ function AISummaryModal({
                                 size={32}
                             />
 
-                            <h3>Generating AI Summary...</h3>
+                            <h3>{loadingTitle}</h3>
 
-                            <p>
-                                Please wait while AI analyzes the vendor.
-                            </p>
+                            <p>{loadingDescription}</p>
 
                         </div>
 
                     ) : (
 
-                        <div className="ai-summary-card">
+                        summary && (
 
-                            <p>{summary}</p>
+                            <div className="ai-summary-card">
 
-                        </div>
+                                <p>{summary}</p>
+
+                            </div>
+
+                        )
 
                     )}
 
                 </div>
 
-                {!loading && (
+                {!loading && summary && (
 
                     <div className="ai-footer">
 
@@ -86,19 +157,23 @@ function AISummaryModal({
 
                             <Copy size={18} />
 
-                            Copy Summary
+                            Copy
 
                         </button>
 
-                        <button
-                            className="ai-primary-button"
-                            onClick={onRegenerate}>
+                        {!showQuestion && (
 
-                            <Sparkles size={18} />
+                            <button
+                                className="ai-primary-button"
+                                onClick={onRegenerate}>
 
-                            Regenerate
+                                <Sparkles size={18} />
 
-                        </button>
+                                {primaryButtonText}
+
+                            </button>
+
+                        )}
 
                     </div>
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize]
+[Authorize]
 public class AIController : ControllerBase
 {
     private readonly AIService _aiService;

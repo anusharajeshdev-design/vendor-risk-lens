@@ -26,3 +26,18 @@ export const generateVendorSummary = async (vendorId) => {
 
     return await response.json();
 };
+
+export const askVRL = async (prompt) => {
+
+    const response = await fetch(
+        `${API_URL}/ask-vrl`,
+        {
+            method: "POST",
+            headers: getAuthHeader(),
+            body: JSON.stringify({
+                prompt
+            })
+        });
+
+    return await response.json();
+};
