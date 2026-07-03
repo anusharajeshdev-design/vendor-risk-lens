@@ -1,5 +1,7 @@
 using OpenAI.Chat;
 using VRL.API.Models;
+using VRL.API.AI;
+using VRL.API.DTOs;
 
 namespace VRL.API.Services;
 
@@ -7,11 +9,16 @@ public class AIService
 {
     private readonly IConfiguration _configuration;
     private readonly ChatClient _chatClient;
-
     private readonly string _apiKey;
     private readonly string _model;
-
-    public AIService(IConfiguration configuration)
+    private readonly VendorService _vendorService;
+    private readonly IncidentsService _incidentService;
+    private readonly DashboardService _dashboardService;
+    public AIService(
+    IConfiguration configuration,
+    VendorService vendorService,
+    IncidentsService incidentService,
+    DashboardService dashboardService)
     {
         _configuration = configuration;
 
@@ -21,6 +28,9 @@ public class AIService
         _chatClient = new ChatClient(
             model: _model,
             apiKey: _apiKey);
+        _vendorService = vendorService;
+        _incidentService = incidentService;
+        _dashboardService = dashboardService;
     }
 
     #pragma warning disable OPENAI001
@@ -140,5 +150,212 @@ public class AIService
         var result = await _chatClient.CompleteChatAsync(messages);
 
         return result.Value.Content[0].Text;
+    }
+
+    public async Task<string> ProcessQuestionAsync(string question)
+    {
+        var query = AIIntentDetector.Analyze(question);
+
+        // Check if the question contains any vendor name
+        var vendorNames = await _vendorService.GetVendorNamesAsync();
+
+        foreach (var vendorName in vendorNames)
+        {
+            if (question.Contains(vendorName, StringComparison.OrdinalIgnoreCase))
+            {
+                query.VendorName = vendorName;
+                query.Intent = AIIntent.Vendor;
+                break;
+            }
+        }
+
+        switch (query.Intent)
+        {
+           case AIIntent.Vendor:
+                // If a specific vendor name was found
+                if (!string.IsNullOrWhiteSpace(query.VendorName))
+                {
+                    var vendor = await _vendorService.GetVendorByNameAsync(query.VendorName);
+
+                    if (vendor == null)
+                    {
+                        return "Vendor not found.";
+                    }
+
+                    var vendorContext = BuildVendorContext(new List<Vendor> { vendor });
+
+                    return await AskVRLAsync(
+                        question,
+                        vendorContext);
+                }
+
+                // Otherwise use filters
+                var vendors = await _vendorService.GetFilteredVendorsAsync(
+                    query.RiskRating,
+                    query.DueForReview,
+                    query.IsActive);
+
+                if (question.Contains("incident", StringComparison.OrdinalIgnoreCase))
+                {
+                    var vendorIds = vendors
+                        .Select(v => v.VendorId)
+                        .ToList();
+
+                    var incidents1 = await _incidentService
+                        .GetIncidentsByVendorIdsAsync(vendorIds);
+
+                    var context2 = BuildVendorIncidentContext(
+                        vendors,
+                        incidents1);
+
+                    return await AskVRLAsync(
+                        question,
+                        context2);
+                }
+
+                // Otherwise use vendor-only context
+                var context = BuildVendorContext(vendors);
+
+                return await AskVRLAsync(
+                    question,
+                    context);
+
+            case AIIntent.Incident:
+                var incidents = await _incidentService.GetFilteredIncidentsAsync(
+                    query.Status,
+                    query.Severity);
+
+                var incidentContext = BuildIncidentContext(incidents);
+
+                return await AskVRLAsync(
+                    question,
+                    incidentContext);
+
+           case AIIntent.Dashboard:
+
+                var dashboard = await _dashboardService.GetDashboardSummaryAsync();
+
+                var dashboardContext = BuildDashboardContext(dashboard);
+
+                return await AskVRLAsync(
+                    question,
+                    dashboardContext);
+
+            default:
+
+                return "Sorry, I couldn't understand your question.";
+        }
+    }
+
+    private string BuildVendorContext(List<Vendor> vendors)
+    {
+        if (!vendors.Any())
+            return "No vendors found.";
+
+        var context = "Vendor Data\n\n";
+
+        foreach (var vendor in vendors)
+        {
+                    context += $@"
+            Vendor Name: {vendor.VendorName}
+            Vendor Type: {vendor.VendorType}
+            Risk Rating: {vendor.RiskRating}
+            Status: {(vendor.IsActive ? "Active" : "Inactive")}
+            Next Review: {vendor.NextReviewDate:dd-MMM-yyyy}
+
+            -------------------------
+
+            ";
+        }
+
+        return context;
+    }
+
+    private string BuildIncidentContext(List<Incident> incidents)
+    {
+        if (!incidents.Any())
+            return "No incidents found.";
+
+        var context = "Incident Data\n\n";
+
+        foreach (var incident in incidents)
+        {
+            context += $@"
+            Incident Number: {incident.IncidentNumber}
+            Title: {incident.Title}
+            Severity: {incident.Severity}
+            Priority: {incident.Priority}
+            Status: {incident.Status}
+            Reported Date: {incident.ReportedDate:dd-MMM-yyyy}
+
+            --------------------------------
+            ";
+        }
+
+        return context;
+    }
+
+    private string BuildDashboardContext(DashboardSummaryDto dashboard)
+    {
+        return $@"
+            Dashboard Summary
+
+            Total Vendors: {dashboard.TotalVendors}
+            High Risk Vendors: {dashboard.CriticalVendors}
+            Open Incidents: {dashboard.OpenIncidents}
+            Critical Incidents: {dashboard.CriticalIncidents}
+            Vendors Due For Review: {dashboard.VendorsDueForReview}
+            Active Users: {dashboard.ActiveUsers}
+            Compliance Score: {dashboard.ComplianceScore}%
+
+    ";
+    }
+
+    private string BuildVendorIncidentContext(
+    List<Vendor> vendors,
+    List<Incident> incidents)
+    {
+        if (!vendors.Any())
+            return "No matching vendors found.";
+
+        var context = "";
+
+        foreach (var vendor in vendors)
+        {
+            context += $@"
+            Vendor Name: {vendor.VendorName}
+            Vendor Type: {vendor.VendorType}
+            Risk Rating: {vendor.RiskRating}
+            Status: {(vendor.IsActive ? "Active" : "Inactive")}
+            Next Review Date: {vendor.NextReviewDate:dd-MMM-yyyy}
+
+            Incidents:
+            ";
+
+            var vendorIncidents = incidents
+                .Where(i => i.VendorId == vendor.VendorId)
+                .ToList();
+
+            if (!vendorIncidents.Any())
+            {
+                context += "None\n";
+            }
+            else
+            {
+                foreach (var incident in vendorIncidents)
+                {
+                    context += $@"
+                    - {incident.IncidentNumber}
+                    Title: {incident.Title}
+                    Status: {incident.Status}
+                    Severity: {incident.Severity}
+                    ";
+                }
+            }
+
+            context += "\n-----------------------------------------\n";
+        }
+
+        return context;
     }
 }

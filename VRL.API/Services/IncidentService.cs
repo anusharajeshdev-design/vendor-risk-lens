@@ -171,4 +171,30 @@ public class IncidentsService
 
         return $"{prefix}{nextSequence:D3}";
     }
+
+    public async Task<List<Incident>> GetFilteredIncidentsAsync(
+    string? status,
+    string? severity)
+    {
+        var query = _context.Incidents.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(status))
+        {
+            query = query.Where(i => i.Status == status);
+        }
+
+        if (!string.IsNullOrWhiteSpace(severity))
+        {
+            query = query.Where(i => i.Severity == severity);
+        }
+
+        return await query.ToListAsync();
+    }
+
+    public async Task<List<Incident>> GetIncidentsByVendorIdsAsync(List<int> vendorIds)
+    {
+        return await _context.Incidents
+            .Where(i => vendorIds.Contains(i.VendorId))
+            .ToListAsync();
+    }
 }

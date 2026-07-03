@@ -115,4 +115,47 @@ public class VendorService
     {
         return await _context.Users.Where(u => u.IsActive).OrderBy(u => u.FirstName).ToListAsync();
     }
+
+    public async Task<List<Vendor>> GetFilteredVendorsAsync(
+    string? riskRating,
+    bool? dueForReview,
+    bool? isActive)
+    {
+        var query = _context.Vendors
+            .Where(v => !v.IsDeleted)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(riskRating))
+        {
+            query = query.Where(v => v.RiskRating == riskRating);
+        }
+
+        if (dueForReview == true)
+        {
+            query = query.Where(v => v.NextReviewDate <= DateTime.UtcNow);
+        }
+
+        if (isActive.HasValue)
+        {
+            query = query.Where(v => v.IsActive == isActive.Value);
+        }
+
+        return await query.ToListAsync();
+    }
+
+    public async Task<Vendor?> GetVendorByNameAsync(string vendorName)
+    {
+        return await _context.Vendors
+            .FirstOrDefaultAsync(v =>
+                v.VendorName.ToLower() == vendorName.ToLower() &&
+                !v.IsDeleted);
+    }
+
+    public async Task<List<string>> GetVendorNamesAsync()
+    {
+        return await _context.Vendors
+            .Where(v => !v.IsDeleted)
+            .Select(v => v.VendorName)
+            .ToListAsync();
+    }
 }

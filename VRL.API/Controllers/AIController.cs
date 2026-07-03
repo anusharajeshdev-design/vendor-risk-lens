@@ -64,13 +64,7 @@ public class AIController : ControllerBase
     [HttpPost("ask-vrl")]
     public async Task<IActionResult> AskVRL(AskAIRequest request)
     {
-        var context =
-            await _dashboardService.BuildBusinessContextAsync();
-
-        var response =
-            await _aiService.AskVRLAsync(
-                request.Prompt,
-                context);
+        var response = await _aiService.ProcessQuestionAsync(request.Prompt);
 
         return Ok(new
         {
