@@ -1,13 +1,22 @@
-# Node Modules
-node_modules
+# macOS
+.DS_Store
 
-# Build folders
-bin
-obj
-dist
+# Node
+node_modules/
+dist/
+
+# React
+.env
+
+# .NET
+bin/
+obj/
 
 # VS Code
-.vscode
+.vscode/
+
+# Rider
+.idea/
 
 # Logs
 *.log
