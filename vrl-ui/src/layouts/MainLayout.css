@@ -2,11 +2,12 @@
     min-height: 100vh;
 }
 
-.main-content {
+.main-content{
+    min-height:100vh;
+    padding:24px;
+    transition: margin-left .3s ease-in-out;
+}
 
-    min-height: 100vh;
-    padding: 24px;
-    box-sizing: border-box;
-      overflow-y: scroll;  
-    overflow-x: hidden;
+.main-content.collapsed {
+    margin-left:-92px;
 }

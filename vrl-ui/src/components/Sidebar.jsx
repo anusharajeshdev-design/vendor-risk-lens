@@ -10,7 +10,7 @@ import {
 
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({collapsed, setCollapsed}){
 
     const navigate = useNavigate();
     const fullName = localStorage.getItem("fullName");
@@ -28,10 +28,17 @@ function Sidebar() {
 
     return (
 
-        <div className="sidebar">
+        <div className={`sidebar ${ collapsed ? "collapsed" : "" }`} >
 
             <div className="sidebar-brand">
+                <button
+                        className="collapse-btn"
+                        onClick={() => setCollapsed(!collapsed)}
+                    >
 
+                        {collapsed ? ">" : "<"}
+
+                    </button>
                 <h1>VRL</h1>
 
                 <span>Vendor Risk Lens</span>
@@ -42,22 +49,22 @@ function Sidebar() {
 
                 <NavLink to="/dashboard">
                     <FaChartLine className="menu-icon" />
-                    <span>Dashboard</span>
+                    <span className="sidebar-label">Dashboard</span>
                 </NavLink>
 
                 <NavLink to="/vendors">
                     <FaBuilding className="menu-icon" />
-                    <span>Vendors</span>
+                    <span className="sidebar-label">Vendors</span>
                 </NavLink>
 
                 <NavLink to="/incidents">
                     <FaExclamationTriangle className="menu-icon" />
-                    <span>Incidents</span>
+                    <span className="sidebar-label">Incidents</span>
                 </NavLink>
 
                 <NavLink to="/users">
                     <FaUsers className="menu-icon" />
-                    <span>Users</span>
+                    <span className="sidebar-label">Users</span>
                 </NavLink>
 
             </nav>
@@ -81,7 +88,7 @@ function Sidebar() {
                     onClick={handleLogout}
                 >
                     <FaSignOutAlt />
-                    <span>Logout</span>
+                    <span className="sidebar-label">Logout</span>
                 </button>
 
             </div>

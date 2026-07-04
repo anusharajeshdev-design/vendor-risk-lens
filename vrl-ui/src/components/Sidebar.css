@@ -24,8 +24,13 @@
         10px 0 40px rgba(15,23,42,.05);
 
     z-index: 1000;
+    width:260px;
+    transition: width .30s ease;
 }
+.sidebar.collapsed{
 
+    width:92px;
+}
 .sidebar-brand {
 
     margin-bottom: 40px;
@@ -195,4 +200,70 @@
     color: white;
 
     font-weight: 600;
+}
+
+.sidebar-label{
+
+    transition:
+
+        opacity .25s,
+
+        width .25s;
+
+    white-space:nowrap;
+}
+
+.sidebar.collapsed .sidebar-label{
+    opacity:0;
+    width:0;
+    overflow:hidden;
+}
+
+.sidebar.collapsed a{
+
+    justify-content:center;
+}
+
+.sidebar.collapsed .profile-name,
+.sidebar.collapsed .profile-role{
+    display:none;
+}
+
+.sidebar.collapsed .profile-card{
+
+    width:56px;
+    height:56px;
+    padding:0;
+    border-radius:50%;
+    justify-content:center;
+    align-items:center;
+}
+
+.sidebar.collapsed{
+
+    align-items:center;
+}
+
+.sidebar.collapsed .sidebar-nav a{
+
+    justify-content:center;
+
+    padding:16px 0;
+}
+
+.sidebar.collapsed .menu-icon{
+
+    margin:0;
+}
+
+.sidebar.collapsed .profile-card{
+
+    justify-content:center;
+
+    padding:12px;
+}
+
+.sidebar.collapsed .logout-btn{
+
+    justify-content:center;
 }
