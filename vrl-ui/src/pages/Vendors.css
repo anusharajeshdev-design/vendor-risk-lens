@@ -395,3 +395,168 @@ td {
     color: #4338CA;
     transform: scale(1.15);
 }
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+/* ---------------------------------
+   Large Laptop
+----------------------------------*/
+@media (max-width:1400px){
+
+    .page-container{
+
+        padding:32px;
+    }
+
+    .page-header h1{
+
+        font-size:40px;
+    }
+}
+
+/* ---------------------------------
+   Tablet
+----------------------------------*/
+@media (max-width:992px){
+
+    .page-container{
+
+        padding:24px;
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+    }
+
+    .page-header h1{
+
+        font-size:38px;
+    }
+
+    .add-button{
+
+        width:100%;
+
+        justify-content:center;
+    }
+
+    .table-card{
+
+        padding:20px;
+
+        overflow-x:auto;
+
+        -webkit-overflow-scrolling:touch;
+    }
+
+    table{
+
+        min-width:900px;
+    }
+}
+
+/* ---------------------------------
+   Mobile
+----------------------------------*/
+@media (max-width:768px){
+
+    .page-container{
+
+        padding:16px;
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:16px;
+
+        margin-bottom:24px;
+    }
+
+    .page-header h1{
+
+        font-size:32px;
+
+        letter-spacing:-.5px;
+    }
+
+    .add-button{
+
+        width:100%;
+
+        height:52px;
+    }
+
+    .table-card{
+
+        padding:16px;
+
+        border-radius:24px;
+
+        overflow-x:auto;
+
+        -webkit-overflow-scrolling:touch;
+    }
+
+    table{
+
+        min-width:900px;
+    }
+
+    th{
+
+        font-size:13px;
+
+        white-space:nowrap;
+    }
+
+    td{
+
+        font-size:14px;
+
+        white-space:nowrap;
+    }
+
+    .action-icons{
+
+        gap:18px;
+
+        justify-content:center;
+    }
+}
+
+/* ---------------------------------
+   Small Phones
+----------------------------------*/
+@media (max-width:480px){
+
+    .page-container{
+
+        padding:12px;
+    }
+
+    .page-header h1{
+
+        font-size:28px;
+    }
+
+    .table-card{
+
+        padding:14px;
+    }
+
+    .add-button{
+
+        font-size:14px;
+    }
+}
