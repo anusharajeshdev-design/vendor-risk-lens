@@ -1,85 +1,141 @@
 import { NavLink, useNavigate } from "react-router-dom";
-
 import {
     FaBuilding,
     FaExclamationTriangle,
     FaUsers,
     FaChartLine,
-    FaSignOutAlt
+    FaSignOutAlt,
+    FaChevronLeft,
+    FaChevronRight
 } from "react-icons/fa";
 
 import "./Sidebar.css";
 
-function Sidebar({collapsed, setCollapsed}){
+function Sidebar({ collapsed, setCollapsed }) {
 
     const navigate = useNavigate();
-    const fullName = localStorage.getItem("fullName");
-    const roleName = localStorage.getItem("roleName");
-    const initials =
-    fullName
-        ?.split(" ")
-        .map(name => name[0])
+
+    const fullName = localStorage.getItem("fullName") || "";
+    const roleName = localStorage.getItem("roleName") || "";
+
+    const initials = fullName
+        .split(" ")
+        .map(name => name.charAt(0))
         .join("")
+        .substring(0, 2)
         .toUpperCase();
+
     const handleLogout = () => {
-        localStorage.removeItem("token");
+
+        localStorage.clear();
+
         navigate("/login");
     };
 
     return (
 
-        <div className={`sidebar ${ collapsed ? "collapsed" : "" }`} >
+        <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
 
-            <div className="sidebar-brand">
-                <button
-                        className="collapse-btn"
-                        onClick={() => setCollapsed(!collapsed)}
-                    >
+            {/* Collapse Button */}
 
-                        {collapsed ? ">" : "<"}
+             <button
+                    className="collapse-btn"
+                    onClick={() => setCollapsed(!collapsed)}
+                >
+                    {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
+                </button>
 
-                    </button>
-                <h1>VRL</h1>
+                <div className="sidebar-brand">
 
-                <span>Vendor Risk Lens</span>
+                    <h1>VRL</h1>
 
-            </div>
+                    {!collapsed && <span>Vendor Risk Lens</span>}
+
+                </div>
+
+            {/* Navigation */}
 
             <nav className="sidebar-nav">
 
                 <NavLink to="/dashboard">
+
                     <FaChartLine className="menu-icon" />
-                    <span className="sidebar-label">Dashboard</span>
+
+                    {
+                        !collapsed &&
+                        <span>Dashboard</span>
+                    }
+
                 </NavLink>
 
                 <NavLink to="/vendors">
+
                     <FaBuilding className="menu-icon" />
-                    <span className="sidebar-label">Vendors</span>
+
+                    {
+                        !collapsed &&
+                        <span>Vendors</span>
+                    }
+
                 </NavLink>
 
                 <NavLink to="/incidents">
+
                     <FaExclamationTriangle className="menu-icon" />
-                    <span className="sidebar-label">Incidents</span>
+
+                    {
+                        !collapsed &&
+                        <span>Incidents</span>
+                    }
+
                 </NavLink>
 
                 <NavLink to="/users">
+
                     <FaUsers className="menu-icon" />
-                    <span className="sidebar-label">Users</span>
+
+                    {
+                        !collapsed &&
+                        <span>Users</span>
+                    }
+
                 </NavLink>
 
             </nav>
+
+            {/* Footer */}
 
             <div className="sidebar-footer">
 
                 <div className="profile-card">
 
-                    <div className="profile-name">
-                        {fullName}
+                    <div className="profile-avatar">
+
+                        {initials}
+
                     </div>
 
-                    <div className="profile-role">
-                        {roleName}
-                    </div>
+                    {
+
+                        !collapsed &&
+
+                        <div className="profile-details">
+
+                            <div className="profile-name">
+
+                                {fullName}
+
+                            </div>
+
+                            <div className="profile-role">
+
+                                {roleName}
+
+                            </div>
+
+                        </div>
+
+                    }
 
                 </div>
 
@@ -87,13 +143,26 @@ function Sidebar({collapsed, setCollapsed}){
                     className="logout-btn"
                     onClick={handleLogout}
                 >
+
                     <FaSignOutAlt />
-                    <span className="sidebar-label">Logout</span>
+
+                    {
+
+                        !collapsed &&
+
+                        <span>
+
+                            Logout
+
+                        </span>
+
+                    }
+
                 </button>
 
             </div>
 
-        </div>
+        </aside>
 
     );
 }
