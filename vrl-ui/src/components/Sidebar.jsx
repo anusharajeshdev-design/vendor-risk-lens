@@ -29,7 +29,7 @@ function Sidebar({ collapsed, setCollapsed }) {
 
         localStorage.clear();
 
-        navigate("/login");
+        navigate("/login", { replace: true });
     };
 
     return (

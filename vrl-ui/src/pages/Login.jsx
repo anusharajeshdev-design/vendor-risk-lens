@@ -57,7 +57,7 @@ function Login() {
                     "roleName",
                     result.roleName);
 
-                navigate("/dashboard");
+                navigate("/dashboard", { replace: true });
             }
             else {
 
