@@ -1,107 +1,253 @@
-# Vendor-Risk Lens (VRL)
+<p align="center">
+  <img src="screenshots/vrl-banner.png" alt="Vendor Risk Lens Banner" width="100%">
+</p>
 
-Vendor-Risk Lens (VRL) is an enterprise-grade Vendor Risk Management platform that helps organizations monitor third-party vendors, track operational incidents, maintain audit trails, and leverage AI-powered insights for faster decision-making.
+<h1 align="center">🛡️ Vendor-Risk Lens (VRL)</h1>
 
-Built with modern full-stack technologies, VRL demonstrates enterprise application architecture, secure authentication, AI integration, and responsive business dashboards.
+<p align="center">
+An Enterprise Vendor Risk Management Platform with AI-Powered Business Insights
+</p>
 
----
+<p align="center">
 
-## Features
+ASP.NET Core • React • SQL Server • OpenAI • JWT Authentication
 
-### Authentication & Security
-
-- JWT Authentication
-- Secure Login & Logout
-- Protected API Endpoints
-- Protected React Routes
-- User Context from JWT
-- Role-Based Access Ready
+</p>
 
 ---
 
-### Vendor Management
+# 📖 About
 
-- Vendor CRUD Operations
-- Vendor Types
-- Vendor Risk Ratings
-- Active / Inactive Status
-- Vendor Review Tracking
-- Soft Delete
-- Search & Filtering
+Vendor-Risk Lens (VRL) is an enterprise-style Vendor Risk Management platform that helps organizations manage third-party vendors, monitor operational incidents, maintain complete audit visibility, and leverage AI-powered insights for faster business decisions.
+
+The project demonstrates enterprise application architecture using ASP.NET Core, React, Entity Framework Core, SQL Server, JWT Authentication, and OpenAI integration.
 
 ---
 
-### Incident Management
+# 📸 Application Preview
 
-- Incident CRUD Operations
-- Automatic Incident Number Generation
-- Severity & Priority Management
-- Incident Status Tracking
-- Vendor Association
-- Assigned User Tracking
-- Resolution Summary
+## 🔐 Login
+
+![Login](screenshots/login.png)
+
+Secure authentication using JWT with BCrypt password hashing.
 
 ---
 
-### User Management
+## 📊 Dashboard
 
-- User CRUD
-- Active User Management
-- Role Management
-- Dynamic Role Dropdowns
+![Dashboard](screenshots/dashboard.png)
 
----
+Business dashboard displaying:
 
-### Dashboard & Analytics
-
-- KPI Dashboard
+- KPI Cards
 - Compliance Score
-- Vendor Risk Distribution
-- Incident Status Charts
+- Vendor Risk Metrics
+- Incident Statistics
 - Recent Vendors
-- Monthly Statistics
+- AI Assistant
 
 ---
 
-### Audit Logging
+## 🏢 Vendor Management
 
-- Create Audit Logs
-- Update Audit Logs
-- Delete Audit Logs
-- Field-Level Change Tracking
-- Previous vs New Values
-- Username Tracking
-- Timestamp History
+![Vendor Management](screenshots/vendors.png)
+
+Features include:
+
+- Vendor CRUD
+- Vendor Search
+- AI Executive Summary
+- Audit History
+- Risk Ratings
+- Vendor Types
 
 ---
 
-### AI Features
+## 🤖 AI Executive Summary
 
-#### AI Executive Summary
+![AI Summary](screenshots/ai-summary.png)
 
 Generate AI-powered executive summaries for vendors including:
 
 - Executive Summary
-- Key Observations
-- Risk Recommendations
-
-#### Risk Lens AI
-
-Enterprise AI assistant capable of answering natural language questions such as:
-
-- Show high-risk vendors
-- List open incidents
-- Show vendors due for review
-- Identify critical incidents
-- Executive business insights
-
-The AI uses an intent detection engine to retrieve only the required business data before sending context to OpenAI, reducing token usage and improving response quality.
+- Key Business Observations
+- Risk Analysis
+- Recommendations
 
 ---
 
-## Tech Stack
+## 🚨 Incident Management
 
-### Backend
+![Incident Management](screenshots/incidents.png)
+
+Enterprise incident tracking featuring:
+
+- Incident CRUD
+- Vendor Association
+- Severity Management
+- Priority Management
+- Search
+- Audit History
+
+---
+
+## 👥 User Management
+
+![User Management](screenshots/users.png)
+
+Manage users with:
+
+- User CRUD
+- Dynamic Roles
+- Search
+- Active / Inactive Status
+
+---
+
+## 🧠 Risk Lens AI
+
+![Risk Lens AI](screenshots/risk-lens-ai.png)
+
+Natural language business assistant capable of answering questions such as:
+
+- Show high-risk vendors
+- List open incidents
+- Vendors due for review
+- Executive business insights
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication & Security
+
+- JWT Authentication
+- Secure Login & Logout
+- BCrypt Password Hashing
+- Protected API Endpoints
+- Protected React Routes
+- User Context from JWT
+
+---
+
+## 🏢 Vendor Management
+
+- Vendor CRUD Operations
+- Vendor Type Management
+- Risk Rating Management
+- Vendor Review Tracking
+- Active / Inactive Status
+- Soft Delete
+- Enterprise Search
+- AI Executive Summary
+
+---
+
+## 🚨 Incident Management
+
+- Incident CRUD Operations
+- Automatic Incident Number Generation
+- Vendor Association
+- Severity Management
+- Priority Management
+- Status Tracking
+- Resolution Summary
+- Enterprise Search
+
+---
+
+## 👥 User Management
+
+- User CRUD Operations
+- Dynamic Role Management
+- Active / Inactive Users
+- Enterprise Search
+
+---
+
+## 📊 Dashboard
+
+- KPI Dashboard
+- Compliance Score
+- Vendor Risk Distribution
+- Open Incident Metrics
+- Critical Vendor Metrics
+- Recent Vendors
+- Monthly Business Statistics
+
+---
+
+## 📝 Audit Logging
+
+Field-level audit tracking including:
+
+- Create History
+- Update History
+- Delete History
+- Previous Values
+- New Values
+- Username Tracking
+- Timestamp History
+- Audit History Viewer
+
+---
+
+## 🤖 AI Features
+
+### AI Executive Summary
+
+Generate business-ready executive summaries using OpenAI.
+
+Includes:
+
+- Executive Summary
+- Business Observations
+- Potential Risks
+- Recommendations
+
+---
+
+### Risk Lens AI
+
+Enterprise AI assistant capable of answering natural language business questions.
+
+Workflow:
+
+1. Detect user intent
+2. Retrieve only required business data
+3. Build optimized business context
+4. Send context to OpenAI
+5. Generate enterprise-ready response
+
+Benefits:
+
+- Reduced token usage
+- Improved response quality
+- Minimal business data exposure
+
+---
+
+# 🔍 Enterprise Search
+
+Enterprise search is available across:
+
+- Vendors
+- Incidents
+- Users
+
+Implemented using:
+
+- Entity Framework Core
+- LINQ
+- DTO Projection
+- SQL Query Translation
+
+---
+
+# 🛠️ Tech Stack
+
+## Backend
 
 - ASP.NET Core 8 Web API
 - Entity Framework Core
@@ -110,124 +256,181 @@ The AI uses an intent detection engine to retrieve only the required business da
 - Swagger
 - Dependency Injection
 
-### Frontend
+---
+
+## Frontend
 
 - React
 - Vite
-- Recharts
 - Lucide React
-- CSS3 (Glassmorphism UI)
+- Recharts
+- CSS3
+- Responsive Glassmorphism UI
 
-### Security
+---
+
+## Security
 
 - JWT Authentication
-- Authorization
+- BCrypt Password Hashing
+- Protected APIs
 - Protected Routes
 
-### Tools
+---
 
+## Development Tools
+
+- Git
 - GitHub
-- Postman
+- Docker
+- SQL Server
 - DBeaver
-- Docker (SQL Server)
+- Postman
+- Visual Studio Code
 
 ---
 
-## Architecture
+# 🏗️ Architecture
 
+```text
+                 React + Vite
+                      │
+                      ▼
+          ASP.NET Core Web API
+                      │
+                      ▼
+              Business Services
+                      │
+        ┌─────────────┼──────────────┐
+        │             │              │
+        ▼             ▼              ▼
+ Vendor Service  Incident Service  User Service
+        │             │              │
+        └─────────────┼──────────────┘
+                      ▼
+             Dashboard Service
+                      │
+                      ▼
+              Audit Log Service
+                      │
+                      ▼
+                  AI Service
+                      │
+                      ▼
+                 OpenAI API
+                      │
+                      ▼
+                 SQL Server
 ```
-React UI
-      │
-      ▼
-ASP.NET Core Web API
-      │
-      ▼
-Business Services
-      │
-      ├── Vendor Service
-      ├── Incident Service
-      ├── Dashboard Service
-      ├── Audit Log Service
-      └── AI Service
-               │
-               ▼
-         OpenAI API
-      │
-      ▼
-SQL Server
-```
 
 ---
 
-## AI Architecture
+# 💼 Enterprise Concepts Demonstrated
 
-Risk Lens AI uses a lightweight intent detection engine that:
-
-1. Detects the user's intent.
-2. Retrieves only the required business data.
-3. Builds a minimal business context.
-4. Sends optimized context to OpenAI.
-5. Returns enterprise-ready responses.
-
-This approach reduces token usage, improves response accuracy, and keeps business data exposure minimal.
-
----
-
-## Screens
-
-- Login
-- Dashboard
-- Vendors
-- Incidents
-- Users
-- Audit Logs
-- AI Executive Summary
-- Risk Lens AI
+- Layered Architecture
+- Service Pattern
+- Repository-style Service Layer
+- DTO Pattern
+- REST API Design
+- Dependency Injection
+- Entity Framework Core
+- LINQ Queries
+- LINQ Joins
+- JWT Authentication
+- BCrypt Password Hashing
+- Enterprise Search
+- Audit Logging
+- OpenAI Integration
+- Responsive UI
 
 ---
 
-## Current Status
+# 🖥️ Application Modules
 
-### Completed
+- 🔐 Login
+- 📊 Dashboard
+- 🏢 Vendors
+- 🚨 Incidents
+- 👥 Users
+- 📝 Audit History
+- 🤖 AI Executive Summary
+- 🧠 Risk Lens AI
 
-- Authentication
-- Dashboard
+---
+
+# 📌 Current Status
+
+## ✅ Completed
+
+- JWT Authentication
+- BCrypt Password Hashing
 - Vendor Management
 - Incident Management
 - User Management
+- Dashboard
+- Enterprise Search
+- DTO Architecture
+- LINQ Joins
 - Audit Logging
 - AI Executive Summary
 - Risk Lens AI
+- Responsive UI
 - Glassmorphism UI
 
-### In Progress
+---
 
-- Responsive UI
-- PostgreSQL Migration
+## 🚀 Future Enhancements
+
+- Pagination
+- Column Sorting
+- PostgreSQL Support
 - Cloud Deployment
 
 ---
 
-## Planned Enhancements
+# 📂 Project Structure
 
-- Email Notifications
-- Excel Export
-- Vendor Risk Scoring Engine
-- Advanced Dashboard Filters
-- AI Incident Assistant
-- AI Risk Prediction
-- AI Vendor Recommendations
+```text
+Backend/
+│
+├── Controllers
+├── DTOs
+├── Models
+├── Services
+├── Data
+└── Program.cs
+
+Frontend/
+│
+├── Components
+├── Pages
+├── Services
+├── Layouts
+└── Assets
+```
 
 ---
 
-## Repository
+# 👨‍💻 Repository Purpose
 
-Enterprise Full-Stack Vendor Risk Management platform demonstrating:
+Vendor-Risk Lens demonstrates enterprise full-stack software development using modern Microsoft technologies together with AI integration.
 
-- ASP.NET Core
-- React
+Key technologies showcased include:
+
+- ASP.NET Core Web API
+- React + Vite
+- Entity Framework Core
 - SQL Server
-- OpenAI Integration
 - JWT Authentication
+- BCrypt Password Hashing
+- OpenAI API
 - Enterprise Dashboard
+- Audit Logging
+- Responsive UI
 - AI-Powered Business Insights
+
+---
+
+<p align="center">
+⭐ If you found this project interesting, consider giving it a star!
+</p>
