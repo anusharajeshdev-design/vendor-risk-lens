@@ -1,4 +1,6 @@
 import { Sparkles, Copy, RefreshCw } from "lucide-react";
+import { useState } from "react";
+import SuccessModal from "../components/SuccessModal";
 import "./AISummaryModal.css";
 
 function AISummaryModal({
@@ -20,7 +22,7 @@ function AISummaryModal({
 }) {
 
     if (!isOpen) return null;
-
+    const [showCopiedModal, setShowCopiedModal] = useState(false);
     const suggestions = [
     "Show high risk vendors",
     "Show open incidents",
@@ -36,7 +38,7 @@ function AISummaryModal({
 
         await navigator.clipboard.writeText(summary);
 
-        alert("Copied to clipboard.");
+        setShowCopiedModal(true);
     };
 
     return (
@@ -180,7 +182,15 @@ function AISummaryModal({
                 )}
 
             </div>
-
+                {
+                    showCopiedModal && (
+                        <SuccessModal
+                            title="Copied"
+                            message="The content has been copied to your clipboard."
+                            onClose={() => setShowCopiedModal(false)}
+                        />
+                    )
+                }
         </div>
 
     );

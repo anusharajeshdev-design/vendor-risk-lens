@@ -23,14 +23,9 @@ public class IncidentController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetIncidents()
     {
-        var incidents = await _incidentService.GetIncidentsAsync();
+       var incidents = await _incidentService.GetIncidentsAsync();
 
-        return Ok(new ApiResponse<List<Incident>>
-        {
-            Success = true,
-            Message = "Incident retrieved successfully",
-            Data = incidents
-        });
+        return Ok(incidents);
     }
 
     [HttpPost]

@@ -67,7 +67,7 @@ function Incidents() {
 
                 <td>{incident.incidentNumber}</td>
 
-                <td>{incident.vendorId}</td>
+                <td>{incident.vendorName}</td>
 
                 <td>{incident.title}</td>
 

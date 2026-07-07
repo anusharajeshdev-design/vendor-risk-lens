@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using VRL.API.Data;
 using VRL.API.Models;
 using System.Text.Json;
+using VRL.API.DTOs;
 
 namespace VRL.API.Services;
 
@@ -17,9 +18,27 @@ public class IncidentsService
         _currentUserService = currentUserService;
     }
 
-    public async Task<List<Incident>> GetIncidentsAsync()
+    public async Task<List<IncidentDto>> GetIncidentsAsync()
     {
-        return await _context.Incidents.ToListAsync();
+        return await
+        (
+            from i in _context.Incidents
+
+            join v in _context.Vendors
+                on i.VendorId equals v.VendorId
+
+            select new IncidentDto
+            {
+                IncidentId = i.IncidentId,
+                IncidentNumber = i.IncidentNumber,
+                VendorName = v.VendorName,
+                Title = i.Title,
+                Severity = i.Severity,
+                Status = i.Status,
+                ReportedDate = i.ReportedDate
+            }
+
+        ).ToListAsync();
     }
 
    public async Task<Incident> CreateIncidentAsync(Incident incident)
