@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using VRL.API.Data;
 using VRL.API.Models;
+using VRL.API.DTOs;
 
 namespace VRL.API.Services;
 
@@ -19,9 +20,27 @@ public class UserService
         _currentUserService = currentUserService;
     }
 
-    public async Task<List<Users>> GetUsers()
+    public async Task<List<UserDto>> GetUsers()
     {
-        return await _context.Users.ToListAsync();
+        return await
+        (
+            from u in _context.Users
+
+            join r in _context.Roles
+                on u.RoleId equals r.RoleId
+
+            select new UserDto
+            {
+                UserId = u.UserId,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                Username = u.Username,
+                RoleName = r.RoleName,
+                IsActive = u.IsActive
+            }
+
+        ).ToListAsync();
     }
 
     public async Task<Users> CreateUserAsync(Users user)
@@ -122,5 +141,37 @@ public class UserService
      public async Task<List<Roles>> GetRoles()
     {
         return await _context.Roles.ToListAsync();
+    }
+
+    public async Task<List<UserDto>> SearchUsersAsync(string keyword)
+    {
+        keyword = keyword?.Trim() ?? string.Empty;
+
+        return await
+        (
+            from u in _context.Users
+
+            join r in _context.Roles
+                on u.RoleId equals r.RoleId
+
+            where string.IsNullOrEmpty(keyword)
+                || u.FirstName.Contains(keyword)
+                || u.LastName.Contains(keyword)
+                || u.Email.Contains(keyword)
+                || u.Username.Contains(keyword)
+                || r.RoleName.Contains(keyword)
+
+            select new UserDto
+            {
+                UserId = u.UserId,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                Username = u.Username,
+                RoleName = r.RoleName,
+                IsActive = u.IsActive
+            }
+
+        ).ToListAsync();
     }
 }

@@ -186,4 +186,12 @@ public class IncidentController : ControllerBase
             Data = vendors
         });
     }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> SearchIncidents(string keyword)
+    {
+        var incidents = await _incidentService.SearchIncidentsAsync(keyword);
+
+        return Ok(incidents);
+    }
 }

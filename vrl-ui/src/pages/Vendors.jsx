@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getVendors, deleteVendor } from "../services/vendorService";
-import { Pencil, Trash2, Sparkles, History } from "lucide-react";
+import { getVendors, deleteVendor, searchVendors } from "../services/vendorService";
+import { Pencil, Trash2, Sparkles, History, Search } from "lucide-react";
 import SuccessModal from "../components/SuccessModal";
 import ConfirmModal from "../components/ConfirmModal";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ function Vendors() {
   const [aiSummary, setAISummary] = useState("");
   const [aiLoading, setAILoading] = useState(false);
   const [selectedVendorForAI, setSelectedVendorForAI] = useState(null);
+  const [searchKeyword, setSearchKeyword] = useState("");
   useEffect(() => {
     loadVendors();
   }, []);
@@ -28,6 +29,22 @@ function Vendors() {
     const result = await getVendors();
 
     setVendors(result.data);
+  };
+
+  const handleSearch = async (keyword) => {
+  
+      setSearchKeyword(keyword);
+  
+      if (keyword.trim() === "") {
+  
+          loadVendors();
+  
+          return;
+      }
+  
+      const result = await searchVendors(keyword);
+  
+      setVendors(result);
   };
 
   const handleDelete = async (vendorId) => {
@@ -86,7 +103,15 @@ function Vendors() {
     <div className="page-container">
       <div className="page-header">
         <h1>Vendor Management</h1>
-
+        <div className="search-box">
+            <Search size={18} />
+            <input
+                type="text"
+                placeholder="Search vendors..."
+                value={searchKeyword}
+                onChange={(e) => handleSearch(e.target.value)}
+            />
+        </div>
         <button className="add-button" onClick={() => navigate("/vendors/new")}>
             + Add Vendor
         </button>
@@ -185,6 +210,7 @@ function Vendors() {
               handleGenerateSummary(selectedVendorForAI)
           }
       />
+
     </div>
   );
 }

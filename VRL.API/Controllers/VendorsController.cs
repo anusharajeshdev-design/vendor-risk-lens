@@ -146,4 +146,12 @@ public class VendorsController : ControllerBase
             Data = users
         });
     }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> SearchVendors(string keyword)
+    {
+        var vendors = await _vendorService.SearchVendorsAsync(keyword);
+
+        return Ok(vendors);
+    }
 }

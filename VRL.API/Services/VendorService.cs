@@ -158,4 +158,23 @@ public class VendorService
             .Select(v => v.VendorName)
             .ToListAsync();
     }
+
+    public async Task<List<Vendor>> SearchVendorsAsync(string keyword)
+    {
+        if (string.IsNullOrWhiteSpace(keyword))
+        {
+            return await _context.Vendors.ToListAsync();
+        }
+
+        keyword = keyword.Trim();
+
+        return await _context.Vendors
+            .Where(v =>
+                v.VendorName.Contains(keyword) ||
+                v.VendorType.Contains(keyword) ||
+                v.ContactEmail!.Contains(keyword) ||
+                v.RiskRating.Contains(keyword)
+            )
+            .ToListAsync();
+    }
 }

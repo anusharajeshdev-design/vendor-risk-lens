@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react";
-import { getUsers, deleteUser } from "../services/userService";
-import { Pencil, Trash2, History } from "lucide-react";
+import { Pencil, Trash2, History, Search } from "lucide-react";
 import SuccessModal from "../components/SuccessModal";
 import ConfirmModal from "../components/ConfirmModal";
 import ViewHistoryModal from "../components/ViewHistoryModal";
 import { useNavigate } from "react-router-dom";
+import { getUsers, searchUsers, deleteUser } from "../services/userService";
 import "./Vendors.css";
 
 function Users() {
-
-
 const [users, setUsers] = useState([]);
-
+const [searchKeyword, setSearchKeyword] = useState("");
 const [showSuccessModal, setShowSuccessModal] = useState(false);
-
 const [showDeleteModal, setShowDeleteModal] = useState(false);
-
 const [userToDelete, setUserToDelete] = useState(null);
-
-  const [showHistoryModal, setShowHistoryModal] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+const [showHistoryModal, setShowHistoryModal] = useState(false);
+const [selectedUserId, setSelectedUserId] = useState(null);
 const navigate = useNavigate();
 
 useEffect(() => {
@@ -29,8 +24,23 @@ useEffect(() => {
 const loadUsers = async () => {
 
     const result = await getUsers();
+    setUsers(result);
+};
 
-    setUsers(result.data);
+const handleSearch = async (keyword) => {
+
+    setSearchKeyword(keyword);
+
+    if (keyword.trim() === "") {
+
+        loadUsers();
+
+        return;
+    }
+
+    const result = await searchUsers(keyword);
+
+    setUsers(result);
 };
 
 const handleDelete = async (userId) => {
@@ -65,7 +75,18 @@ return (
         <div className="page-header">
 
             <h1>User Management</h1>
+            <div className="search-box">
 
+                <Search size={18} />
+
+                <input
+                    type="text"
+                    placeholder="Search users..."
+                    value={searchKeyword}
+                    onChange={(e) => handleSearch(e.target.value)}
+                />
+
+            </div>
             <button
                 className="add-button"
                 onClick={() =>
@@ -107,17 +128,11 @@ return (
                     {users.map((user) => (
 
                         <tr key={user.userId}>
-
                             <td>{user.firstName}</td>
-
                             <td>{user.lastName}</td>
-
                             <td>{user.email}</td>
-
                             <td>{user.username}</td>
-
-                            <td>{user.roleId}</td>
-
+                            <td>{user.roleName}</td>
                             <td>
                                 {
                                     user.isActive

@@ -560,3 +560,66 @@ td {
         font-size:14px;
     }
 }
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    width:320px;
+
+    padding:0 16px;
+
+    height:52px;
+
+    background:white;
+
+    border:1px solid rgba(148,163,184,.18);
+
+    border-radius:16px;
+
+    box-shadow:0 8px 24px rgba(15,23,42,.05);
+}
+
+.search-box input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:15px;
+}
+
+.search-box svg{
+
+    color:#64748b;
+}
+
+@media(max-width:768px){
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        gap:16px;
+    }
+
+    .search-box{
+
+        width:100%;
+    }
+
+    .add-button{
+
+        width:100%;
+    }
+}

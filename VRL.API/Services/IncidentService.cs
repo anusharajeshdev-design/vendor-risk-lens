@@ -216,4 +216,72 @@ public class IncidentsService
             .Where(i => vendorIds.Contains(i.VendorId))
             .ToListAsync();
     }
+
+    public async Task<List<IncidentDto>> SearchIncidentsAsync(string keyword)
+    {
+        if (string.IsNullOrWhiteSpace(keyword))
+        {
+            return await
+            (
+                from i in _context.Incidents
+
+                join v in _context.Vendors
+                    on i.VendorId equals v.VendorId
+
+                select new IncidentDto
+                {
+                    IncidentId = i.IncidentId,
+                    IncidentNumber = i.IncidentNumber,
+                    VendorName = v.VendorName,
+                    Title = i.Title,
+                    Severity = i.Severity,
+                    Status = i.Status,
+                    ReportedDate = i.ReportedDate
+                }
+
+            ).ToListAsync();
+        }
+
+        keyword = keyword.Trim();
+
+        return await
+        (
+            from i in _context.Incidents
+
+            join v in _context.Vendors
+                on i.VendorId equals v.VendorId
+
+            where
+
+                i.IncidentNumber.Contains(keyword)
+
+                ||
+
+                v.VendorName.Contains(keyword)
+
+                ||
+
+                i.Title.Contains(keyword)
+
+                ||
+
+                i.Severity.Contains(keyword)
+
+                ||
+
+                i.Status.Contains(keyword)
+
+            select new IncidentDto
+            {
+                IncidentId = i.IncidentId,
+                IncidentNumber = i.IncidentNumber,
+                VendorName = v.VendorName,
+                Title = i.Title,
+                Severity = i.Severity,
+                Status = i.Status,
+                ReportedDate = i.ReportedDate
+            }
+
+        ).ToListAsync();
+    }
 }

@@ -115,3 +115,16 @@ export const getActiveUsers = async () => {
 
     return await response.json();
 };
+export const searchVendors = async (keyword) => {
+
+    const response = await fetch(
+        `${API_URL}/search?keyword=${encodeURIComponent(keyword)}`,
+        {
+            headers: {
+                ...getAuthHeader()
+            }
+        }
+    );
+
+    return await response.json();
+};

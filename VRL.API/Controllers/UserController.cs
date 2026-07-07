@@ -25,12 +25,7 @@ public class UserController : ControllerBase
     {
         var users = await _userService.GetUsers();
 
-        return Ok(new ApiResponse<List<Users>>
-        {
-            Success = true,
-            Message = "Users retrieved successfully",
-            Data = users
-        });
+        return Ok(users);
     }
 
     [HttpGet("{id}")]
@@ -131,5 +126,13 @@ public class UserController : ControllerBase
             Message = "Roles retrieved successfully",
             Data = roles
         });
+    }
+    
+    [HttpGet("search")]
+    public async Task<IActionResult> SearchUsers(string keyword)
+    {
+        var users = await _userService.SearchUsersAsync(keyword);
+
+        return Ok(users);
     }
 } 
