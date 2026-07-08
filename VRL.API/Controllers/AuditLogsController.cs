@@ -35,7 +35,7 @@ public class AuditLogsController : ControllerBase
     public async Task<IActionResult> CreateAuditLog(
         AuditLog auditLog)
     {
-        auditLog.CreatedDate = DateTime.UtcNow;
+        auditLog.CreatedDate = DateTime.Now;
 
         _context.AuditLogs.Add(auditLog);
 

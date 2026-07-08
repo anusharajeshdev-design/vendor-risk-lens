@@ -41,15 +41,16 @@ public class IncidentsService
         ).ToListAsync();
     }
 
-   public async Task<Incident> CreateIncidentAsync(Incident incident)
+    public async Task<Incident> CreateIncidentAsync(Incident incident)
     {
         incident.IncidentNumber = await GenerateIncidentNumberAsync();
 
-        incident.CreatedDate = DateTime.UtcNow;
+        incident.CreatedDate = DateTime.Now;
 
         _context.Incidents.Add(incident);
 
         await _context.SaveChangesAsync();
+
         _auditLogService.LogCreate(
             "Incident",
             incident.IncidentId,
@@ -57,14 +58,13 @@ public class IncidentsService
             _currentUserService.Username);
 
         await _auditLogService.SaveAsync();
+
         return incident;
     }
-
     public async Task<bool> UpdateIncidentAsync(int id, Incident updatedIncident)
     {
         var incident = await _context.Incidents
-            .FirstOrDefaultAsync(i =>
-                i.IncidentId == id);
+            .FirstOrDefaultAsync(i => i.IncidentId == id);
 
         if (incident == null)
         {
@@ -99,26 +99,15 @@ public class IncidentsService
         incident.Severity = updatedIncident.Severity;
         incident.Priority = updatedIncident.Priority;
         incident.Status = updatedIncident.Status;
+        incident.AssignedUserId = updatedIncident.AssignedUserId;
 
-        incident.AssignedUserId =
-            updatedIncident.AssignedUserId;
+        incident.ReportedDate = updatedIncident.ReportedDate;
+        incident.DueDate = updatedIncident.DueDate;
+        incident.ExpectedCloseDate = updatedIncident.ExpectedCloseDate;
+        incident.ActualCloseDate = updatedIncident.ActualCloseDate;
 
-        incident.ReportedDate =
-            updatedIncident.ReportedDate;
-
-        incident.DueDate =
-            updatedIncident.DueDate;
-
-        incident.ExpectedCloseDate =
-            updatedIncident.ExpectedCloseDate;
-
-        incident.ActualCloseDate =
-            updatedIncident.ActualCloseDate;
-
-        incident.ResolutionSummary =
-            updatedIncident.ResolutionSummary;
-
-        incident.UpdatedDate = DateTime.UtcNow;
+        incident.ResolutionSummary = updatedIncident.ResolutionSummary;
+        incident.UpdatedDate = DateTime.Now;
 
         _auditLogService.LogUpdate(
             "Incident",
@@ -127,7 +116,10 @@ public class IncidentsService
             incident,
             _currentUserService.Username);
 
+        await _context.SaveChangesAsync();
+
         await _auditLogService.SaveAsync();
+
         return true;
     }
 
@@ -169,7 +161,7 @@ public class IncidentsService
 
     private async Task<string> GenerateIncidentNumberAsync()
     {
-        string today = DateTime.UtcNow.ToString("yyyyMMdd");
+        string today = DateTime.Now.ToString("yyyyMMdd");
 
         string prefix = $"INC{today}";
 

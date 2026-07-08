@@ -31,7 +31,7 @@ public class AuditLogService
             NewValue = newValue,
             ActionType = actionType,
             PerformedBy = performedBy,
-            CreatedDate = DateTime.UtcNow
+            CreatedDate = DateTime.Now
         };
 
         _context.AuditLogs.Add(auditLog);

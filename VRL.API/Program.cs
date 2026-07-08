@@ -21,8 +21,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<VrlDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("PostgresConnection")));
 
 builder.Services.AddScoped<VendorService>();
 builder.Services.AddScoped<IncidentsService>();

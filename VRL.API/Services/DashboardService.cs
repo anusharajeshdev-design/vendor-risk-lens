@@ -13,49 +13,39 @@ public class DashboardService
         _context = context;
     }
 
-    public async Task<DashboardSummaryDto> GetDashboardSummaryAsync()
-    {
-        DateTime today = DateTime.UtcNow.Date;
+   public async Task<DashboardSummaryDto> GetDashboardSummaryAsync()
+{
+    DateTime today = DateTime.Today;
+    DateTime firstDayOfMonth = new(today.Year, today.Month, 1);
 
-        DateTime firstDayOfMonth =
-            new DateTime(today.Year, today.Month, 1);
+    var dto = new DashboardSummaryDto();
 
-        return new DashboardSummaryDto
-        {
-            TotalVendors =
-                await _context.Vendors.CountAsync(),
+    dto.TotalVendors = await _context.Vendors.CountAsync();
 
-            CriticalVendors =
-                await _context.Vendors.CountAsync(v =>
-                    v.RiskRating == "High"),
+    dto.CriticalVendors = await _context.Vendors.CountAsync(v =>
+        v.RiskRating == "High");
 
-            OpenIncidents =
-                await _context.Incidents.CountAsync(i =>
-                    i.Status == "Open"),
+    dto.OpenIncidents = await _context.Incidents.CountAsync(i =>
+        i.Status == "Open");
 
-            ActiveUsers =
-                await _context.Users.CountAsync(),
+    dto.ActiveUsers = await _context.Users.CountAsync();
 
-            VendorsDueForReview =
-                await _context.Vendors.CountAsync(v =>
-                    v.NextReviewDate <= today),
+    dto.VendorsDueForReview = await _context.Vendors.CountAsync(v =>
+        v.NextReviewDate <= today);
 
-            CriticalIncidents =
-                await _context.Incidents.CountAsync(i =>
-                    i.Severity == "Critical"),
+    dto.CriticalIncidents = await _context.Incidents.CountAsync(i =>
+        i.Severity == "Critical");
 
-            VendorsAddedThisMonth =
-                await _context.Vendors.CountAsync(v =>
-                    v.CreatedDate >= firstDayOfMonth),
+    dto.VendorsAddedThisMonth = await _context.Vendors.CountAsync(v =>
+        v.CreatedDate >= firstDayOfMonth);
 
-            IncidentsOpenedThisMonth =
-                await _context.Incidents.CountAsync(i =>
-                    i.CreatedDate >= firstDayOfMonth),
+    dto.IncidentsOpenedThisMonth = await _context.Incidents.CountAsync(i =>
+        i.CreatedDate >= firstDayOfMonth);
 
-            ComplianceScore =
-                await CalculateComplianceScore()
-        };
-    }
+    dto.ComplianceScore = await CalculateComplianceScore();
+
+    return dto;
+}
 
     private async Task<decimal> CalculateComplianceScore()
     {
@@ -65,9 +55,10 @@ public class DashboardService
         if (totalVendors == 0)
             return 100;
 
-        int compliantVendors =
-            await _context.Vendors.CountAsync(v =>
-                v.NextReviewDate > DateTime.UtcNow);
+       DateTime today = DateTime.Today;
+
+        int compliantVendors = await _context.Vendors.CountAsync(v =>
+                v.NextReviewDate > today);
 
         return Math.Round(
             ((decimal)compliantVendors / totalVendors) * 100,
@@ -147,7 +138,7 @@ public class DashboardService
 
     Vendors Due For Review:
     {string.Join(", ",
-        vendors.Where(v => v.NextReviewDate <= DateTime.UtcNow)
+        vendors.Where(v => v.NextReviewDate <= DateTime.Now)
             .Select(v => v.VendorName))}
     ";
     }

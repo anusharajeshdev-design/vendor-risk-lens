@@ -45,7 +45,7 @@ public class UserService
 
     public async Task<Users> CreateUserAsync(Users user)
     {
-        user.CreatedDate = DateTime.UtcNow;
+        user.CreatedDate = DateTime.Now;
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         _context.Users.Add(user);
 

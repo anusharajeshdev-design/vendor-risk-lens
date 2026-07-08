@@ -24,12 +24,13 @@ public class VendorService
 
     public async Task<Vendor> CreateVendorAsync(Vendor vendor)
     {
-        vendor.CreatedDate = DateTime.UtcNow;
+        vendor.CreatedDate = DateTime.Now;
 
         _context.Vendors.Add(vendor);
 
         await _context.SaveChangesAsync();
-         _auditLogService.LogCreate(
+
+        _auditLogService.LogCreate(
             "Vendor",
             vendor.VendorId,
             vendor,
@@ -37,7 +38,7 @@ public class VendorService
 
         await _auditLogService.SaveAsync();
 
-            return vendor;
+        return vendor;
     }
 
     public async Task<bool> UpdateVendorAsync(int id, Vendor vendor)
@@ -66,7 +67,7 @@ public class VendorService
         existingVendor.Website = vendor.Website;
         existingVendor.RiskRating = vendor.RiskRating;
         existingVendor.IsActive = vendor.IsActive;
-        existingVendor.UpdatedDate = DateTime.UtcNow;
+        existingVendor.UpdatedDate = DateTime.Now;
 
        _auditLogService.LogUpdate(
             "Vendor",
@@ -87,7 +88,7 @@ public class VendorService
             return false;
 
         vendor.IsDeleted = true;
-        vendor.UpdatedDate = DateTime.UtcNow;
+        vendor.UpdatedDate = DateTime.Now;
 
         await _context.SaveChangesAsync();
         _auditLogService.LogDelete(
@@ -132,7 +133,7 @@ public class VendorService
 
         if (dueForReview == true)
         {
-            query = query.Where(v => v.NextReviewDate <= DateTime.UtcNow);
+            query = query.Where(v => v.NextReviewDate <= DateTime.Now);
         }
 
         if (isActive.HasValue)
