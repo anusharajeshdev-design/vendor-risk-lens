@@ -249,7 +249,7 @@ Implemented using:
 
 ## Backend
 
-- ASP.NET Core 8 Web API
+- ASP.NET Core 10 Web API
 - Entity Framework Core
 - SQL Server
 - OpenAI API
