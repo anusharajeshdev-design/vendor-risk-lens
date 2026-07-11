@@ -20,11 +20,11 @@ Enterprise Vendor Risk Management Platform with AI-Powered Business Intelligence
 
 ### Frontend
 
-https://YOUR-VERCEL-URL.vercel.app
+<a href="https://vendor-risk-lens.vercel.app">Vendor Risk Lens UI URL</a>
 
 ### Backend API (Swagger)
 
-https://vendor-risk-lens.onrender.com/swagger
+<a href="https://vendor-risk-lens.onrender.com/swagger">Vendor Risk Lens Swagger URL</a>
 
 ---
 
