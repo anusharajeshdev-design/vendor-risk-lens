@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5037/api/dashboard";
+const API_URL = "https://vendor-risk-lens.onrender.com/api/dashboard";
 
 const getAuthHeader = () => {
 

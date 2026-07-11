@@ -19,7 +19,7 @@ function Login() {
         try {
 
             const response = await fetch(
-                "http://localhost:5037/api/Auth/login",
+                "https://vendor-risk-lens.onrender.com/api/Auth/login",
                 {
                     method: "POST",
                     headers: {

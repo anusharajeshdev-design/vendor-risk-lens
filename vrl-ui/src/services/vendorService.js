@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5037/api/vendors";
+const API_URL = "https://vendor-risk-lens.onrender.com/api/vendors";
 
 const getAuthHeader = () => {
 const token = localStorage.getItem("token");
