@@ -2,25 +2,44 @@
   <img src="screenshots/vrl-banner.png" alt="Vendor Risk Lens Banner" width="100%">
 </p>
 
-<h1 align="center">🛡️ Vendor-Risk Lens (VRL)</h1>
+<h1 align="center">🛡️ Vendor Risk Lens (VRL)</h1>
 
 <p align="center">
-An Enterprise Vendor Risk Management Platform with AI-Powered Business Insights
+Enterprise Vendor Risk Management Platform with AI-Powered Business Intelligence
 </p>
 
 <p align="center">
 
-ASP.NET Core • React • SQL Server • OpenAI • JWT Authentication
+**ASP.NET Core 10 • React • PostgreSQL • OpenAI • JWT Authentication • Cloud Deployment**
 
 </p>
 
 ---
 
+# 🌐 Live Demo
+
+### Frontend
+
+https://YOUR-VERCEL-URL.vercel.app
+
+### Backend API (Swagger)
+
+https://vendor-risk-lens.onrender.com/swagger
+
+---
+
 # 📖 About
 
-Vendor-Risk Lens (VRL) is an enterprise-style Vendor Risk Management platform that helps organizations manage third-party vendors, monitor operational incidents, maintain complete audit visibility, and leverage AI-powered insights for faster business decisions.
+Vendor Risk Lens (VRL) is a cloud-hosted enterprise-style Vendor Risk Management platform that helps organizations manage third-party vendors, monitor operational incidents, maintain complete audit visibility, and generate AI-powered business insights.
 
-The project demonstrates enterprise application architecture using ASP.NET Core, React, Entity Framework Core, SQL Server, JWT Authentication, and OpenAI integration.
+The application demonstrates modern full-stack development using ASP.NET Core 10, React, PostgreSQL, JWT Authentication, Entity Framework Core, and OpenAI.
+
+The solution is deployed using a modern cloud architecture:
+
+- Frontend hosted on **Vercel**
+- Backend hosted on **Render**
+- PostgreSQL database hosted on **Neon**
+- AI powered by **OpenAI**
 
 ---
 
@@ -30,7 +49,7 @@ The project demonstrates enterprise application architecture using ASP.NET Core,
 
 ![Login](screenshots/login.png)
 
-Secure authentication using JWT with BCrypt password hashing.
+Secure authentication using JWT and BCrypt password hashing.
 
 ---
 
@@ -38,11 +57,11 @@ Secure authentication using JWT with BCrypt password hashing.
 
 ![Dashboard](screenshots/dashboard.png)
 
-Business dashboard displaying:
+Enterprise dashboard displaying:
 
-- KPI Cards
+- Vendor KPIs
 - Compliance Score
-- Vendor Risk Metrics
+- Vendor Risk Distribution
 - Incident Statistics
 - Recent Vendors
 - AI Assistant
@@ -57,10 +76,11 @@ Features include:
 
 - Vendor CRUD
 - Vendor Search
+- Vendor Review Tracking
+- Vendor Types
 - AI Executive Summary
 - Audit History
 - Risk Ratings
-- Vendor Types
 
 ---
 
@@ -68,10 +88,10 @@ Features include:
 
 ![AI Summary](screenshots/ai-summary.png)
 
-Generate AI-powered executive summaries for vendors including:
+Generate business-ready executive summaries including:
 
 - Executive Summary
-- Key Business Observations
+- Business Observations
 - Risk Analysis
 - Recommendations
 
@@ -81,14 +101,15 @@ Generate AI-powered executive summaries for vendors including:
 
 ![Incident Management](screenshots/incidents.png)
 
-Enterprise incident tracking featuring:
+Enterprise incident management featuring:
 
 - Incident CRUD
 - Vendor Association
-- Severity Management
-- Priority Management
+- Severity
+- Priority
+- Status Tracking
+- Resolution Summary
 - Search
-- Audit History
 
 ---
 
@@ -109,12 +130,14 @@ Manage users with:
 
 ![Risk Lens AI](screenshots/risk-lens-ai.png)
 
-Natural language business assistant capable of answering questions such as:
+Enterprise AI assistant capable of answering business questions such as:
 
 - Show high-risk vendors
 - List open incidents
 - Vendors due for review
-- Executive business insights
+- Critical vendors
+- Business insights
+- Executive summaries
 
 ---
 
@@ -123,8 +146,8 @@ Natural language business assistant capable of answering questions such as:
 ## 🔐 Authentication & Security
 
 - JWT Authentication
-- Secure Login & Logout
 - BCrypt Password Hashing
+- Secure Login & Logout
 - Protected API Endpoints
 - Protected React Routes
 - User Context from JWT
@@ -134,11 +157,11 @@ Natural language business assistant capable of answering questions such as:
 ## 🏢 Vendor Management
 
 - Vendor CRUD Operations
-- Vendor Type Management
-- Risk Rating Management
-- Vendor Review Tracking
-- Active / Inactive Status
+- Vendor Types
+- Vendor Risk Ratings
+- Review Tracking
 - Soft Delete
+- Active / Inactive Vendors
 - Enterprise Search
 - AI Executive Summary
 
@@ -146,7 +169,7 @@ Natural language business assistant capable of answering questions such as:
 
 ## 🚨 Incident Management
 
-- Incident CRUD Operations
+- Incident CRUD
 - Automatic Incident Number Generation
 - Vendor Association
 - Severity Management
@@ -159,7 +182,7 @@ Natural language business assistant capable of answering questions such as:
 
 ## 👥 User Management
 
-- User CRUD Operations
+- User CRUD
 - Dynamic Role Management
 - Active / Inactive Users
 - Enterprise Search
@@ -171,10 +194,10 @@ Natural language business assistant capable of answering questions such as:
 - KPI Dashboard
 - Compliance Score
 - Vendor Risk Distribution
-- Open Incident Metrics
 - Critical Vendor Metrics
+- Open Incident Metrics
+- Monthly Statistics
 - Recent Vendors
-- Monthly Business Statistics
 
 ---
 
@@ -197,25 +220,25 @@ Field-level audit tracking including:
 
 ### AI Executive Summary
 
-Generate business-ready executive summaries using OpenAI.
+Generate executive-level vendor summaries using OpenAI.
 
 Includes:
 
 - Executive Summary
 - Business Observations
-- Potential Risks
+- Risk Analysis
 - Recommendations
 
 ---
 
 ### Risk Lens AI
 
-Enterprise AI assistant capable of answering natural language business questions.
+Enterprise AI assistant that answers natural language business questions.
 
 Workflow:
 
 1. Detect user intent
-2. Retrieve only required business data
+2. Retrieve only relevant business data
 3. Build optimized business context
 4. Send context to OpenAI
 5. Generate enterprise-ready response
@@ -223,8 +246,19 @@ Workflow:
 Benefits:
 
 - Reduced token usage
-- Improved response quality
+- Better response quality
 - Minimal business data exposure
+
+---
+
+# ☁️ Cloud Deployment
+
+| Component | Technology |
+|------------|------------|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | Neon PostgreSQL |
+| AI | OpenAI GPT-4.1-mini |
 
 ---
 
@@ -241,7 +275,7 @@ Implemented using:
 - Entity Framework Core
 - LINQ
 - DTO Projection
-- SQL Query Translation
+- SQL Translation
 
 ---
 
@@ -251,7 +285,8 @@ Implemented using:
 
 - ASP.NET Core 10 Web API
 - Entity Framework Core
-- SQL Server
+- PostgreSQL
+- Npgsql
 - OpenAI API
 - Swagger
 - Dependency Injection
@@ -262,6 +297,7 @@ Implemented using:
 
 - React
 - Vite
+- TypeScript
 - Lucide React
 - Recharts
 - CSS3
@@ -278,49 +314,72 @@ Implemented using:
 
 ---
 
-## Development Tools
+## Cloud & DevOps
 
+- Docker
+- Render
+- Vercel
+- Neon PostgreSQL
 - Git
 - GitHub
-- Docker
-- SQL Server
-- DBeaver
-- Postman
-- Visual Studio Code
 
 ---
 
-# 🏗️ Architecture
+## Development Tools
+
+- Visual Studio Code
+- DBeaver
+- Postman
+
+---
+
+# 🏗️ Deployment Architecture
 
 ```text
-                 React + Vite
-                      │
-                      ▼
-          ASP.NET Core Web API
-                      │
-                      ▼
-              Business Services
-                      │
-        ┌─────────────┼──────────────┐
-        │             │              │
-        ▼             ▼              ▼
- Vendor Service  Incident Service  User Service
-        │             │              │
-        └─────────────┼──────────────┘
-                      ▼
-             Dashboard Service
-                      │
-                      ▼
-              Audit Log Service
-                      │
-                      ▼
-                  AI Service
-                      │
-                      ▼
-                 OpenAI API
-                      │
-                      ▼
-                 SQL Server
+                  Users
+                     │
+                     ▼
+          React + Vite (Vercel)
+                     │
+               HTTPS Requests
+                     │
+                     ▼
+      ASP.NET Core 10 API (Render)
+                     │
+        ┌────────────┴────────────┐
+        ▼                         ▼
+  Neon PostgreSQL            OpenAI API
+```
+
+---
+
+# 🏗️ Application Architecture
+
+```text
+React + Vite
+      │
+      ▼
+ASP.NET Core Web API
+      │
+      ▼
+Business Services
+      │
+ ┌────┼──────────────┐
+ ▼    ▼              ▼
+Vendor Incident     User
+Service Service    Service
+      │
+      ▼
+Dashboard Service
+      │
+      ▼
+Audit Log Service
+      │
+      ▼
+AI Service
+      │
+      ▼
+OpenAI API
 ```
 
 ---
@@ -329,19 +388,35 @@ Implemented using:
 
 - Layered Architecture
 - Service Pattern
-- Repository-style Service Layer
 - DTO Pattern
 - REST API Design
 - Dependency Injection
 - Entity Framework Core
-- LINQ Queries
+- LINQ
 - LINQ Joins
 - JWT Authentication
 - BCrypt Password Hashing
-- Enterprise Search
 - Audit Logging
-- OpenAI Integration
+- Enterprise Search
+- AI Integration
+- Cloud Deployment
+- PostgreSQL Migration
 - Responsive UI
+
+---
+
+# 🎯 Skills Demonstrated
+
+- Full-Stack Development
+- REST API Development
+- React Development
+- Cloud Deployment
+- PostgreSQL Migration
+- AI Integration
+- Authentication & Authorization
+- Entity Framework Core
+- Enterprise Architecture
+- Responsive UI Design
 
 ---
 
@@ -358,7 +433,33 @@ Implemented using:
 
 ---
 
-# 📌 Current Status
+# 📂 Project Structure
+
+```text
+vendor-risk-lens
+│
+├── VRL.API
+│   ├── Controllers
+│   ├── Data
+│   ├── DTOs
+│   ├── Models
+│   ├── Services
+│   ├── Migrations
+│   └── Program.cs
+│
+└── vrl-ui
+    ├── src
+    │   ├── components
+    │   ├── pages
+    │   ├── layouts
+    │   ├── services
+    │   └── assets
+    └── public
+```
+
+---
+
+# 🚀 Current Status
 
 ## ✅ Completed
 
@@ -370,64 +471,47 @@ Implemented using:
 - Dashboard
 - Enterprise Search
 - DTO Architecture
-- LINQ Joins
+- LINQ Queries
 - Audit Logging
 - AI Executive Summary
 - Risk Lens AI
-- Responsive UI
-- Glassmorphism UI
+- PostgreSQL Migration
+- Docker Support
+- Cloud Deployment
+- Responsive Glassmorphism UI
 
 ---
 
-## 🚀 Future Enhancements
+# 🔮 Future Enhancements
 
 - Pagination
 - Column Sorting
-- PostgreSQL Support
-- Cloud Deployment
-
----
-
-# 📂 Project Structure
-
-```text
-Backend/
-│
-├── Controllers
-├── DTOs
-├── Models
-├── Services
-├── Data
-└── Program.cs
-
-Frontend/
-│
-├── Components
-├── Pages
-├── Services
-├── Layouts
-└── Assets
-```
+- Role-Based Authorization
+- Email Notifications
+- Export to Excel / PDF
+- CI/CD with GitHub Actions
+- Automated Seed Data
+- Docker Compose
 
 ---
 
 # 👨‍💻 Repository Purpose
 
-Vendor-Risk Lens demonstrates enterprise full-stack software development using modern Microsoft technologies together with AI integration.
+Vendor Risk Lens demonstrates enterprise full-stack software development using modern Microsoft technologies, cloud deployment, and AI integration.
 
-Key technologies showcased include:
+The project showcases:
 
-- ASP.NET Core Web API
+- ASP.NET Core 10 Web API
 - React + Vite
+- PostgreSQL
 - Entity Framework Core
-- SQL Server
 - JWT Authentication
 - BCrypt Password Hashing
-- OpenAI API
-- Enterprise Dashboard
+- OpenAI Integration
+- Cloud Deployment
 - Audit Logging
-- Responsive UI
-- AI-Powered Business Insights
+- Enterprise Dashboard
+- AI-Powered Business Intelligence
 
 ---
 
